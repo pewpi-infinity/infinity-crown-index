@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>👑 Infinity Crown Index</title>
+<style>
+body{background:#0b0f14;color:#e8eef7;font-family:system-ui;margin:0}
+header{padding:16px;border-bottom:1px solid #222}
+.card{border:1px solid #222;border-radius:12px;padding:12px;margin:12px}
+.emoji{font-size:22px;cursor:pointer;margin-right:8px}
+</style>
+</head>
+<body>
+<header>
+<h1>👑 Infinity Crown Index</h1>
+<input id="q" placeholder="🕹️ Search crowns…" style="width:100%;padding:10px">
+</header>
+<div id="grid"></div>
+
+<script>
+fetch('data/crown_sites.json').then(r=>r.json()).then(d=>{
+  const g=document.getElementById('grid');
+  const q=document.getElementById('q');
+  function render(){
+    g.innerHTML='';
+    d.filter(x=>!q.value||x.repo.includes(q.value)).forEach(x=>{
+      const c=document.createElement('div');
+      c.className='card';
+      c.innerHTML=`
+        <div><strong>👑 ${x.repo}</strong></div>
+        <div>${x.url}</div>
+        <div>
+          <span class="emoji" onclick="window.open('${x.url}')">👑</span>
+          <span class="emoji" onclick="window.open('https://github.com/pewpi-infinity/${x.repo}')">🧱</span>
+          <span class="emoji">🟡</span>
+          <span class="emoji">🤓</span>
+          <span class="emoji">🦾</span>
+          <span class="emoji">💎</span>
+        </div>`;
+      g.appendChild(c);
+    });
+  }
+  q.oninput=render;
+  render();
+});
+</script>
+</body>
+</html>
