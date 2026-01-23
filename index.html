@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>👑 Infinity Crown Index</title>
 <style>
-:root{--bg:#0b0f14;--panel:#0f1620;--line:rgba(255,255,255,.08);--text:#e8eef7;--muted:#a9b7c8}
+:root{--bg:#0b0f14;--panel:#0f1620;--line:rgba(255,255,255,.1);--text:#e8eef7;--muted:#a9b7c8}
 *{box-sizing:border-box}
 body{margin:0;background:radial-gradient(900px 600px at 20% -10%,#18243a,transparent 40%),var(--bg);
      color:var(--text);font-family:system-ui}
-header{position:sticky;top:0;background:rgba(11,15,20,.9);backdrop-filter:blur(8px);
+header{position:sticky;top:0;background:rgba(11,15,20,.92);backdrop-filter:blur(8px);
        border-bottom:1px solid var(--line);z-index:10}
 .wrap{max-width:1200px;margin:auto;padding:14px}
 .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
@@ -24,20 +24,21 @@ header{position:sticky;top:0;background:rgba(11,15,20,.9);backdrop-filter:blur(8
 .url{font-size:12px;color:var(--muted);word-break:break-all}
 .bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .e{min-width:38px;height:34px;border:1px solid var(--line);border-radius:12px;
-   display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+   display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px}
 .e:hover{transform:translateY(-1px)}
 .body{padding:12px}
 .steps{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
 .step{border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:12px;cursor:pointer}
-.step.active{background:rgba(255,255,255,.08)}
+.step.active{background:rgba(255,255,255,.1)}
 .panel{border:1px solid var(--line);border-radius:14px;padding:10px;background:rgba(0,0,0,.25)}
 .links{display:flex;gap:8px;flex-wrap:wrap}
-.lnk{border:1px solid var(--line);border-radius:12px;padding:7px 10px;text-decoration:none;color:var(--text);font-size:12px}
-.tiny{font-size:11px;color:var(--muted)}
+.lnk{border:1px solid var(--line);border-radius:12px;padding:7px 10px;font-size:12px}
 footer{border-top:1px solid var(--line);margin-top:24px}
+.tiny{font-size:11px;color:var(--muted)}
 </style>
 </head>
 <body>
+
 <header>
   <div class="wrap row">
     <div class="brand">👑 Infinity Crown Index</div>
@@ -51,104 +52,77 @@ footer{border-top:1px solid var(--line);margin-top:24px}
 </main>
 
 <footer class="wrap tiny">
-  Ladder: 🟡→👑→🤓→🦾→⚙️→💰→💲 • Emoji-only • Local vault for 💎 & 🧲
+  Card-local interaction engine • Emoji = mode • No outbound redirects
 </footer>
 
 <script>
 const ladder=["🟡","👑","🤓","🦾","⚙️","💰","💲"];
-const emojis=["⚙️","🕹️","🧲","🦾","💎","👑","🔍","⭐","🟡","🍄","🤑","🔎","🧱","⚡","💰","🤓","⚪","☄️","🌐","💲"];
-const vault=JSON.parse(localStorage.getItem("vault")||"[]");
-const pulled=JSON.parse(localStorage.getItem("pulled")||"[]");
+const emojis=["⚙️","🦾","💎","🍄","👑","🟡","🤓","💰","💲","🧱"];
+const cardState={activeMode:{}};
 const $=id=>document.getElementById(id);
 
-function save(){localStorage.setItem("vault",JSON.stringify(vault.slice(0,500)));
-               localStorage.setItem("pulled",JSON.stringify(pulled.slice(0,500)));}
-
-function search(q){return `https://duckduckgo.com/?q=${encodeURIComponent(q)}`;}
-
-function panel(step,item){
-  const topic=($("q").value||item.repo);
-  if(step==="🟡")return `<div class=panel><div class=tiny>Token intent set (local)</div></div>`;
-  if(step==="👑")return `<div class=panel><a class=lnk href="${item.url}" target=_blank>👑 open</a></div>`;
-  if(step==="🤓")return `<div class=panel>
-    <div class=links>
-      <a class=lnk href="${search(topic+' site:'+new URL(item.url).host)}" target=_blank>🔍</a>
-      <a class=lnk href="${search(topic+' github '+item.repo)}" target=_blank>🔎</a>
-      <a class=lnk href="${search(topic+' trends')}" target=_blank>⭐</a>
-      <a class=lnk href="${search(topic+' nightly news movies entertainment')}" target=_blank>☄️</a>
-    </div></div>`;
-  if(step==="🦾")return `<div class=panel>
-    <div class=links>
-      <button class=lnk onclick='pull("${item.repo}","${item.url}")'>🧲</button>
-      <button class=lnk onclick='facet("${item.repo}","${item.url}")'>💎</button>
-    </div></div>`;
-  if(step==="⚙️")return `<div class=panel>
-    <div class=links>
-      <a class=lnk href="https://github.com/pewpi-infinity/${item.repo}" target=_blank>🧱</a>
-      <a class=lnk href="${search('improve github pages '+topic)}" target=_blank>🎛️</a>
-    </div></div>`;
-  if(step==="💰")return `<div class=panel>
-    <div class=links>
-      <a class=lnk href="${search(topic+' keywords')}" target=_blank>💰</a>
-      <a class=lnk href="${search(topic+' monetization')}" target=_blank>🤑</a>
-    </div></div>`;
-  if(step==="💲")return `<div class=panel>
-    <div class=links>
-      <button class=lnk onclick='alert("💎 facets: '+vault.length+' | 🧲 pulled: '+pulled.length+'")'>💲</button>
-      <a class=lnk href="${search(topic+' assets checklist')}" target=_blank>🔢</a>
-    </div></div>`;
+function inferTools(repo){
+  const r=repo.toLowerCase();
+  const t=[];
+  if(r.includes("spark"))t.push("🎨 Page Builder","🧱 Component Editor");
+  if(r.includes("infinity"))t.push("🧠 AI Panel","🟡 Token Engine");
+  if(r.includes("market"))t.push("💰 Pricing Engine","📈 Trends");
+  if(r.includes("data"))t.push("📊 Charts","🧮 Analyzer");
+  return t.length?t:["🔍 Inspector","🧱 Repo Viewer"];
 }
 
-function pull(r,u){pulled.unshift({r,u,t:Date.now()});save();render();}
-function facet(r,u){vault.unshift({r,u,t:Date.now()});save();render();}
+function handleEmoji(repo,emoji){
+  cardState.activeMode[repo]=emoji;
+  render();
+}
+
+function renderPanel(repo,url){
+  const m=cardState.activeMode[repo];
+  if(!m)return "";
+  if(m==="⚙️"){
+    return `<div class="panel"><strong>⚙️ Tools</strong><div class="links">${
+      inferTools(repo).map(t=>`<div class="lnk">${t}</div>`).join("")
+    }</div></div>`;
+  }
+  if(m==="🦾")return `<div class="panel">🦾 Automation queued (local)</div>`;
+  if(m==="💎")return `<div class="panel">💎 Facet saved locally</div>`;
+  if(m==="🍄")return `<div class="panel">🍄 Expanded context view</div>`;
+  if(m==="👑")return `<div class="panel">👑 Royal mode active</div>`;
+  if(m==="🟡")return `<div class="panel">🟡 Token intent set (local)</div>`;
+  if(m==="🤓")return `<div class="panel">🤓 Research workspace (local)</div>`;
+  if(m==="💰")return `<div class="panel">💰 Value analysis panel</div>`;
+  if(m==="💲")return `<div class="panel">💲 Asset builder panel</div>`;
+  return "";
+}
 
 function card(item){
-  const key='tab_'+item.repo;
-  const cur=localStorage.getItem(key)||"🟡";
-  const steps=ladder.map(e=>`<div class="step ${e===cur?'active':''}" onclick="setTab('${item.repo}','${e}')">${e}</div>`).join('');
-  const bar=emojis.map(e=>`<div class=e onclick="act('${e}','${item.repo}','${item.url}')">${e}</div>`).join('');
-  return `<div class=card>
-    <div class=hd>
-      <div class=repo>👑 ${item.repo}</div>
-      <div class=url>${item.url}</div>
-      <div class=bar>${bar}</div>
+  const mode=cardState.activeMode[item.repo];
+  return `<div class="card">
+    <div class="hd">
+      <div class="repo">👑 ${item.repo}</div>
+      <div class="url">${item.url}</div>
+      <div class="bar">${
+        emojis.map(e=>`<div class="e" onclick="handleEmoji('${item.repo}','${e}')">${e}</div>`).join("")
+      }</div>
     </div>
-    <div class=body>
-      <div class=steps>${steps}</div>
-      ${panel(cur,item)}
+    <div class="body">
+      ${renderPanel(item.repo,item.url)}
     </div>
   </div>`;
 }
 
-function act(e,r,u){
-  const t=$("q").value||r;
-  if(e==="👑")return window.open(u);
-  if(e==="🧱")return window.open('https://github.com/pewpi-infinity/'+r);
-  if(e==="🕹️")return $("q").focus();
-  if(e==="🧲")return pull(r,u);
-  if(e==="💎")return facet(r,u);
-  if(e==="🍄"){window.open(search(t+' site:'+new URL(u).host));window.open(search(t+' github '+r));}
-  if(e==="⭐")return window.open(search(t+' trends'));
-  if(e==="☄️")return window.open(search(t+' nightly news movies entertainment'));
-  if(e==="🌐")return window.open(search(t+' communities resources'));
-  if(e==="⚡")return window.open(search(u+' ui inspiration'));
-  if(e==="🤑")return window.open(search(t+' press release'));
-}
-
-window.setTab=(r,e)=>{localStorage.setItem('tab_'+r,e);render();}
-
 async function load(){
-  const d=await (await fetch('data/crown_sites.json',{cache:'no-store'})).json();
-  $("count").textContent='👑 '+d.length;
-  window.data=d;
+  const data=await (await fetch("data/crown_sites.json",{cache:"no-store"})).json();
+  window.data=data;
+  $("count").textContent="👑 "+data.length;
   render();
 }
 
 function render(){
-  const q=($("q").value||'').toLowerCase();
+  const q=($("q").value||"").toLowerCase();
   $("grid").innerHTML=window.data
     .filter(x=>!q||x.repo.toLowerCase().includes(q)||x.url.toLowerCase().includes(q))
-    .map(card).join('');
+    .map(card).join("");
 }
 
 $("q").oninput=render;
