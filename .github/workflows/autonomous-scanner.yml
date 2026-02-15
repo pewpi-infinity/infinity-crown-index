@@ -1,0 +1,115 @@
+name: 🤖 Autonomous Claude Scanner
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'  # Every 10 minutes
+  workflow_dispatch:
+
+jobs:
+  scan-everything:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install deps
+        run: pip install anthropic requests
+      
+      - name: Full System Scan
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python3 <<'EOPY'
+import anthropic
+import requests
+import json
+import base64
+import os
+from datetime import datetime, timezone
+
+USER = "pewpi-infinity"
+client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY", ""))
+
+# Get all repos
+repos = []
+for page in range(1, 20):
+    r = requests.get(f"https://api.github.com/users/{USER}/repos?per_page=100&page={page}")
+    if r.status_code != 200:
+        break
+    batch = r.json()
+    if not batch:
+        break
+    repos.extend(batch)
+
+print(f"Found {len(repos)} repos")
+
+# Categorize with Claude
+categories = {
+    "engineer": [],
+    "ceo": [],
+    "import": [],
+    "investigate": [],
+    "routes": [],
+    "data": []
+}
+
+for repo in repos[:50]:  # First 50 per run
+    name = repo['name']
+    desc = repo.get('description', '')
+    
+    try:
+        response = client.messages.create(
+            model="claude-sonnet-4-20250514",
+            max_tokens=200,
+            messages=[{
+                "role": "user",
+                "content": f"""Categorize this repo into ONE category:
+- engineer: Research, hydrogen, mechanics
+- ceo: Tokens, value, business
+- import: Data scrapers, feeds
+- investigate: Anomalies, patterns
+- routes: Connections, dependencies
+- data: Metrics, analytics
+
+Repo: {name}
+Description: {desc}
+
+Respond ONLY with the category name."""
+            }]
+        )
+        
+        category = response.content[0].text.strip().lower()
+        if category in categories:
+            categories[category].append({
+                "name": name,
+                "url": repo['html_url'],
+                "title": name.replace('-', ' ').title()
+            })
+    except:
+        categories["data"].append({
+            "name": name,
+            "url": repo['html_url'],
+            "title": name.replace('-', ' ').title()
+        })
+
+with open("api/tokens.json", "w") as f:
+    json.dump(categories, f, indent=2)
+
+with open("api/analytics.json", "w") as f:
+    json.dump({
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "total_repos": len(repos),
+        "categorized": sum(len(v) for v in categories.values()),
+        "categories": {k: len(v) for k, v in categories.items()}
+    }, f, indent=2)
+
+print(f"Categorized {sum(len(v) for v in categories.values())} repos")
+EOPY
+      
+      - name: Commit
+        run: |
+          git config user.name "Autonomous Claude"
+          git config user.email "claude@infinity.ai"
+          git add api/
+          git commit -m "🤖 Autonomous scan"
+          git push

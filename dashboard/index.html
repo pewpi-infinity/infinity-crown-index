@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>👑 Infinity Crown Dashboard</title>
+    <title>👑 Infinity Dashboard - LIVE</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -13,174 +13,119 @@
             font-family: 'Courier New', monospace;
             padding: 2rem;
         }
-        h1 { text-align: center; margin-bottom: 2rem; }
+        h1 { text-align: center; margin-bottom: 2rem; font-size: 2.5rem; }
+        .status {
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid #10b981;
+            border-radius: 15px;
+        }
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin: 2rem 0;
         }
-        .stat-card {
-            background: rgba(46, 42, 94, 0.5);
+        .stat {
+            background: rgba(59, 130, 246, 0.1);
+            border: 2px solid #3b82f6;
             padding: 1.5rem;
             border-radius: 15px;
-            border: 2px solid #4c4580;
+            text-align: center;
         }
-        .stat-value { font-size: 2rem; font-weight: bold; color: #10b981; }
-        .stat-label { font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem; }
-        .charts {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+        .stat-value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #10b981;
         }
-        .chart-container {
-            background: rgba(46, 42, 94, 0.5);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 2px solid #4c4580;
+        .stat-label {
+            margin-top: 0.5rem;
+            opacity: 0.8;
         }
-        .recommendations {
+        canvas {
+            max-width: 600px;
+            margin: 2rem auto;
+            display: block;
+        }
+        .error {
             background: rgba(239, 68, 68, 0.1);
             border: 2px solid #ef4444;
+            padding: 1rem;
             border-radius: 15px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
+            margin: 2rem 0;
         }
-        .rec-item {
-            padding: 0.75rem;
-            margin: 0.5rem 0;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-        }
-        .loading { text-align: center; padding: 2rem; font-size: 1.5rem; }
     </style>
 </head>
 <body>
-    <h1>👑 Infinity Crown Dashboard - LIVE ANALYTICS</h1>
+    <h1>👑 INFINITY CROWN DASHBOARD</h1>
     
-    <div id="loading" class="loading">🔄 Loading analytics...</div>
+    <div id="status" class="status">🔄 Loading data...</div>
     
-    <div id="content" style="display:none;">
-        <div class="stats" id="stats"></div>
-        
-        <div id="recommendations"></div>
-        
-        <div class="charts">
-            <div class="chart-container">
-                <h3>Category Distribution</h3>
-                <canvas id="categoryChart"></canvas>
-            </div>
-            <div class="chart-container">
-                <h3>Content Density</h3>
-                <canvas id="densityChart"></canvas>
-            </div>
-        </div>
-        
-        <div style="text-align:center;margin-top:2rem;">
-            <a href="../index.html" style="color:#6366f1;text-decoration:none;font-size:1.2rem;">
-                👑 Return to Crown Index
-            </a>
-        </div>
+    <div id="stats" class="stats"></div>
+    
+    <canvas id="chart"></canvas>
+    
+    <div style="text-align:center; margin-top:2rem;">
+        <a href="../" style="color:#6366f1; font-size:1.2rem;">← Back to Crown Index</a>
     </div>
     
     <script>
-        async function loadAnalytics() {
+        async function load() {
             try {
+                // Load analytics
                 const res = await fetch('../api/analytics.json');
                 const data = await res.json();
                 
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('content').style.display = 'block';
+                document.getElementById('status').innerHTML = 
+                    '✅ SYSTEM ONLINE - Last update: ' + new Date(data.timestamp).toLocaleString();
                 
-                // Stats cards
-                const statsHtml = `
-                    <div class="stat-card">
-                        <div class="stat-value">${data.overview.total_repos}</div>
+                // Stats
+                document.getElementById('stats').innerHTML = `
+                    <div class="stat">
+                        <div class="stat-value">${data.total_repos || 0}</div>
                         <div class="stat-label">Total Repos</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-value">${data.overview.total_words.toLocaleString()}</div>
-                        <div class="stat-label">Total Words</div>
+                    <div class="stat">
+                        <div class="stat-value">${data.categorized || 0}</div>
+                        <div class="stat-label">Categorized</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-value" style="color:#f59e0b;">${data.overview.empty_repos}</div>
-                        <div class="stat-label">Empty Repos (Seeding...)</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" style="color:#10b981;">${data.overview.rich_repos}</div>
-                        <div class="stat-label">Rich Repos (Ready)</div>
+                    <div class="stat">
+                        <div class="stat-value">${Object.keys(data.categories || {}).length}</div>
+                        <div class="stat-label">Categories</div>
                     </div>
                 `;
-                document.getElementById('stats').innerHTML = statsHtml;
                 
-                // Recommendations
-                if (data.recommendations.length > 0) {
-                    const recHtml = '<h3>⚠️ System Recommendations</h3>' +
-                        data.recommendations.map(rec => `
-                            <div class="rec-item">
-                                <strong>${rec.type.toUpperCase()}</strong>: ${rec.message}
-                            </div>
-                        `).join('');
-                    document.getElementById('recommendations').innerHTML = `
-                        <div class="recommendations">${recHtml}</div>
-                    `;
-                }
-                
-                // Category Chart
-                const catCtx = document.getElementById('categoryChart').getContext('2d');
-                new Chart(catCtx, {
+                // Chart
+                const ctx = document.getElementById('chart').getContext('2d');
+                new Chart(ctx, {
                     type: 'pie',
                     data: {
-                        labels: Object.keys(data.categories),
+                        labels: Object.keys(data.categories || {}),
                         datasets: [{
-                            data: Object.values(data.categories),
-                            backgroundColor: [
-                                '#10b981', '#f59e0b', '#3b82f6', 
-                                '#ec4899', '#ef4444', '#eab308'
-                            ]
+                            data: Object.values(data.categories || {}),
+                            backgroundColor: ['#10b981', '#f59e0b', '#3b82f6', '#ec4899', '#ef4444', '#eab308']
                         }]
                     },
                     options: {
                         responsive: true,
                         plugins: {
-                            legend: { labels: { color: '#e0e7ff' } }
-                        }
-                    }
-                });
-                
-                // Density Chart
-                const densCtx = document.getElementById('densityChart').getContext('2d');
-                new Chart(densCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: Object.keys(data.charts.content_density),
-                        datasets: [{
-                            label: 'Repos',
-                            data: Object.values(data.charts.content_density),
-                            backgroundColor: ['#ef4444', '#f59e0b', '#10b981']
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: { labels: { color: '#e0e7ff' } }
-                        },
-                        scales: {
-                            y: { ticks: { color: '#e0e7ff' } },
-                            x: { ticks: { color: '#e0e7ff' } }
+                            legend: { labels: { color: '#e0e7ff', font: { size: 14 } } }
                         }
                     }
                 });
                 
             } catch (error) {
-                document.getElementById('loading').textContent = 
-                    '⚠️ Waiting for first analytics run... (refresh in 2 hours)';
+                document.getElementById('status').innerHTML = 
+                    '<div class="error">⚠️ Waiting for first scan... System will update automatically every 10 minutes</div>';
+                console.error(error);
             }
         }
         
-        loadAnalytics();
-        setInterval(loadAnalytics, 300000); // Refresh every 5 minutes
+        load();
+        setInterval(load, 60000);  // Refresh every minute
     </script>
 </body>
 </html>

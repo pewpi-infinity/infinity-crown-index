@@ -1,0 +1,81 @@
+name: 🌱 Repo Seeder
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'  # Every 15 minutes
+  workflow_dispatch:
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Seed Empty Repos
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 <<'EOPY'
+import requests
+import json
+import base64
+import os
+
+USER = "pewpi-infinity"
+TOKEN = os.environ["GITHUB_TOKEN"]
+
+# Get empty repos
+repos = []
+for page in range(1, 15):
+    r = requests.get(f"https://api.github.com/users/{USER}/repos?per_page=100&page={page}")
+    if r.status_code != 200:
+        break
+    batch = r.json()
+    if not batch:
+        break
+    repos.extend(batch)
+
+seeded = 0
+for repo in repos[:30]:  # Seed 30 per run
+    name = repo['name']
+    
+    # Check if empty
+    check = requests.get(
+        f"https://api.github.com/repos/{USER}/{name}/readme",
+        headers={"Authorization": f"token {TOKEN}"}
+    )
+    
+    if check.status_code == 404:  # No README = empty
+        print(f"Seeding {name}...")
+        
+        content = f"""# {name}
+
+Part of Infinity Realm - Building autonomously
+
+## Status
+- Connected to Crown Index
+- Ready for automation
+- Part of 1011+ repo network
+
+## Next Steps
+Use Crown Index emoji buttons to build this repo
+"""
+        
+        payload = {
+            "message": "🌱 Seeded by Infinity System",
+            "content": base64.b64encode(content.encode()).decode()
+        }
+        
+        result = requests.put(
+            f"https://api.github.com/repos/{USER}/{name}/contents/README.md",
+            json=payload,
+            headers={"Authorization": f"token {TOKEN}"}
+        )
+        
+        if result.status_code in [200, 201]:
+            seeded += 1
+            print(f"  ✅ Seeded")
+
+print(f"Seeded {seeded} repos")
+EOPY
