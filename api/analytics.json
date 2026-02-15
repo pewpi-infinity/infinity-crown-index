@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-02-15T19:44:03.429805+00:00",
+  "timestamp": "2026-02-15T19:50:03.348957+00:00",
   "overview": {
     "total_repos": 100,
-    "total_words": 272,
-    "empty_repos": 88,
-    "rich_repos": 12
+    "total_words": 300,
+    "empty_repos": 55,
+    "rich_repos": 45
   },
   "categories": {
     "engineer": 31,
@@ -21,9 +21,24 @@
       "words": 436
     },
     {
+      "name": "-Jade-Beacon-Oracle-",
+      "url": "https://github.com/pewpi-infinity/-Jade-Beacon-Oracle-",
+      "words": 253
+    },
+    {
       "name": "-Comet-Delta-Noble-",
       "url": "https://github.com/pewpi-infinity/-Comet-Delta-Noble-",
       "words": 252
+    },
+    {
+      "name": "-Halo-Aurora-Prism-",
+      "url": "https://github.com/pewpi-infinity/-Halo-Aurora-Prism-",
+      "words": 250
+    },
+    {
+      "name": "-Halo-Juniper-Solace-",
+      "url": "https://github.com/pewpi-infinity/-Halo-Juniper-Solace-",
+      "words": 247
     },
     {
       "name": "-Atlas-Glyph-Oracle-",
@@ -71,9 +86,34 @@
       "words": 244
     },
     {
-      "name": "-",
-      "url": "https://github.com/pewpi-infinity/-",
-      "words": 241
+      "name": "-Ember-Echo-Oracle-",
+      "url": "https://github.com/pewpi-infinity/-Ember-Echo-Oracle-",
+      "words": 244
+    },
+    {
+      "name": "-Ember-Glyph-Ripple-",
+      "url": "https://github.com/pewpi-infinity/-Ember-Glyph-Ripple-",
+      "words": 244
+    },
+    {
+      "name": "-Ember-Horizon-Prism-",
+      "url": "https://github.com/pewpi-infinity/-Ember-Horizon-Prism-",
+      "words": 244
+    },
+    {
+      "name": "-Ember-Juniper-Ripple-",
+      "url": "https://github.com/pewpi-infinity/-Ember-Juniper-Ripple-",
+      "words": 244
+    },
+    {
+      "name": "-Falcon-Aurora-Mint-",
+      "url": "https://github.com/pewpi-infinity/-Falcon-Aurora-Mint-",
+      "words": 244
+    },
+    {
+      "name": "-Falcon-Ivory-Noble-",
+      "url": "https://github.com/pewpi-infinity/-Falcon-Ivory-Noble-",
+      "words": 244
     }
   ],
   "charts": {
@@ -86,8 +126,8 @@
       "data": 581
     },
     "content_density": {
-      "empty": 88,
-      "rich": 12
+      "empty": 55,
+      "rich": 45
     }
   }
 }

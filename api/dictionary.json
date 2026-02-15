@@ -1,70 +1,76 @@
 {
-  "timestamp": "2026-02-15T19:43:50.437089+00:00",
+  "timestamp": "2026-02-15T19:49:53.413528+00:00",
   "total_repos": 100,
-  "total_unique_words": 272,
+  "total_unique_words": 300,
   "top_words": {
-    "next": 132,
-    "what": 121,
-    "repo": 110,
-    "this": 88,
-    "and": 77,
-    "tools": 69,
-    "research": 66,
-    "timestamp": 66,
-    "extracted": 66,
-    "files": 66,
-    "code": 66,
-    "investigative": 66,
-    "missing": 66,
-    "blocked": 66,
-    "undefined": 66,
-    "engineering": 66,
-    "routes": 66,
-    "two": 66,
-    "paths": 66,
-    "immediate": 66,
-    "docs": 65,
-    "data": 64,
-    "with": 64,
-    "notes": 55,
-    "present": 55,
-    "fastest": 55,
-    "worth": 55,
-    "more": 55,
-    "build": 55,
-    "reasoning": 55,
-    "decisions": 55,
-    "step": 55,
-    "why": 55,
-    "scripts": 44,
-    "repository": 33,
-    "modules": 33,
-    "tooling": 33,
-    "would": 33,
-    "advance": 33,
-    "concrete": 33,
-    "matters": 33,
-    "advances": 22,
-    "high": 13,
-    "value": 13,
-    "sweep": 11,
-    "class": 11,
-    "blocks": 11,
-    "automation": 11,
-    "add": 11,
-    "that": 11,
-    "increase": 11,
-    "leverage": 11,
-    "decision": 11,
-    "action": 11,
-    "memory": 10,
+    "next": 528,
+    "what": 484,
+    "repo": 440,
+    "this": 352,
+    "tools": 268,
+    "engineering": 265,
+    "research": 264,
+    "timestamp": 264,
+    "extracted": 264,
+    "files": 264,
+    "code": 264,
+    "investigative": 264,
+    "missing": 264,
+    "blocked": 264,
+    "undefined": 264,
+    "routes": 264,
+    "two": 264,
+    "paths": 264,
+    "immediate": 264,
+    "docs": 261,
+    "and": 243,
+    "data": 230,
+    "with": 229,
+    "notes": 220,
+    "present": 220,
+    "fastest": 220,
+    "worth": 220,
+    "more": 220,
+    "build": 220,
+    "reasoning": 220,
+    "decisions": 220,
+    "step": 220,
+    "why": 220,
+    "scripts": 176,
+    "repository": 132,
+    "modules": 132,
+    "tooling": 132,
+    "would": 132,
+    "advance": 132,
+    "concrete": 132,
+    "matters": 132,
+    "advances": 88,
+    "high": 46,
+    "value": 46,
+    "sweep": 44,
+    "class": 44,
+    "blocks": 44,
+    "automation": 44,
+    "add": 44,
+    "that": 44,
+    "increase": 44,
+    "leverage": 44,
+    "decision": 44,
+    "action": 44,
+    "memory": 11,
+    "glyph": 10,
     "system": 9,
     "orchestrator": 9,
     "mongodb": 8,
+    "ember": 8,
     "orb": 7,
     "for": 7,
     "management": 7,
     "await": 7,
+    "oracle": 7,
+    "noble": 7,
+    "prism": 7,
+    "aurora": 7,
     "healing": 6,
     "state": 6,
     "local": 5,
@@ -72,6 +78,12 @@
     "program": 5,
     "star": 5,
     "logicorb": 5,
+    "solace": 5,
+    "ripple": 5,
+    "halo": 5,
+    "jade": 5,
+    "kestrel": 5,
+    "viper": 5,
     "logic": 4,
     "the": 4,
     "entities": 4,
@@ -82,8 +94,11 @@
     "bash": 4,
     "const": 4,
     "comet": 4,
-    "noble": 4,
-    "ember": 4,
+    "delta": 4,
+    "juniper": 4,
+    "falcon": 4,
+    "beacon": 4,
+    "empty": 3,
     "task": 3,
     "mongoose": 3,
     "store": 3,
@@ -104,7 +119,14 @@
     "key": 3,
     "schemas": 3,
     "workflow": 3,
-    "aurora": 3,
+    "quartz": 3,
+    "cipher": 3,
+    "mint": 3,
+    "ivory": 3,
+    "ion": 3,
+    "titan": 3,
+    "flux": 3,
+    "magnetic": 2,
     "use": 2,
     "operations": 2,
     "orchestration": 2,
@@ -147,12 +169,10 @@
     "core": 2,
     "check": 2,
     "atlas": 2,
-    "glyph": 2,
-    "oracle": 2,
-    "cipher": 2,
-    "delta": 2,
-    "empty": 1,
-    "magnetic": 1,
+    "token": 2,
+    "echo": 2,
+    "horizon": 2,
+    "umbra": 2,
     "pulls": 1,
     "purpose": 1,
     "comprehensive": 1,
@@ -264,187 +284,30 @@
     "node": 1,
     "license": 1,
     "isc": 1,
-    "quartz": 1,
-    "token": 1,
     "assimilation": 1,
     "acknowledger": 1,
     "metamaterials": 1,
     "negative": 1,
     "optics": 1,
-    "echo": 1,
-    "prism": 1,
-    "mint": 1,
-    "solace": 1
+    "time": 1,
+    "crystal": 1,
+    "experimental": 1,
+    "realizations": 1,
+    "spintronics": 1,
+    "derived": 1,
+    "color": 1,
+    "route": 1,
+    "extract": 1,
+    "put": 1,
+    "blue": 1,
+    "lotus": 1,
+    "mario": 1,
+    "infinitytrumpcoin": 1
   },
   "empty_repos": [
     {
-      "name": "-Ember-Echo-Oracle-",
-      "url": "https://github.com/pewpi-infinity/-Ember-Echo-Oracle-",
-      "words": 0
-    },
-    {
-      "name": "-Ember-Glyph-Ripple-",
-      "url": "https://github.com/pewpi-infinity/-Ember-Glyph-Ripple-",
-      "words": 0
-    },
-    {
-      "name": "-Ember-Horizon-Prism-",
-      "url": "https://github.com/pewpi-infinity/-Ember-Horizon-Prism-",
-      "words": 0
-    },
-    {
-      "name": "-Ember-Juniper-Ripple-",
-      "url": "https://github.com/pewpi-infinity/-Ember-Juniper-Ripple-",
-      "words": 0
-    },
-    {
-      "name": "-Falcon-Aurora-Mint-",
-      "url": "https://github.com/pewpi-infinity/-Falcon-Aurora-Mint-",
-      "words": 0
-    },
-    {
-      "name": "-Falcon-Ivory-Noble-",
-      "url": "https://github.com/pewpi-infinity/-Falcon-Ivory-Noble-",
-      "words": 0
-    },
-    {
-      "name": "-Falcon-Ivory-Ripple-",
-      "url": "https://github.com/pewpi-infinity/-Falcon-Ivory-Ripple-",
-      "words": 0
-    },
-    {
-      "name": "-Falcon-Juniper-Umbra-",
-      "url": "https://github.com/pewpi-infinity/-Falcon-Juniper-Umbra-",
-      "words": 0
-    },
-    {
-      "name": "-Halo-Aurora-Prism-",
-      "url": "https://github.com/pewpi-infinity/-Halo-Aurora-Prism-",
-      "words": 0
-    },
-    {
-      "name": "-Halo-Cipher-Prism-",
-      "url": "https://github.com/pewpi-infinity/-Halo-Cipher-Prism-",
-      "words": 0
-    },
-    {
-      "name": "-Halo-Horizon-Solace-",
-      "url": "https://github.com/pewpi-infinity/-Halo-Horizon-Solace-",
-      "words": 0
-    },
-    {
-      "name": "-Halo-Ivory-Prism-",
-      "url": "https://github.com/pewpi-infinity/-Halo-Ivory-Prism-",
-      "words": 0
-    },
-    {
-      "name": "-Halo-Juniper-Solace-",
-      "url": "https://github.com/pewpi-infinity/-Halo-Juniper-Solace-",
-      "words": 0
-    },
-    {
-      "name": "-Ion-Glyph-Mint-",
-      "url": "https://github.com/pewpi-infinity/-Ion-Glyph-Mint-",
-      "words": 0
-    },
-    {
-      "name": "-Ion-Glyph-Quartz-",
-      "url": "https://github.com/pewpi-infinity/-Ion-Glyph-Quartz-",
-      "words": 0
-    },
-    {
-      "name": "-Ion-Glyph-Titan-",
-      "url": "https://github.com/pewpi-infinity/-Ion-Glyph-Titan-",
-      "words": 0
-    },
-    {
-      "name": "-Jade-Aurora-Oracle-",
-      "url": "https://github.com/pewpi-infinity/-Jade-Aurora-Oracle-",
-      "words": 0
-    },
-    {
-      "name": "-Jade-Beacon-Oracle-",
-      "url": "https://github.com/pewpi-infinity/-Jade-Beacon-Oracle-",
-      "words": 0
-    },
-    {
-      "name": "-Jade-Beacon-Titan-",
-      "url": "https://github.com/pewpi-infinity/-Jade-Beacon-Titan-",
-      "words": 0
-    },
-    {
-      "name": "-Jade-Delta-Oracle-",
-      "url": "https://github.com/pewpi-infinity/-Jade-Delta-Oracle-",
-      "words": 0
-    },
-    {
-      "name": "-Jade-Delta-Ripple-",
-      "url": "https://github.com/pewpi-infinity/-Jade-Delta-Ripple-",
-      "words": 0
-    },
-    {
-      "name": "-Kestrel-Aurora-Noble-",
-      "url": "https://github.com/pewpi-infinity/-Kestrel-Aurora-Noble-",
-      "words": 0
-    },
-    {
-      "name": "-Kestrel-Flux-Prism-",
-      "url": "https://github.com/pewpi-infinity/-Kestrel-Flux-Prism-",
-      "words": 0
-    },
-    {
-      "name": "-Kestrel-Flux-Solace-",
-      "url": "https://github.com/pewpi-infinity/-Kestrel-Flux-Solace-",
-      "words": 0
-    },
-    {
-      "name": "-Kestrel-Glyph-Solace-",
-      "url": "https://github.com/pewpi-infinity/-Kestrel-Glyph-Solace-",
-      "words": 0
-    },
-    {
-      "name": "-Kestrel-Juniper-Quartz-",
-      "url": "https://github.com/pewpi-infinity/-Kestrel-Juniper-Quartz-",
-      "words": 0
-    },
-    {
-      "name": "-Lotus-Glyph-Noble-",
-      "url": "https://github.com/pewpi-infinity/-Lotus-Glyph-Noble-",
-      "words": 0
-    },
-    {
-      "name": "-Mario-InfinityTrumpCoin-",
-      "url": "https://github.com/pewpi-infinity/-Mario-InfinityTrumpCoin-",
-      "words": 0
-    },
-    {
       "name": "-PREFIX---STAMP-",
       "url": "https://github.com/pewpi-infinity/-PREFIX---STAMP-",
-      "words": 0
-    },
-    {
-      "name": "-Viper-Beacon-Ripple-",
-      "url": "https://github.com/pewpi-infinity/-Viper-Beacon-Ripple-",
-      "words": 0
-    },
-    {
-      "name": "-Viper-Beacon-Umbra-",
-      "url": "https://github.com/pewpi-infinity/-Viper-Beacon-Umbra-",
-      "words": 0
-    },
-    {
-      "name": "-Viper-Flux-Titan-",
-      "url": "https://github.com/pewpi-infinity/-Viper-Flux-Titan-",
-      "words": 0
-    },
-    {
-      "name": "-Viper-Glyph-Oracle-",
-      "url": "https://github.com/pewpi-infinity/-Viper-Glyph-Oracle-",
-      "words": 0
-    },
-    {
-      "name": "-Viper-Glyph-Prism-",
-      "url": "https://github.com/pewpi-infinity/-Viper-Glyph-Prism-",
       "words": 0
     },
     {
@@ -725,9 +588,24 @@
       "words": 436
     },
     {
+      "name": "-Jade-Beacon-Oracle-",
+      "url": "https://github.com/pewpi-infinity/-Jade-Beacon-Oracle-",
+      "words": 253
+    },
+    {
       "name": "-Comet-Delta-Noble-",
       "url": "https://github.com/pewpi-infinity/-Comet-Delta-Noble-",
       "words": 252
+    },
+    {
+      "name": "-Halo-Aurora-Prism-",
+      "url": "https://github.com/pewpi-infinity/-Halo-Aurora-Prism-",
+      "words": 250
+    },
+    {
+      "name": "-Halo-Juniper-Solace-",
+      "url": "https://github.com/pewpi-infinity/-Halo-Juniper-Solace-",
+      "words": 247
     },
     {
       "name": "-Atlas-Glyph-Oracle-",
@@ -773,6 +651,156 @@
       "name": "-Ember-Cipher-Noble-",
       "url": "https://github.com/pewpi-infinity/-Ember-Cipher-Noble-",
       "words": 244
+    },
+    {
+      "name": "-Ember-Echo-Oracle-",
+      "url": "https://github.com/pewpi-infinity/-Ember-Echo-Oracle-",
+      "words": 244
+    },
+    {
+      "name": "-Ember-Glyph-Ripple-",
+      "url": "https://github.com/pewpi-infinity/-Ember-Glyph-Ripple-",
+      "words": 244
+    },
+    {
+      "name": "-Ember-Horizon-Prism-",
+      "url": "https://github.com/pewpi-infinity/-Ember-Horizon-Prism-",
+      "words": 244
+    },
+    {
+      "name": "-Ember-Juniper-Ripple-",
+      "url": "https://github.com/pewpi-infinity/-Ember-Juniper-Ripple-",
+      "words": 244
+    },
+    {
+      "name": "-Falcon-Aurora-Mint-",
+      "url": "https://github.com/pewpi-infinity/-Falcon-Aurora-Mint-",
+      "words": 244
+    },
+    {
+      "name": "-Falcon-Ivory-Noble-",
+      "url": "https://github.com/pewpi-infinity/-Falcon-Ivory-Noble-",
+      "words": 244
+    },
+    {
+      "name": "-Falcon-Ivory-Ripple-",
+      "url": "https://github.com/pewpi-infinity/-Falcon-Ivory-Ripple-",
+      "words": 244
+    },
+    {
+      "name": "-Falcon-Juniper-Umbra-",
+      "url": "https://github.com/pewpi-infinity/-Falcon-Juniper-Umbra-",
+      "words": 244
+    },
+    {
+      "name": "-Halo-Cipher-Prism-",
+      "url": "https://github.com/pewpi-infinity/-Halo-Cipher-Prism-",
+      "words": 244
+    },
+    {
+      "name": "-Halo-Horizon-Solace-",
+      "url": "https://github.com/pewpi-infinity/-Halo-Horizon-Solace-",
+      "words": 244
+    },
+    {
+      "name": "-Halo-Ivory-Prism-",
+      "url": "https://github.com/pewpi-infinity/-Halo-Ivory-Prism-",
+      "words": 244
+    },
+    {
+      "name": "-Ion-Glyph-Mint-",
+      "url": "https://github.com/pewpi-infinity/-Ion-Glyph-Mint-",
+      "words": 244
+    },
+    {
+      "name": "-Ion-Glyph-Quartz-",
+      "url": "https://github.com/pewpi-infinity/-Ion-Glyph-Quartz-",
+      "words": 244
+    },
+    {
+      "name": "-Ion-Glyph-Titan-",
+      "url": "https://github.com/pewpi-infinity/-Ion-Glyph-Titan-",
+      "words": 244
+    },
+    {
+      "name": "-Jade-Aurora-Oracle-",
+      "url": "https://github.com/pewpi-infinity/-Jade-Aurora-Oracle-",
+      "words": 244
+    },
+    {
+      "name": "-Jade-Beacon-Titan-",
+      "url": "https://github.com/pewpi-infinity/-Jade-Beacon-Titan-",
+      "words": 244
+    },
+    {
+      "name": "-Jade-Delta-Oracle-",
+      "url": "https://github.com/pewpi-infinity/-Jade-Delta-Oracle-",
+      "words": 244
+    },
+    {
+      "name": "-Jade-Delta-Ripple-",
+      "url": "https://github.com/pewpi-infinity/-Jade-Delta-Ripple-",
+      "words": 244
+    },
+    {
+      "name": "-Kestrel-Aurora-Noble-",
+      "url": "https://github.com/pewpi-infinity/-Kestrel-Aurora-Noble-",
+      "words": 244
+    },
+    {
+      "name": "-Kestrel-Flux-Prism-",
+      "url": "https://github.com/pewpi-infinity/-Kestrel-Flux-Prism-",
+      "words": 244
+    },
+    {
+      "name": "-Kestrel-Flux-Solace-",
+      "url": "https://github.com/pewpi-infinity/-Kestrel-Flux-Solace-",
+      "words": 244
+    },
+    {
+      "name": "-Kestrel-Glyph-Solace-",
+      "url": "https://github.com/pewpi-infinity/-Kestrel-Glyph-Solace-",
+      "words": 244
+    },
+    {
+      "name": "-Kestrel-Juniper-Quartz-",
+      "url": "https://github.com/pewpi-infinity/-Kestrel-Juniper-Quartz-",
+      "words": 244
+    },
+    {
+      "name": "-Lotus-Glyph-Noble-",
+      "url": "https://github.com/pewpi-infinity/-Lotus-Glyph-Noble-",
+      "words": 244
+    },
+    {
+      "name": "-Viper-Beacon-Ripple-",
+      "url": "https://github.com/pewpi-infinity/-Viper-Beacon-Ripple-",
+      "words": 244
+    },
+    {
+      "name": "-Viper-Beacon-Umbra-",
+      "url": "https://github.com/pewpi-infinity/-Viper-Beacon-Umbra-",
+      "words": 244
+    },
+    {
+      "name": "-Viper-Flux-Titan-",
+      "url": "https://github.com/pewpi-infinity/-Viper-Flux-Titan-",
+      "words": 244
+    },
+    {
+      "name": "-Viper-Glyph-Oracle-",
+      "url": "https://github.com/pewpi-infinity/-Viper-Glyph-Oracle-",
+      "words": 244
+    },
+    {
+      "name": "-Viper-Glyph-Prism-",
+      "url": "https://github.com/pewpi-infinity/-Viper-Glyph-Prism-",
+      "words": 244
+    },
+    {
+      "name": "-Mario-InfinityTrumpCoin-",
+      "url": "https://github.com/pewpi-infinity/-Mario-InfinityTrumpCoin-",
+      "words": 243
     },
     {
       "name": "-",
