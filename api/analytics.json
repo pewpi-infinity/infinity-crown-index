@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-02-15T11:13:56.103523+00:00",
+  "timestamp": "2026-02-15T11:21:03.524131+00:00",
   "overview": {
-    "total_repos": 100,
+    "total_repos": 200,
     "total_words": 431,
-    "empty_repos": 50,
+    "empty_repos": 150,
     "rich_repos": 47
   },
   "categories": {
@@ -126,7 +126,7 @@
       "data": 581
     },
     "content_density": {
-      "empty": 50,
+      "empty": 150,
       "rich": 47
     }
   }
