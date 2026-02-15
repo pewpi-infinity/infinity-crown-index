@@ -86,7 +86,7 @@ for idx, repo in enumerate(repos, 1):
             word_list = re.findall(r'\b[a-zA-Z]{3,}\b', content.lower())
             all_words.update(word_list)
             words = len(word_list)
-        except:
+        except (KeyError, ValueError, TypeError):
             pass
     
     if any(x in name for x in ['hydrogen', 'research', 'paper', 'science', 'ion']):

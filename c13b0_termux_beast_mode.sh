@@ -5,7 +5,6 @@
 set -euo pipefail
 
 USER="pewpi-infinity"
-EMAIL="marvaseater@gmail.com"
 START_TIME=$(date +%s)
 
 # Colors for terminal
@@ -15,7 +14,19 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
-NC='\033[0m' # No Color
+NC='\033[0m'
+
+# ── Auth: load token from env file, never hardcoded ──
+if [ -f "$HOME/.infinity-env" ]; then
+    # shellcheck source=/dev/null
+    source "$HOME/.infinity-env"
+fi
+
+if [ -z "${GITHUB_TOKEN:-}" ]; then
+    echo -e "${RED}GITHUB_TOKEN not set. Create ~/.infinity-env with:${NC}"
+    echo '  GITHUB_TOKEN=ghp_yourtoken'
+    echo "Seeding will be skipped."
+fi
 
 # Keep screen awake
 termux-wake-lock 2>/dev/null || true
@@ -237,6 +248,7 @@ python3 <<'EOPY'
 import requests
 import json
 import base64
+import os
 from datetime import datetime
 import time
 
@@ -280,32 +292,43 @@ Use Crown Index emoji buttons to build this repo:
 """
         
         url = f"https://api.github.com/repos/{USER}/{repo_name}/contents/README.md"
-        
-        # Check existing
-        check = requests.get(url, timeout=5)
-        
+
         content_b64 = base64.b64encode(readme_content.encode()).decode()
-        
+
         payload = {
-            "message": "🌱 Seeded by C13B0",
+            "message": "Seeded by C13B0",
             "content": content_b64
         }
-        
+
+        TOKEN = os.environ.get("GITHUB_TOKEN", "")
+        if not TOKEN:
+            print("\033[0;31mNo GITHUB_TOKEN - skipping seed\033[0m")
+            break
+        HEADERS = {"Authorization": f"token {TOKEN}"}
+
+        check = requests.get(url, headers=HEADERS, timeout=5)
         if check.status_code == 200:
             payload["sha"] = check.json()["sha"]
-        
-        result = requests.put(url, json=payload, timeout=10)
-        
+
+        result = requests.put(url, json=payload, headers=HEADERS, timeout=10)
+
         if result.status_code in [200, 201]:
-            print("\033[0;32m✅ Seeded\033[0m")
+            print("\033[0;32mSeeded\033[0m")
             seeded_count += 1
+        elif result.status_code == 401:
+            print("\033[0;31mAUTH FAILED - check token\033[0m")
+            break
+        elif result.status_code == 403:
+            wait = int(result.headers.get("Retry-After", 60))
+            print(f"\033[0;31mRate limited {wait}s\033[0m")
+            time.sleep(wait)
         else:
-            print(f"\033[0;31m❌ Failed ({result.status_code})\033[0m")
-        
-        time.sleep(0.5)  # Rate limit safety
-        
-    except Exception as e:
-        print(f"\033[0;31m❌ Error: {e}\033[0m")
+            print(f"\033[0;31mHTTP {result.status_code}\033[0m")
+
+        time.sleep(1)
+
+    except requests.exceptions.RequestException as e:
+        print(f"\033[0;31mERR: {e}\033[0m")
 
 print(f"\n\033[1;32m✅ Seeded {seeded_count}/{len(empty_repos)} repos\033[0m\n")
 

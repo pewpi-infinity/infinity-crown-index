@@ -6,7 +6,6 @@
 set -euo pipefail
 
 USER="pewpi-infinity"
-EMAIL="marvaseater@gmail.com"
 DATE=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
 
 echo "🌙 C13B0 OVERNIGHT BUILDER STARTING"
@@ -175,67 +174,74 @@ import json
 import base64
 from datetime import datetime
 
+import os, sys, time
+
 USER = "pewpi-infinity"
-TOKEN = "${{ secrets.GITHUB_TOKEN }}"
+TOKEN = os.environ.get("GITHUB_TOKEN", "")
+if not TOKEN:
+    print("No GITHUB_TOKEN. Exiting.")
+    sys.exit(1)
 
-# Load dictionary to find empty repos
-with open("api/dictionary.json") as f:
-    data = json.load(f)
+HEADERS = {"Authorization": f"token {TOKEN}"}
 
-empty_repos = data.get("empty_repos", [])[:10]  # Seed 10 per run
+try:
+    with open("api/dictionary.json") as f:
+        data = json.load(f)
+except (FileNotFoundError, json.JSONDecodeError):
+    print("No dictionary.json. Run dictionary-builder first.")
+    sys.exit(0)
+
+empty_repos = data.get("empty_repos", [])[:10]
+seeded = 0
 
 for repo_info in empty_repos:
     repo_name = repo_info['name']
-    
-    print(f"🌱 Seeding {repo_name}...")
-    
-    # Create README
+    print(f"Seeding {repo_name}...", end=" ", flush=True)
+
     readme_content = f"""# {repo_name}
 
 **Part of the Infinity Realm**
 
-This repository is being built autonomously by C13B0 systems.
-
-## Purpose
-To be determined based on semantic connections across the Infinity network.
-
 ## Status
-- 🌱 Seeded: {datetime.utcnow().isoformat()}
-- 📊 Growing: Content will populate based on realm dictionary
-- 🔗 Connected: Part of 1011+ repo ecosystem
+- Seeded: {datetime.utcnow().isoformat()}
+- Connected: Part of 1011+ repo ecosystem
 
 ## Actions
-Click emoji buttons in Crown Index to build this repo:
-- 🤓 Research
-- 🦾 Automation
-- ⚙️ Tools
-- 💰 Value
+Click emoji buttons in Crown Index to build this repo.
 """
-    
-    # PUT README via API
+
     url = f"https://api.github.com/repos/{USER}/{repo_name}/contents/README.md"
-    
-    # Check if exists first
-    check = requests.get(url, headers={"Authorization": f"token {TOKEN}"})
-    
     content_b64 = base64.b64encode(readme_content.encode()).decode()
-    
+
     payload = {
-        "message": "🌱 Seeded by C13B0 Overnight Builder",
+        "message": "Seeded by C13B0 Overnight Builder",
         "content": content_b64
     }
-    
-    if check.status_code == 200:
-        # Update existing
-        payload["sha"] = check.json()["sha"]
-        requests.put(url, json=payload, headers={"Authorization": f"token {TOKEN}"})
-    else:
-        # Create new
-        requests.put(url, json=payload, headers={"Authorization": f"token {TOKEN}"})
-    
-    print(f"  ✅ Seeded {repo_name}")
 
-print(f"🌱 Seeded {len(empty_repos)} repos this cycle")
+    try:
+        check = requests.get(url, headers=HEADERS, timeout=10)
+        if check.status_code == 200:
+            payload["sha"] = check.json()["sha"]
+
+        result = requests.put(url, json=payload, headers=HEADERS, timeout=10)
+        if result.status_code in [200, 201]:
+            seeded += 1
+            print("OK")
+        elif result.status_code == 401:
+            print("AUTH FAILED")
+            break
+        elif result.status_code == 403:
+            wait = int(result.headers.get("Retry-After", 60))
+            print(f"Rate limited {wait}s")
+            time.sleep(wait)
+        else:
+            print(f"HTTP {result.status_code}")
+    except requests.exceptions.RequestException as e:
+        print(f"ERR: {e}")
+
+    time.sleep(1)
+
+print(f"Seeded {seeded}/{len(empty_repos)} repos")
 EOPY
 EOSEED
 

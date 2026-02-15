@@ -1,0 +1,9 @@
+# Infinity Crown Index - Environment Variables
+# Copy this to ~/.infinity-env and fill in your tokens.
+# NEVER commit ~/.infinity-env to git.
+
+# GitHub fine-grained PAT (contents:write scope, 90-day expiry recommended)
+GITHUB_TOKEN=ghp_your_token_here
+
+# Anthropic API key (only needed for autonomous-scanner.yml)
+# ANTHROPIC_API_KEY=sk-ant-your_key_here

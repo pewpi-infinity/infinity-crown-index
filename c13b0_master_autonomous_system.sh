@@ -5,7 +5,6 @@
 set -euo pipefail
 
 USER="pewpi-infinity"
-EMAIL="marvaseater@gmail.com"
 DATE=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
 STAMP=$(date -u +%Y%m%d_%H%M%S)
 

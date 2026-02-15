@@ -4,7 +4,6 @@
 set -euo pipefail
 
 USER="pewpi-infinity"
-EMAIL="marvaseater@gmail.com"
 START_TIME=$(date +%s)
 
 # Colors
@@ -19,6 +18,17 @@ NC='\033[0m'
 # Use Termux temp directory
 TEMP_DIR="$HOME/.c13b0_temp"
 mkdir -p "$TEMP_DIR"
+
+# ── Auth: load token from env file, never hardcoded ──
+if [ -f "$HOME/.infinity-env" ]; then
+    # shellcheck source=/dev/null
+    source "$HOME/.infinity-env"
+fi
+
+if [ -z "${GITHUB_TOKEN:-}" ]; then
+    echo -e "${RED}GITHUB_TOKEN not set. Create ~/.infinity-env with:${NC}"
+    echo '  GITHUB_TOKEN=ghp_yourtoken'
+fi
 
 termux-wake-lock 2>/dev/null || true
 

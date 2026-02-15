@@ -1,0 +1,13 @@
+# Secrets - NEVER commit
+.infinity-env
+.env
+*.env
+credentials.json
+
+# Logs
+engine.log
+*.log
+
+# Temp
+.c13b0_temp/
+/tmp/
