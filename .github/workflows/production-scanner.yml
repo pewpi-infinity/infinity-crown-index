@@ -1,9 +1,11 @@
 name: 👑 Production Scanner
 
 on:
-  schedule:
-    - cron: '*/30 * * * *'  # Every 30 minutes
   workflow_dispatch:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '*/30 * * * *'
 
 jobs:
   scan:
@@ -26,12 +28,11 @@ from collections import Counter
 from datetime import datetime, timezone
 
 USER = "pewpi-infinity"
-TOKEN = os.environ["GITHUB_TOKEN"]
-HEADERS = {"Authorization": f"token {TOKEN}"}
+TOKEN = os.environ.get("GITHUB_TOKEN", "")
+HEADERS = {"Authorization": f"token {TOKEN}"} if TOKEN else {}
 
-print("📡 Scanning repos with authentication...")
+print("📡 Scanning repos...")
 
-# Get all repos (authenticated)
 repos = []
 page = 1
 while page < 15:
@@ -51,11 +52,9 @@ while page < 15:
     
     repos.extend(batch)
     page += 1
-    print(f"  Page {page-1}: {len(batch)} repos")
 
-print(f"✅ Found {len(repos)} total repos")
+print(f"✅ Found {len(repos)} repos")
 
-# Categorize by name patterns (fast, no API key needed)
 categories = {
     "engineer": [],
     "ceo": [],
@@ -67,10 +66,11 @@ categories = {
 
 all_words = Counter()
 
-for repo in repos:
+for idx, repo in enumerate(repos, 1):
     name = repo['name'].lower()
     
-    # Try to get README for word count
+    print(f"  [{idx}/{len(repos)}] {repo['name']}", end=" ")
+    
     readme_r = requests.get(
         f"https://api.github.com/repos/{USER}/{repo['name']}/readme",
         headers=HEADERS,
@@ -89,19 +89,24 @@ for repo in repos:
         except:
             pass
     
-    # Smart categorization
     if any(x in name for x in ['hydrogen', 'research', 'paper', 'science', 'ion']):
         cat = "engineer"
+        print("🟩")
     elif any(x in name for x in ['token', 'wallet', 'spark', 'value', 'coin']):
         cat = "ceo"
+        print("🟧")
     elif any(x in name for x in ['scrape', 'fetch', 'import', 'data']):
         cat = "import"
+        print("🔵")
     elif any(x in name for x in ['brain', 'mongoose', 'scan', 'investigate']):
         cat = "investigate"
+        print("💗")
     elif any(x in name for x in ['route', 'path', 'link', 'chain', 'spine', 'legend']):
         cat = "routes"
+        print("🔴")
     else:
         cat = "data"
+        print("🟡")
     
     categories[cat].append({
         "name": repo['name'],
@@ -112,11 +117,9 @@ for repo in repos:
         "updated": repo.get('updated_at', '')
     })
 
-# Save tokens
 with open("api/tokens.json", "w") as f:
     json.dump(categories, f, indent=2)
 
-# Save analytics
 with open("api/analytics.json", "w") as f:
     json.dump({
         "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -126,7 +129,7 @@ with open("api/analytics.json", "w") as f:
         "categories": {k: len(v) for k, v in categories.items()}
     }, f, indent=2)
 
-print(f"✅ Categorized {sum(len(v) for v in categories.values())} repos:")
+print(f"\n✅ Categorized:")
 for cat, items in categories.items():
     print(f"  {cat}: {len(items)}")
 EOPY
@@ -135,6 +138,6 @@ EOPY
         run: |
           git config user.name "Production Scanner"
           git config user.email "scanner@infinity.ai"
-          git add api/tokens.json api/analytics.json
-          git diff --staged --quiet || git commit -m "👑 Production scan - $(date)"
+          git add api/
+          git diff --staged --quiet || git commit -m "👑 Scan complete - $(date -u +%Y-%m-%d_%H:%M:%S)"
           git push
