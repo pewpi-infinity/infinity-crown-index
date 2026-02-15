@@ -1,0 +1,124 @@
+name: 📚 Dictionary Builder (Continuous)
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'  # Every 30 minutes (never stops)
+  workflow_dispatch:
+
+jobs:
+  build-dictionary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Scan All Repos for Words
+        run: |
+          python3 <<'EOPY'
+import requests
+import re
+import json
+from collections import Counter
+from datetime import datetime
+
+USER = "pewpi-infinity"
+
+print("📚 Building Infinity Dictionary...")
+
+all_words = Counter()
+repo_data = {}
+empty_repos = []
+rich_repos = []
+
+page = 1
+total_repos = 0
+
+while page < 15:
+    print(f"  Scanning page {page}...")
+    r = requests.get(f"https://api.github.com/users/{USER}/repos?per_page=100&page={page}")
+    
+    if r.status_code != 200:
+        break
+    
+    repos = r.json()
+    if not repos:
+        break
+    
+    for repo in repos:
+        total_repos += 1
+        name = repo['name']
+        
+        # Get README
+        readme_url = f"https://api.github.com/repos/{USER}/{name}/readme"
+        readme_r = requests.get(readme_url)
+        
+        word_count = 0
+        file_count = 0
+        
+        if readme_r.status_code == 200:
+            import base64
+            content = base64.b64decode(readme_r.json()['content']).decode('utf-8', errors='ignore')
+            
+            # Extract words
+            words = re.findall(r'\b[a-zA-Z]{3,}\b', content.lower())
+            all_words.update(words)
+            word_count = len(words)
+        
+        # Count files
+        tree_url = f"https://api.github.com/repos/{USER}/{name}/git/trees/main?recursive=1"
+        tree_r = requests.get(tree_url)
+        if tree_r.status_code == 200:
+            tree = tree_r.json()
+            file_count = len(tree.get('tree', []))
+        
+        # Categorize
+        repo_info = {
+            "name": name,
+            "url": repo['html_url'],
+            "words": word_count,
+            "files": file_count,
+            "size": repo.get('size', 0)
+        }
+        
+        repo_data[name] = repo_info
+        
+        if word_count < 10 and file_count < 3:
+            empty_repos.append(repo_info)
+        elif word_count > 100 or file_count > 10:
+            rich_repos.append(repo_info)
+        
+        # Rate limit safety
+        if total_repos % 50 == 0:
+            import time
+            time.sleep(2)
+    
+    page += 1
+
+# Top words (Infinity realm vocabulary)
+top_words = dict(all_words.most_common(500))
+
+# Save dictionary
+dictionary = {
+    "timestamp": datetime.utcnow().isoformat(),
+    "total_repos": total_repos,
+    "total_unique_words": len(all_words),
+    "top_words": top_words,
+    "empty_repos": empty_repos[:100],
+    "rich_repos": sorted(rich_repos, key=lambda x: x['words'], reverse=True)[:50]
+}
+
+with open("api/dictionary.json", "w") as f:
+    json.dump(dictionary, f, indent=2)
+
+print(f"✅ Dictionary built: {len(all_words)} unique words across {total_repos} repos")
+print(f"📊 Empty repos: {len(empty_repos)} | Rich repos: {len(rich_repos)}")
+EOPY
+      
+      - name: Commit Dictionary
+        run: |
+          git config user.name "Dictionary Bot"
+          git config user.email "dict@infinity.ai"
+          git add api/dictionary.json
+          git commit -m "📚 Dictionary update - ${{ github.run_number }}" || true
+          git push || true

@@ -1,0 +1,86 @@
+name: 🌱 Repo Seeder (Continuous)
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Every hour
+  workflow_dispatch:
+
+jobs:
+  seed-repos:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Seed Empty Repos
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 <<'EOPY'
+import requests
+import json
+import base64
+from datetime import datetime
+
+USER = "pewpi-infinity"
+TOKEN = "${{ secrets.GITHUB_TOKEN }}"
+
+# Load dictionary to find empty repos
+with open("api/dictionary.json") as f:
+    data = json.load(f)
+
+empty_repos = data.get("empty_repos", [])[:10]  # Seed 10 per run
+
+for repo_info in empty_repos:
+    repo_name = repo_info['name']
+    
+    print(f"🌱 Seeding {repo_name}...")
+    
+    # Create README
+    readme_content = f"""# {repo_name}
+
+**Part of the Infinity Realm**
+
+This repository is being built autonomously by C13B0 systems.
+
+## Purpose
+To be determined based on semantic connections across the Infinity network.
+
+## Status
+- 🌱 Seeded: {datetime.utcnow().isoformat()}
+- 📊 Growing: Content will populate based on realm dictionary
+- 🔗 Connected: Part of 1011+ repo ecosystem
+
+## Actions
+Click emoji buttons in Crown Index to build this repo:
+- 🤓 Research
+- 🦾 Automation
+- ⚙️ Tools
+- 💰 Value
+"""
+    
+    # PUT README via API
+    url = f"https://api.github.com/repos/{USER}/{repo_name}/contents/README.md"
+    
+    # Check if exists first
+    check = requests.get(url, headers={"Authorization": f"token {TOKEN}"})
+    
+    content_b64 = base64.b64encode(readme_content.encode()).decode()
+    
+    payload = {
+        "message": "🌱 Seeded by C13B0 Overnight Builder",
+        "content": content_b64
+    }
+    
+    if check.status_code == 200:
+        # Update existing
+        payload["sha"] = check.json()["sha"]
+        requests.put(url, json=payload, headers={"Authorization": f"token {TOKEN}"})
+    else:
+        # Create new
+        requests.put(url, json=payload, headers={"Authorization": f"token {TOKEN}"})
+    
+    print(f"  ✅ Seeded {repo_name}")
+
+print(f"🌱 Seeded {len(empty_repos)} repos this cycle")
+EOPY

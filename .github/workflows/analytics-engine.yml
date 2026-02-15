@@ -1,0 +1,85 @@
+name: 📊 Analytics Engine
+
+on:
+  schedule:
+    - cron: '0 */2 * * *'  # Every 2 hours
+  workflow_dispatch:
+
+jobs:
+  build-analytics:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Generate Analytics
+        run: |
+          python3 <<'EOPY'
+import json
+from datetime import datetime
+from collections import Counter
+
+# Load dictionary
+with open("api/dictionary.json") as f:
+    data = json.load(f)
+
+# Load existing token data
+with open("api/tokens.json") as f:
+    tokens = json.load(f)
+
+# Build analytics
+analytics = {
+    "timestamp": datetime.utcnow().isoformat(),
+    "overview": {
+        "total_repos": data["total_repos"],
+        "total_words": data["total_unique_words"],
+        "empty_repos": len(data["empty_repos"]),
+        "rich_repos": len(data["rich_repos"])
+    },
+    "categories": {
+        cat: len(repos) for cat, repos in tokens.items()
+    },
+    "top_content_repos": data["rich_repos"][:20],
+    "seeding_targets": data["empty_repos"][:20],
+    "word_cloud": dict(list(data["top_words"].items())[:100]),
+    "charts": {
+        "category_distribution": {
+            cat: len(repos) for cat, repos in tokens.items()
+        },
+        "content_density": {
+            "empty": len(data["empty_repos"]),
+            "sparse": len([r for r in data.get("rich_repos", []) if r["words"] < 500]),
+            "rich": len([r for r in data.get("rich_repos", []) if r["words"] >= 500])
+        }
+    },
+    "recommendations": []
+}
+
+# Generate recommendations
+if len(data["empty_repos"]) > 50:
+    analytics["recommendations"].append({
+        "type": "seeding",
+        "urgency": "high",
+        "message": f"⚠️ {len(data['empty_repos'])} repos need content - seeder running"
+    })
+
+if len(data["rich_repos"]) > 100:
+    analytics["recommendations"].append({
+        "type": "value",
+        "urgency": "medium",
+        "message": f"💰 {len(data['rich_repos'])} repos with substantial content - ready for value extraction"
+    })
+
+with open("api/analytics.json", "w") as f:
+    json.dump(analytics, f, indent=2)
+
+print("📊 Analytics generated")
+EOPY
+      
+      - name: Commit Analytics
+        run: |
+          git config user.name "Analytics Bot"
+          git config user.email "analytics@infinity.ai"
+          git add api/analytics.json
+          git commit -m "📊 Analytics update" || true
+          git push || true
