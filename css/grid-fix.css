@@ -1,0 +1,31 @@
+/* Responsive emoji button grid */
+.emoji-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    gap: 0.8rem;
+    max-width: 100%;
+    padding: 1.5rem;
+    overflow-x: hidden;
+}
+
+.emoji-btn {
+    min-width: 70px;
+    max-width: 90px;
+    aspect-ratio: 1;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+/* Ensure cockpit visible */
+#active-modules,
+#website-preview {
+    margin-top: 2rem;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+    .emoji-grid {
+        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+        gap: 0.5rem;
+    }
+}

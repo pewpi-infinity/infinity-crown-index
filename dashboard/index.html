@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👑 Infinity Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            color: #e0e7ff;
+            font-family: 'Courier New', monospace;
+            padding: 2rem;
+        }
+        h1 { text-align: center; margin-bottom: 2rem; font-size: 2.5rem; }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .section {
+            border: 2px solid;
+            border-radius: 15px;
+            padding: 1.5rem;
+            min-height: 200px;
+        }
+        .section h2 { margin-bottom: 1rem; font-size: 1.5rem; }
+        .section-green { border-color: #10b981; background: rgba(16, 185, 129, 0.1); }
+        .section-orange { border-color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
+        .section-blue { border-color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
+        .section-pink { border-color: #ec4899; background: rgba(236, 72, 153, 0.1); }
+        .section-red { border-color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+        .section-yellow { border-color: #eab308; background: rgba(234, 179, 8, 0.1); }
+        .token-link {
+            display: block;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+        }
+        .token-link:hover { background: rgba(255, 255, 255, 0.15); transform: translateX(5px); }
+    </style>
+</head>
+<body>
+    <h1>👑 Infinity Crown Dashboard</h1>
+    <div class="dashboard-grid">
+        <div class="section section-green">
+            <h2>🟩 Engineer</h2>
+            <div id="engineer-tokens"></div>
+        </div>
+        <div class="section section-orange">
+            <h2>🟧 CEO</h2>
+            <div id="ceo-tokens"></div>
+        </div>
+        <div class="section section-blue">
+            <h2>🔵 Import</h2>
+            <div id="import-tokens"></div>
+        </div>
+        <div class="section section-pink">
+            <h2>💗 Investigate</h2>
+            <div id="investigate-tokens"></div>
+        </div>
+        <div class="section section-red">
+            <h2>🔴 Routes</h2>
+            <div id="routes-tokens"></div>
+        </div>
+        <div class="section section-yellow">
+            <h2>🟡 Data</h2>
+            <div id="data-tokens"></div>
+        </div>
+    </div>
+    <script>
+        // Load tokens from API
+        fetch('../api/tokens.json')
+            .then(r => r.json())
+            .then(data => {
+                Object.keys(data).forEach(category => {
+                    const container = document.getElementById(`${category}-tokens`);
+                    data[category].forEach(token => {
+                        const link = document.createElement('a');
+                        link.className = 'token-link';
+                        link.href = `../tokens/${token.id}.html`;
+                        link.textContent = `${token.emoji} ${token.title}`;
+                        container.appendChild(link);
+                    });
+                });
+            });
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+name: Update Token Dashboard
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Generate Tokens
+        run: bash api/generate-tokens.sh
+      - name: Commit Changes
+        run: |
+          git config user.name "Infinity Bot"
+          git config user.email "bot@infinity.ai"
+          git add api/tokens.json
+          git commit -m "🤖 Auto-update tokens" || true
+          git push
