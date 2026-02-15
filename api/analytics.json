@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-02-15T08:11:24.818532+00:00",
+  "overview": {
+    "total_repos": 0,
+    "total_words": 0,
+    "empty_repos": 0,
+    "rich_repos": 0
+  },
+  "categories": {
+    "engineer": 31,
+    "ceo": 142,
+    "import": 1,
+    "investigate": 118,
+    "routes": 0,
+    "data": 581
+  },
+  "top_content_repos": [],
+  "charts": {
+    "category_distribution": {
+      "engineer": 31,
+      "ceo": 142,
+      "import": 1,
+      "investigate": 118,
+      "routes": 0,
+      "data": 581
+    },
+    "content_density": {
+      "empty": 0,
+      "rich": 0
+    }
+  }
+}
