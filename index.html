@@ -3,136 +3,366 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>👑 Infinity Crown Index</title>
-<style>
-:root{--bg:#0b0f14;--panel:#0f1620;--line:rgba(255,255,255,.1);--text:#e8eef7;--muted:#a9b7c8}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(900px 600px at 20% -10%,#18243a,transparent 40%),var(--bg);
-     color:var(--text);font-family:system-ui}
-header{position:sticky;top:0;background:rgba(11,15,20,.92);backdrop-filter:blur(8px);
-       border-bottom:1px solid var(--line);z-index:10}
-.wrap{max-width:1200px;margin:auto;padding:14px}
-.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.brand{font-weight:800;letter-spacing:.4px}
-.search{flex:1;min-width:240px;border:1px solid var(--line);border-radius:999px;padding:8px 12px;display:flex;gap:8px}
-.search input{width:100%;background:transparent;border:0;outline:0;color:var(--text)}
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-top:14px}
-.card{grid-column:span 6;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.03)}
-@media(max-width:900px){.card{grid-column:span 12}}
-.hd{padding:12px;border-bottom:1px solid var(--line)}
-.repo{font-weight:700}
-.url{font-size:12px;color:var(--muted);word-break:break-all}
-.bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.e{min-width:38px;height:34px;border:1px solid var(--line);border-radius:12px;
-   display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px}
-.e:hover{transform:translateY(-1px)}
-.body{padding:12px}
-.steps{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
-.step{border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:12px;cursor:pointer}
-.step.active{background:rgba(255,255,255,.1)}
-.panel{border:1px solid var(--line);border-radius:14px;padding:10px;background:rgba(0,0,0,.25)}
-.links{display:flex;gap:8px;flex-wrap:wrap}
-.lnk{border:1px solid var(--line);border-radius:12px;padding:7px 10px;font-size:12px}
-footer{border-top:1px solid var(--line);margin-top:24px}
-.tiny{font-size:11px;color:var(--muted)}
-</style>
-    <link rel="stylesheet" href="css/grid-fix.css">
-    <link rel="stylesheet" href="css/grid-fix.css">
+<title>Infinity Crown Index</title>
+<link rel="stylesheet" href="css/crown.css">
 </head>
 <body>
 
 <header>
   <div class="wrap row">
-    <div class="brand">👑 Infinity Crown Index</div>
-    <div class="search"><span>🕹️</span><input id="q" placeholder="Search crowns…"></div>
+    <div class="brand">Infinity Crown Index</div>
+    <div class="search"><span>&#x1F50D;</span><input id="q" placeholder="Search repos or categories..."></div>
+    <nav class="nav-links">
+      <a href="dashboard/">Dashboard</a>
+      <a href="panels/emoji_panels.html">Panels</a>
+    </nav>
     <div class="tiny" id="count"></div>
   </div>
 </header>
 
 <main class="wrap">
+  <!-- Category filter bar -->
+  <div id="category-bar" class="category-bar"></div>
+
+  <!-- Stats strip -->
+  <div id="stats-strip" class="stats-strip"></div>
+
+  <!-- Card grid -->
   <div class="grid" id="grid"></div>
 </main>
 
 <footer class="wrap tiny">
-  Card-local interaction engine • Emoji = mode • No outbound redirects
+  Infinity Crown Index &mdash; Emoji-driven repo management
 </footer>
 
 <script>
-const ladder=["🟡","👑","🤓","🦾","⚙️","💰","💲"];
-const emojis=["⚙️","🦾","💎","🍄","👑","🟡","🤓","💰","💲","🧱"];
-const cardState={activeMode:{}};
-const $=id=>document.getElementById(id);
+const EMOJIS = {
+  "gear":       { icon: "\u2699\uFE0F", label: "Tools",      key: "gear" },
+  "robot":      { icon: "\uD83E\uDD16", label: "Automate",   key: "robot" },
+  "gem":        { icon: "\uD83D\uDC8E", label: "Facets",     key: "gem" },
+  "mushroom":   { icon: "\uD83C\uDF44", label: "Expand",     key: "mushroom" },
+  "crown":      { icon: "\uD83D\uDC51", label: "Royal",      key: "crown" },
+  "circle":     { icon: "\uD83D\uDFE1", label: "Tokens",     key: "circle" },
+  "nerd":       { icon: "\uD83E\uDD13", label: "Research",   key: "nerd" },
+  "money":      { icon: "\uD83D\uDCB0", label: "Value",      key: "money" },
+  "dollar":     { icon: "\uD83D\uDCB2", label: "Assets",     key: "dollar" },
+  "brick":      { icon: "\uD83E\uDDF1", label: "Build",      key: "brick" }
+};
 
-function inferTools(repo){
-  const r=repo.toLowerCase();
-  const t=[];
-  if(r.includes("spark"))t.push("🎨 Page Builder","🧱 Component Editor");
-  if(r.includes("infinity"))t.push("🧠 AI Panel","🟡 Token Engine");
-  if(r.includes("market"))t.push("💰 Pricing Engine","📈 Trends");
-  if(r.includes("data"))t.push("📊 Charts","🧮 Analyzer");
-  return t.length?t:["🔍 Inspector","🧱 Repo Viewer"];
-}
+const CATEGORY_MAP = {
+  engineer:    { label: "Engineer",    color: "#10b981" },
+  ceo:         { label: "CEO",         color: "#f59e0b" },
+  import:      { label: "Import",      color: "#3b82f6" },
+  investigate: { label: "Investigate", color: "#ec4899" },
+  routes:      { label: "Routes",      color: "#8b5cf6" },
+  data:        { label: "Data",        color: "#6b7280" }
+};
 
-function handleEmoji(repo,emoji){
-  cardState.activeMode[repo]=emoji;
+let crownSites = [];
+let tokenData = {};
+let analyticsData = {};
+let dictionaryData = {};
+let activeCategory = null;
+let cardModes = {};
+
+const $ = id => document.getElementById(id);
+
+// ── Data Loading ──
+
+async function loadAll() {
+  const [sitesRes, tokensRes, analyticsRes, dictRes] = await Promise.allSettled([
+    fetch("data/crown_sites.json", { cache: "no-store" }).then(r => r.json()),
+    fetch("api/tokens.json",       { cache: "no-store" }).then(r => r.json()),
+    fetch("api/analytics.json",    { cache: "no-store" }).then(r => r.json()),
+    fetch("api/dictionary.json",   { cache: "no-store" }).then(r => r.json())
+  ]);
+
+  crownSites    = sitesRes.status    === "fulfilled" ? sitesRes.value    : [];
+  tokenData     = tokensRes.status   === "fulfilled" ? tokensRes.value   : {};
+  analyticsData = analyticsRes.status=== "fulfilled" ? analyticsRes.value: {};
+  dictionaryData= dictRes.status     === "fulfilled" ? dictRes.value     : {};
+
+  buildCategoryIndex();
+  renderStats();
+  renderCategoryBar();
   render();
 }
 
-function renderPanel(repo,url){
-  const m=cardState.activeMode[repo];
-  if(!m)return "";
-  if(m==="⚙️"){
-    return `<div class="panel"><strong>⚙️ Tools</strong><div class="links">${
-      inferTools(repo).map(t=>`<div class="lnk">${t}</div>`).join("")
-    }</div></div>`;
+// ── Build a lookup: repoName -> category ──
+
+const repoCategoryIndex = {};
+
+function buildCategoryIndex() {
+  for (const [cat, repos] of Object.entries(tokenData)) {
+    if (!Array.isArray(repos)) continue;
+    for (const r of repos) {
+      repoCategoryIndex[(r.name || "").toLowerCase()] = cat;
+    }
   }
-  if(m==="🦾")return `<div class="panel">🦾 Automation queued (local)</div>`;
-  if(m==="💎")return `<div class="panel">💎 Facet saved locally</div>`;
-  if(m==="🍄")return `<div class="panel">🍄 Expanded context view</div>`;
-  if(m==="👑")return `<div class="panel">👑 Royal mode active</div>`;
-  if(m==="🟡")return `<div class="panel">🟡 Token intent set (local)</div>`;
-  if(m==="🤓")return `<div class="panel">🤓 Research workspace (local)</div>`;
-  if(m==="💰")return `<div class="panel">💰 Value analysis panel</div>`;
-  if(m==="💲")return `<div class="panel">💲 Asset builder panel</div>`;
-  return "";
 }
 
-function card(item){
-  const mode=cardState.activeMode[item.repo];
+function getCategory(repoName) {
+  return repoCategoryIndex[repoName.toLowerCase()] || "data";
+}
+
+// ── Stats ──
+
+function renderStats() {
+  const overview = analyticsData.overview || {};
+  const totalRepos = overview.total_repos || crownSites.length || 0;
+  const totalWords = overview.total_words || 0;
+  const emptyRepos = overview.empty_repos || 0;
+  const richRepos  = overview.rich_repos  || 0;
+
+  $("stats-strip").innerHTML = [
+    stat(totalRepos, "Repos"),
+    stat(Object.keys(tokenData).length, "Categories"),
+    stat(totalWords, "Unique Words"),
+    stat(richRepos, "Content-Rich"),
+    stat(emptyRepos, "Empty")
+  ].join("");
+}
+
+function stat(value, label) {
+  return `<div class="stat-pill"><strong>${value}</strong> ${label}</div>`;
+}
+
+// ── Category Bar ──
+
+function renderCategoryBar() {
+  const cats = analyticsData.categories || {};
+  let html = `<button class="cat-btn${!activeCategory ? " active" : ""}" onclick="filterCategory(null)">All</button>`;
+  for (const [cat, count] of Object.entries(cats)) {
+    const info = CATEGORY_MAP[cat] || { label: cat, color: "#888" };
+    const isActive = activeCategory === cat ? " active" : "";
+    html += `<button class="cat-btn${isActive}" style="--cat-color:${info.color}" onclick="filterCategory('${cat}')">${info.label} <span class="cat-count">${count}</span></button>`;
+  }
+  $("category-bar").innerHTML = html;
+}
+
+function filterCategory(cat) {
+  activeCategory = cat;
+  renderCategoryBar();
+  render();
+}
+
+// ── Card Rendering ──
+
+function render() {
+  const query = ($("q").value || "").toLowerCase();
+  const filtered = crownSites.filter(item => {
+    const matchesQuery = !query
+      || item.repo.toLowerCase().includes(query)
+      || item.url.toLowerCase().includes(query)
+      || getCategory(item.repo).includes(query);
+    const matchesCat = !activeCategory || getCategory(item.repo) === activeCategory;
+    return matchesQuery && matchesCat;
+  });
+
+  $("count").textContent = filtered.length + " repos";
+  $("grid").innerHTML = filtered.map(card).join("");
+}
+
+function card(item) {
+  const cat = getCategory(item.repo);
+  const catInfo = CATEGORY_MAP[cat] || { label: cat, color: "#888" };
+  const mode = cardModes[item.repo];
+
   return `<div class="card">
     <div class="hd">
-      <div class="repo">👑 ${item.repo}</div>
+      <div class="card-top-row">
+        <span class="repo">${item.repo}</span>
+        <span class="cat-tag" style="--cat-color:${catInfo.color}">${catInfo.label}</span>
+      </div>
       <div class="url">${item.url}</div>
-      <div class="bar">${
-        emojis.map(e=>`<div class="e" onclick="handleEmoji('${item.repo}','${e}')">${e}</div>`).join("")
-      }</div>
+      <div class="bar">${Object.values(EMOJIS).map(e =>
+        `<button class="e${mode === e.key ? " e-active" : ""}" title="${e.label}" onclick="handleEmoji('${item.repo}','${e.key}')">${e.icon}</button>`
+      ).join("")}</div>
     </div>
-    <div class="body">
-      ${renderPanel(item.repo,item.url)}
-    </div>
+    <div class="body">${renderPanel(item.repo, item.url, cat)}</div>
   </div>`;
 }
 
-async function load(){
-  const data=await (await fetch("data/crown_sites.json",{cache:"no-store"})).json();
-  window.data=data;
-  $("count").textContent="👑 "+data.length;
+// ── Emoji Panel Logic (the actual 80%) ──
+
+function handleEmoji(repo, key) {
+  cardModes[repo] = cardModes[repo] === key ? null : key;
   render();
 }
 
-function render(){
-  const q=($("q").value||"").toLowerCase();
-  $("grid").innerHTML=window.data
-    .filter(x=>!q||x.repo.toLowerCase().includes(q)||x.url.toLowerCase().includes(q))
-    .map(card).join("");
+function renderPanel(repo, url, category) {
+  const mode = cardModes[repo];
+  if (!mode) return "";
+
+  switch (mode) {
+    case "gear":   return panelTools(repo, url, category);
+    case "robot":  return panelAutomate(repo, url);
+    case "gem":    return panelFacets(repo, category);
+    case "mushroom": return panelExpand(repo);
+    case "crown":  return panelRoyal(repo, url, category);
+    case "circle": return panelTokens(repo, category);
+    case "nerd":   return panelResearch(repo);
+    case "money":  return panelValue(repo, category);
+    case "dollar": return panelAssets(repo, url);
+    case "brick":  return panelBuild(repo, url);
+    default: return "";
+  }
 }
 
-$("q").oninput=render;
-load();
+function panelTools(repo, url, category) {
+  const tools = [];
+  if (category === "engineer")    tools.push("Lab Notebook", "Hypothesis Tracker", "Data Pipeline");
+  if (category === "ceo")         tools.push("Token Minter", "Value Dashboard", "Strategy Board");
+  if (category === "investigate") tools.push("Anomaly Scanner", "Pattern Matcher", "Evidence Log");
+  if (category === "import")      tools.push("Feed Ingester", "Transform Editor", "Schedule Manager");
+  if (category === "routes")      tools.push("Dependency Graph", "Route Mapper", "Link Checker");
+  if (tools.length === 0)         tools.push("Repo Inspector", "File Browser", "Commit Log");
+
+  return panel("Tools", tools.map(t =>
+    `<a class="tool-link" href="${url}" target="_blank">${t}</a>`
+  ).join(""));
+}
+
+function panelAutomate(repo, url) {
+  return panel("Automate", `
+    <div class="panel-row">
+      <span>GitHub Pages</span>
+      <a class="tool-link" href="${url}" target="_blank">Visit Site</a>
+    </div>
+    <div class="panel-row">
+      <span>Actions</span>
+      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/actions" target="_blank">View Runs</a>
+    </div>
+    <div class="panel-row">
+      <span>Workflows</span>
+      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/tree/main/.github/workflows" target="_blank">Edit</a>
+    </div>
+  `);
+}
+
+function panelFacets(repo, category) {
+  const repoTokens = findRepoInTokens(repo);
+  const topics = repoTokens ? (repoTokens.topics || [category]) : [category];
+  const value = repoTokens ? (repoTokens.value || 0) : 0;
+
+  return panel("Facets", `
+    <div class="panel-row"><span>Category</span><strong>${category}</strong></div>
+    <div class="panel-row"><span>Topics</span><span>${topics.join(", ")}</span></div>
+    <div class="panel-row"><span>Token Value</span><span>${value}</span></div>
+    <div class="panel-row"><span>Crowned</span><span>Yes</span></div>
+  `);
+}
+
+function panelExpand(repo) {
+  const richRepo = (dictionaryData.rich_repos || []).find(r => r.name === repo);
+  const emptyRepo = (dictionaryData.empty_repos || []).find(r => r.name === repo);
+  const wordCount = richRepo ? richRepo.words : (emptyRepo ? emptyRepo.words : "N/A");
+  const status = richRepo ? "Content-rich" : (emptyRepo ? "Needs content" : "Unknown");
+
+  const topWords = dictionaryData.top_words || {};
+  const repoWords = Object.keys(topWords).slice(0, 8);
+
+  return panel("Expand", `
+    <div class="panel-row"><span>Word Count</span><strong>${wordCount}</strong></div>
+    <div class="panel-row"><span>Status</span><span>${status}</span></div>
+    <div class="panel-row"><span>Dictionary Sample</span><span class="tiny">${repoWords.join(", ")}</span></div>
+  `);
+}
+
+function panelRoyal(repo, url, category) {
+  return panel("Royal Overview", `
+    <div class="panel-row">
+      <a class="tool-link" href="${url}" target="_blank">Open Site</a>
+      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}" target="_blank">GitHub</a>
+      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/settings" target="_blank">Settings</a>
+    </div>
+    <div class="panel-row"><span>Category</span><strong>${(CATEGORY_MAP[category] || {}).label || category}</strong></div>
+  `);
+}
+
+function panelTokens(repo, category) {
+  const catRepos = tokenData[category] || [];
+  const position = catRepos.findIndex(r => r.name === repo);
+  const total = catRepos.length;
+
+  return panel("Token Position", `
+    <div class="panel-row"><span>Category</span><strong>${category}</strong></div>
+    <div class="panel-row"><span>Position</span><span>${position >= 0 ? position + 1 : "?"} / ${total}</span></div>
+    <div class="panel-row"><span>Category Size</span><span>${total} repos</span></div>
+  `);
+}
+
+function panelResearch(repo) {
+  const richRepo = (dictionaryData.rich_repos || []).find(r => r.name === repo);
+  const wordCount = richRepo ? richRepo.words : 0;
+
+  return panel("Research", `
+    <div class="panel-row"><span>Content Depth</span><strong>${wordCount} words</strong></div>
+    <div class="panel-row">
+      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/find/main" target="_blank">Search Files</a>
+      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/commits/main" target="_blank">History</a>
+    </div>
+  `);
+}
+
+function panelValue(repo, category) {
+  const repoTokens = findRepoInTokens(repo);
+  const value = repoTokens ? (repoTokens.value || 50) : 50;
+  const catInfo = CATEGORY_MAP[category] || {};
+
+  return panel("Value Analysis", `
+    <div class="panel-row"><span>Base Value</span><strong>${value}</strong></div>
+    <div class="panel-row"><span>Category</span><span>${catInfo.label || category}</span></div>
+    <div class="panel-row"><span>Multiplier</span><span>${category === "ceo" ? "2x" : category === "engineer" ? "1.5x" : "1x"}</span></div>
+    <div class="panel-row"><span>Effective Value</span><strong>${Math.round(value * (category === "ceo" ? 2 : category === "engineer" ? 1.5 : 1))}</strong></div>
+  `);
+}
+
+function panelAssets(repo, url) {
+  return panel("Assets", `
+    <div class="panel-row">
+      <a class="tool-link" href="${url}" target="_blank">Deployed Site</a>
+      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}" target="_blank">Source Code</a>
+    </div>
+    <div class="panel-row">
+      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/releases" target="_blank">Releases</a>
+      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/network/dependents" target="_blank">Dependents</a>
+    </div>
+  `);
+}
+
+function panelBuild(repo, url) {
+  return panel("Build", `
+    <div class="panel-row">
+      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/actions" target="_blank">CI/CD Status</a>
+      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/deployments" target="_blank">Deployments</a>
+    </div>
+    <div class="panel-row">
+      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/issues/new" target="_blank">New Issue</a>
+      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/pulls" target="_blank">Pull Requests</a>
+    </div>
+  `);
+}
+
+// ── Helpers ──
+
+function panel(title, content) {
+  return `<div class="panel"><div class="panel-title">${title}</div>${content}</div>`;
+}
+
+function findRepoInTokens(repo) {
+  for (const repos of Object.values(tokenData)) {
+    if (!Array.isArray(repos)) continue;
+    const found = repos.find(r => r.name === repo);
+    if (found) return found;
+  }
+  return null;
+}
+
+// ── Init ──
+
+$("q").oninput = render;
+loadAll();
 </script>
-<!-- Emoji Control Panels -->
-<div style="position:fixed;bottom:12px;right:12px;">
-<a href="panels/emoji_panels.html" target="_blank" style="font-size:24px;">🎛️</a>
-</div>
 </body>
 </html>

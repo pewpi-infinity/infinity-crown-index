@@ -1,131 +1,166 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>👑 Infinity Dashboard - LIVE</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
-            color: #e0e7ff;
-            font-family: 'Courier New', monospace;
-            padding: 2rem;
-        }
-        h1 { text-align: center; margin-bottom: 2rem; font-size: 2.5rem; }
-        .status {
-            text-align: center;
-            font-size: 1.5rem;
-            margin: 2rem 0;
-            padding: 1rem;
-            background: rgba(16, 185, 129, 0.1);
-            border: 2px solid #10b981;
-            border-radius: 15px;
-        }
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        .stat {
-            background: rgba(59, 130, 246, 0.1);
-            border: 2px solid #3b82f6;
-            padding: 1.5rem;
-            border-radius: 15px;
-            text-align: center;
-        }
-        .stat-value {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #10b981;
-        }
-        .stat-label {
-            margin-top: 0.5rem;
-            opacity: 0.8;
-        }
-        canvas {
-            max-width: 600px;
-            margin: 2rem auto;
-            display: block;
-        }
-        .error {
-            background: rgba(239, 68, 68, 0.1);
-            border: 2px solid #ef4444;
-            padding: 1rem;
-            border-radius: 15px;
-            margin: 2rem 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infinity Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="../css/crown.css">
+  <style>
+    body { padding: 2rem; }
+    h1 { text-align: center; margin-bottom: 1.5rem; font-size: 1.8rem; }
+    .status {
+      text-align: center; font-size: 1rem; margin: 1.5rem 0; padding: 1rem;
+      background: rgba(16,185,129,.08); border: 1px solid #10b981; border-radius: 12px;
+    }
+    .dash-stats {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem; margin: 1.5rem 0;
+    }
+    .dash-stat {
+      background: rgba(59,130,246,.08); border: 1px solid rgba(59,130,246,.3);
+      padding: 1.2rem; border-radius: 12px; text-align: center;
+    }
+    .dash-stat-value { font-size: 2.2rem; font-weight: bold; color: #10b981; }
+    .dash-stat-label { margin-top: .3rem; font-size: .85rem; color: var(--muted); }
+    .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+    .chart-box {
+      background: rgba(0,0,0,.2); border: 1px solid var(--line);
+      border-radius: 12px; padding: 1rem;
+    }
+    .chart-box h3 { font-size: .9rem; margin-bottom: .8rem; color: #a78bfa; }
+    canvas { max-height: 280px; }
+    .top-repos { margin: 1.5rem 0; }
+    .top-repos h3 { font-size: .9rem; margin-bottom: .8rem; color: #a78bfa; }
+    .top-repos table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+    .top-repos th, .top-repos td {
+      text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--line);
+    }
+    .top-repos th { color: var(--muted); font-weight: 600; }
+    .error {
+      background: rgba(239,68,68,.08); border: 1px solid #ef4444;
+      padding: 1rem; border-radius: 12px; text-align: center;
+    }
+    @media (max-width: 600px) { .charts { grid-template-columns: 1fr; } }
+  </style>
 </head>
 <body>
-    <h1>👑 INFINITY CROWN DASHBOARD</h1>
-    
-    <div id="status" class="status">🔄 Loading data...</div>
-    
-    <div id="stats" class="stats"></div>
-    
-    <canvas id="chart"></canvas>
-    
-    <div style="text-align:center; margin-top:2rem;">
-        <a href="../" style="color:#6366f1; font-size:1.2rem;">← Back to Crown Index</a>
-    </div>
-    
-    <script>
-        async function load() {
-            try {
-                // Load analytics
-                const res = await fetch('../api/analytics.json');
-                const data = await res.json();
-                
-                document.getElementById('status').innerHTML = 
-                    '✅ SYSTEM ONLINE - Last update: ' + new Date(data.timestamp).toLocaleString();
-                
-                // Stats
-                document.getElementById('stats').innerHTML = `
-                    <div class="stat">
-                        <div class="stat-value">${data.total_repos || 0}</div>
-                        <div class="stat-label">Total Repos</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">${data.categorized || 0}</div>
-                        <div class="stat-label">Categorized</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">${Object.keys(data.categories || {}).length}</div>
-                        <div class="stat-label">Categories</div>
-                    </div>
-                `;
-                
-                // Chart
-                const ctx = document.getElementById('chart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'pie',
-                    data: {
-                        labels: Object.keys(data.categories || {}),
-                        datasets: [{
-                            data: Object.values(data.categories || {}),
-                            backgroundColor: ['#10b981', '#f59e0b', '#3b82f6', '#ec4899', '#ef4444', '#eab308']
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: { labels: { color: '#e0e7ff', font: { size: 14 } } }
-                        }
-                    }
-                });
-                
-            } catch (error) {
-                document.getElementById('status').innerHTML = 
-                    '<div class="error">⚠️ Waiting for first scan... System will update automatically every 10 minutes</div>';
-                console.error(error);
+  <h1>Infinity Crown Dashboard</h1>
+
+  <div style="text-align:center; margin-bottom:1rem;">
+    <a href="../">&larr; Back to Crown Index</a>
+  </div>
+
+  <div id="status" class="status">Loading data...</div>
+  <div id="stats" class="dash-stats"></div>
+  <div id="charts" class="charts"></div>
+  <div id="top-repos" class="top-repos"></div>
+
+  <script>
+    let categoryChart = null;
+    let densityChart = null;
+
+    async function load() {
+      try {
+        const [analyticsRes, dictRes] = await Promise.allSettled([
+          fetch("../api/analytics.json", { cache: "no-store" }).then(r => r.json()),
+          fetch("../api/dictionary.json", { cache: "no-store" }).then(r => r.json())
+        ]);
+
+        const data = analyticsRes.status === "fulfilled" ? analyticsRes.value : {};
+        const dict = dictRes.status === "fulfilled" ? dictRes.value : {};
+
+        // Status
+        const ts = data.timestamp ? new Date(data.timestamp).toLocaleString() : "Unknown";
+        document.getElementById("status").innerHTML = "System Online &mdash; Last update: " + ts;
+
+        // Stats (use overview sub-object which matches actual schema)
+        const ov = data.overview || {};
+        const totalRepos = ov.total_repos || data.total_repos || 0;
+        const totalWords = ov.total_words || dict.total_unique_words || 0;
+        const emptyRepos = ov.empty_repos || 0;
+        const richRepos = ov.rich_repos || 0;
+        const categorized = Object.values(data.categories || {}).reduce((a, b) => a + b, 0);
+
+        document.getElementById("stats").innerHTML = [
+          dashStat(totalRepos, "Total Repos"),
+          dashStat(categorized, "Categorized"),
+          dashStat(Object.keys(data.categories || {}).length, "Categories"),
+          dashStat(totalWords, "Unique Words"),
+          dashStat(richRepos, "Content-Rich"),
+          dashStat(emptyRepos, "Empty")
+        ].join("");
+
+        // Charts
+        const cats = data.categories || {};
+        const density = (data.charts || {}).content_density || { empty: emptyRepos, rich: richRepos };
+
+        document.getElementById("charts").innerHTML = `
+          <div class="chart-box"><h3>Category Distribution</h3><canvas id="catChart"></canvas></div>
+          <div class="chart-box"><h3>Content Density</h3><canvas id="densChart"></canvas></div>
+        `;
+
+        // Destroy previous instances to prevent leaks
+        if (categoryChart) categoryChart.destroy();
+        if (densityChart) densityChart.destroy();
+
+        const chartColors = ["#10b981","#f59e0b","#3b82f6","#ec4899","#8b5cf6","#6b7280"];
+
+        categoryChart = new Chart(document.getElementById("catChart"), {
+          type: "doughnut",
+          data: {
+            labels: Object.keys(cats),
+            datasets: [{ data: Object.values(cats), backgroundColor: chartColors }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { labels: { color: "#e0e7ff", font: { size: 12 } } } }
+          }
+        });
+
+        densityChart = new Chart(document.getElementById("densChart"), {
+          type: "bar",
+          data: {
+            labels: Object.keys(density),
+            datasets: [{ label: "Repos", data: Object.values(density), backgroundColor: ["#ef4444","#10b981"] }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { ticks: { color: "#a9b7c8" }, grid: { color: "rgba(255,255,255,.05)" } },
+              y: { ticks: { color: "#a9b7c8" }, grid: { color: "rgba(255,255,255,.05)" } }
             }
+          }
+        });
+
+        // Top repos table
+        const topRepos = data.top_content_repos || (dict.rich_repos || []).slice(0, 15);
+        if (topRepos.length) {
+          document.getElementById("top-repos").innerHTML = `
+            <h3>Top Content Repos</h3>
+            <table>
+              <thead><tr><th>#</th><th>Repo</th><th>Words</th></tr></thead>
+              <tbody>${topRepos.map((r, i) =>
+                `<tr><td>${i + 1}</td><td><a href="${r.url}" target="_blank">${r.name}</a></td><td>${r.words}</td></tr>`
+              ).join("")}</tbody>
+            </table>
+          `;
         }
-        
-        load();
-        setInterval(load, 60000);  // Refresh every minute
-    </script>
+
+      } catch (err) {
+        document.getElementById("status").innerHTML =
+          '<div class="error">Waiting for first scan &mdash; data will appear after the next workflow run.</div>';
+        console.error(err);
+      }
+    }
+
+    function dashStat(value, label) {
+      return `<div class="dash-stat"><div class="dash-stat-value">${value}</div><div class="dash-stat-label">${label}</div></div>`;
+    }
+
+    load();
+    setInterval(load, 120000);
+  </script>
 </body>
 </html>

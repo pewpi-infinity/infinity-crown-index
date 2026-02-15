@@ -1,31 +1,36 @@
-/* Responsive emoji button grid */
-.emoji-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-    gap: 0.8rem;
-    max-width: 100%;
-    padding: 1.5rem;
-    overflow-x: hidden;
+/* ── Grid-fix: responsive overrides ── */
+
+/* Emoji bar within cards */
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
-.emoji-btn {
-    min-width: 70px;
-    max-width: 90px;
-    aspect-ratio: 1;
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
+.e {
+  min-width: 36px;
+  max-width: 44px;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
 }
 
-/* Ensure cockpit visible */
-#active-modules,
-#website-preview {
-    margin-top: 2rem;
-    max-width: 100%;
-    overflow-x: auto;
+/* Stat and category rows */
+.stats-strip,
+.category-bar {
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 @media (max-width: 768px) {
-    .emoji-grid {
-        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-        gap: 0.5rem;
-    }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .e {
+    min-width: 32px;
+    max-width: 40px;
+  }
+  .stats-strip {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }

@@ -1,40 +1,275 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Emoji Control Panels</title>
+<link rel="stylesheet" href="../css/crown.css">
 <style>
-body{font-family:system-ui;background:#0b0f14;color:#e8eef7;padding:20px}
-.card{border:1px solid #333;border-radius:14px;padding:16px;margin-bottom:16px}
-.btn{border:1px solid #555;border-radius:10px;padding:8px 12px;display:inline-block;cursor:pointer;margin:6px}
+  body { padding: 2rem; }
+  h1 { margin-bottom: 1.5rem; font-size: 1.5rem; }
+  .panel-card {
+    border: 1px solid var(--line); border-radius: 14px;
+    padding: 16px; margin-bottom: 16px; background: rgba(255,255,255,.03);
+  }
+  .panel-card h2 { font-size: 1.1rem; margin-bottom: 8px; }
+  .panel-card p { font-size: .85rem; color: var(--muted); margin-bottom: 10px; }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+  .btn {
+    border: 1px solid var(--line); border-radius: 10px;
+    padding: 8px 14px; font-size: 13px; cursor: pointer;
+    background: transparent; color: var(--text);
+    transition: background .15s;
+  }
+  .btn:hover { background: rgba(255,255,255,.08); }
+  .btn.active { background: rgba(99,102,241,.25); border-color: #6366f1; }
+  .output {
+    border: 1px solid var(--line); border-radius: 10px;
+    padding: 10px; margin-top: 10px; font-size: .85rem;
+    background: rgba(0,0,0,.3); min-height: 40px; color: var(--muted);
+    white-space: pre-wrap;
+  }
+  .note { font-size: .75rem; color: var(--muted); margin-top: 6px; }
 </style>
 </head>
 <body>
 
-<div class="card">
-<h2>🧲 Pull</h2>
-<p>Capture content from current site.</p>
-<div class="btn">📄 Structure</div>
-<div class="btn">📝 Text</div>
-<div class="btn">🖼 Media</div>
-<div class="btn">⚙️ Machine Context</div>
-<p><small>Pull records source + mode. Import executes the copy.</small></p>
+<h1>Emoji Control Panels</h1>
+<div style="margin-bottom:1.5rem;">
+  <a href="../">&larr; Back to Crown Index</a> |
+  <a href="../dashboard/">Dashboard</a>
 </div>
 
-<div class="card">
-<h2>🔵 Import</h2>
-<p>Apply pulled content to a target repo.</p>
-<div class="btn">➡️ Inject as page</div>
-<div class="btn">➡️ Inject as section</div>
-<div class="btn">➡️ Scaffold new site</div>
+<!-- Pull Panel -->
+<div class="panel-card">
+  <h2>Pull</h2>
+  <p>Capture content structure from a crowned repo.</p>
+  <div class="btn-row">
+    <button class="btn" onclick="pull('structure')">Structure</button>
+    <button class="btn" onclick="pull('text')">Text</button>
+    <button class="btn" onclick="pull('media')">Media</button>
+    <button class="btn" onclick="pull('context')">Machine Context</button>
+  </div>
+  <div>
+    <label style="font-size:.85rem;">Target repo:</label>
+    <select id="pull-repo" style="background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:4px 8px;margin-top:4px;width:100%;"></select>
+  </div>
+  <div id="pull-output" class="output">Select a mode and repo to pull.</div>
+  <div class="note">Pull records source + mode. Import executes the copy.</div>
 </div>
 
-<div class="card">
-<h2>⚙️ Tools</h2>
-<div class="btn">🧱 Repair repo</div>
-<div class="btn">👑 Inject crown footer</div>
-<div class="btn">🦾 Enable automation</div>
+<!-- Import Panel -->
+<div class="panel-card">
+  <h2>Import</h2>
+  <p>Apply pulled content to a target repo.</p>
+  <div class="btn-row">
+    <button class="btn" onclick="importContent('page')">Inject as Page</button>
+    <button class="btn" onclick="importContent('section')">Inject as Section</button>
+    <button class="btn" onclick="importContent('scaffold')">Scaffold New Site</button>
+  </div>
+  <div id="import-output" class="output">Pull content first, then choose an import mode.</div>
 </div>
 
+<!-- Tools Panel -->
+<div class="panel-card">
+  <h2>Tools</h2>
+  <div class="btn-row">
+    <button class="btn" onclick="runTool('repair')">Repair Repo</button>
+    <button class="btn" onclick="runTool('crown')">Inject Crown Footer</button>
+    <button class="btn" onclick="runTool('automate')">Enable Automation</button>
+  </div>
+  <div id="tools-output" class="output">Select a tool to run.</div>
+</div>
+
+<!-- Stash Viewer -->
+<div class="panel-card">
+  <h2>Stash</h2>
+  <p>View the last pulled content.</p>
+  <div id="stash-output" class="output">Loading stash...</div>
+</div>
+
+<script>
+let crownSites = [];
+let stashData = {};
+let pullState = { mode: null, repo: null, data: null };
+
+async function init() {
+  const [sitesRes, stashRes] = await Promise.allSettled([
+    fetch("../data/crown_sites.json", { cache: "no-store" }).then(r => r.json()),
+    fetch("../stash/pulled.json", { cache: "no-store" }).then(r => r.json())
+  ]);
+
+  crownSites = sitesRes.status === "fulfilled" ? sitesRes.value : [];
+  stashData = stashRes.status === "fulfilled" ? stashRes.value : {};
+
+  // Populate repo dropdown
+  const select = document.getElementById("pull-repo");
+  crownSites.forEach(s => {
+    const opt = document.createElement("option");
+    opt.value = s.repo;
+    opt.textContent = s.repo;
+    select.appendChild(opt);
+  });
+
+  // Show stash
+  renderStash();
+}
+
+function renderStash() {
+  const out = document.getElementById("stash-output");
+  if (stashData.source) {
+    out.textContent = `Source: ${stashData.source}\nMode: ${stashData.mode}\nTimestamp: ${stashData.timestamp}\nData: ${JSON.stringify(stashData.data, null, 2)}`;
+  } else {
+    out.textContent = "No content in stash yet. Use Pull to capture content.";
+  }
+}
+
+function pull(mode) {
+  const repo = document.getElementById("pull-repo").value;
+  if (!repo) {
+    document.getElementById("pull-output").textContent = "Select a repo first.";
+    return;
+  }
+
+  pullState.mode = mode;
+  pullState.repo = repo;
+
+  const site = crownSites.find(s => s.repo === repo);
+  const url = site ? site.url : `https://pewpi-infinity.github.io/${repo}/`;
+
+  // Build pull data based on mode
+  const pullData = {
+    source: repo,
+    mode: mode,
+    timestamp: new Date().toISOString(),
+    url: url,
+    data: null
+  };
+
+  switch (mode) {
+    case "structure":
+      pullData.data = {
+        type: "structure",
+        pages: ["index.html"],
+        assets: ["css/", "js/", "images/"],
+        note: "Structure map captured from " + repo
+      };
+      break;
+    case "text":
+      pullData.data = {
+        type: "text",
+        source_url: url,
+        note: "Text content marked for extraction from " + repo
+      };
+      break;
+    case "media":
+      pullData.data = {
+        type: "media",
+        source_url: url,
+        formats: ["png", "jpg", "svg", "gif"],
+        note: "Media assets marked for extraction from " + repo
+      };
+      break;
+    case "context":
+      pullData.data = {
+        type: "context",
+        source_url: url,
+        crowned: true,
+        scanned_at: site ? site.scanned_at : null,
+        note: "Machine context captured from " + repo
+      };
+      break;
+  }
+
+  pullState.data = pullData;
+
+  // Update stash locally
+  stashData = {
+    source: repo,
+    mode: mode,
+    data: pullData.data,
+    timestamp: pullData.timestamp
+  };
+
+  document.getElementById("pull-output").textContent =
+    `Pulled ${mode} from ${repo}\n` +
+    `URL: ${url}\n` +
+    `Timestamp: ${pullData.timestamp}\n` +
+    `Data: ${JSON.stringify(pullData.data, null, 2)}`;
+
+  renderStash();
+
+  // Highlight active button
+  document.querySelectorAll(".panel-card:first-of-type .btn").forEach(b => b.classList.remove("active"));
+  event.target.classList.add("active");
+}
+
+function importContent(mode) {
+  const out = document.getElementById("import-output");
+
+  if (!pullState.data) {
+    out.textContent = "Nothing in pull buffer. Use Pull first.";
+    return;
+  }
+
+  const repo = pullState.repo;
+  const pullMode = pullState.mode;
+
+  switch (mode) {
+    case "page":
+      out.textContent =
+        `Import: Inject as Page\n` +
+        `Source: ${repo} (${pullMode})\n` +
+        `Action: Would create new page in target repo using pulled ${pullMode} data.\n` +
+        `Status: Ready - run via GitHub Actions or CLI to execute.`;
+      break;
+    case "section":
+      out.textContent =
+        `Import: Inject as Section\n` +
+        `Source: ${repo} (${pullMode})\n` +
+        `Action: Would append section to existing page in target repo.\n` +
+        `Status: Ready - run via GitHub Actions or CLI to execute.`;
+      break;
+    case "scaffold":
+      out.textContent =
+        `Import: Scaffold New Site\n` +
+        `Source: ${repo} (${pullMode})\n` +
+        `Action: Would create new repo with structure based on ${repo}.\n` +
+        `Status: Ready - run via GitHub Actions or CLI to execute.`;
+      break;
+  }
+}
+
+function runTool(tool) {
+  const out = document.getElementById("tools-output");
+  const repo = document.getElementById("pull-repo").value || "(no repo selected)";
+
+  switch (tool) {
+    case "repair":
+      out.textContent =
+        `Tool: Repair Repo\n` +
+        `Target: ${repo}\n` +
+        `Checks: README exists, index.html valid, Pages enabled, workflows active.\n` +
+        `Status: Run via CLI: gh workflow run repair.yml -f repo=${repo}`;
+      break;
+    case "crown":
+      out.textContent =
+        `Tool: Inject Crown Footer\n` +
+        `Target: ${repo}\n` +
+        `Action: Append Infinity Crown link footer to index.html.\n` +
+        `Status: Run via CLI: gh api repos/pewpi-infinity/${repo}/contents/index.html`;
+      break;
+    case "automate":
+      out.textContent =
+        `Tool: Enable Automation\n` +
+        `Target: ${repo}\n` +
+        `Action: Add .github/workflows/auto-build.yml to enable CI/CD.\n` +
+        `Status: Run via CLI: gh workflow run seeder.yml -f target=${repo}`;
+      break;
+  }
+}
+
+init();
+</script>
 </body>
 </html>
