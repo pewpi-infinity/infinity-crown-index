@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-02-15T19:37:55.345559+00:00",
+  "timestamp": "2026-02-15T19:44:03.429805+00:00",
   "overview": {
-    "total_repos": 0,
-    "total_words": 0,
-    "empty_repos": 0,
-    "rich_repos": 0
+    "total_repos": 100,
+    "total_words": 272,
+    "empty_repos": 88,
+    "rich_repos": 12
   },
   "categories": {
     "engineer": 31,
@@ -14,7 +14,68 @@
     "routes": 0,
     "data": 581
   },
-  "top_content_repos": [],
+  "top_content_repos": [
+    {
+      "name": "---",
+      "url": "https://github.com/pewpi-infinity/---",
+      "words": 436
+    },
+    {
+      "name": "-Comet-Delta-Noble-",
+      "url": "https://github.com/pewpi-infinity/-Comet-Delta-Noble-",
+      "words": 252
+    },
+    {
+      "name": "-Atlas-Glyph-Oracle-",
+      "url": "https://github.com/pewpi-infinity/-Atlas-Glyph-Oracle-",
+      "words": 244
+    },
+    {
+      "name": "-Atlas-Glyph-Quartz-",
+      "url": "https://github.com/pewpi-infinity/-Atlas-Glyph-Quartz-",
+      "words": 244
+    },
+    {
+      "name": "-Comet-Cipher-Noble-",
+      "url": "https://github.com/pewpi-infinity/-Comet-Cipher-Noble-",
+      "words": 244
+    },
+    {
+      "name": "-Comet-Delta-Oracle-",
+      "url": "https://github.com/pewpi-infinity/-Comet-Delta-Oracle-",
+      "words": 244
+    },
+    {
+      "name": "-Comet-Echo-Prism-",
+      "url": "https://github.com/pewpi-infinity/-Comet-Echo-Prism-",
+      "words": 244
+    },
+    {
+      "name": "-Ember-Aurora-Mint-",
+      "url": "https://github.com/pewpi-infinity/-Ember-Aurora-Mint-",
+      "words": 244
+    },
+    {
+      "name": "-Ember-Aurora-Noble-",
+      "url": "https://github.com/pewpi-infinity/-Ember-Aurora-Noble-",
+      "words": 244
+    },
+    {
+      "name": "-Ember-Aurora-Solace-",
+      "url": "https://github.com/pewpi-infinity/-Ember-Aurora-Solace-",
+      "words": 244
+    },
+    {
+      "name": "-Ember-Cipher-Noble-",
+      "url": "https://github.com/pewpi-infinity/-Ember-Cipher-Noble-",
+      "words": 244
+    },
+    {
+      "name": "-",
+      "url": "https://github.com/pewpi-infinity/-",
+      "words": 241
+    }
+  ],
   "charts": {
     "category_distribution": {
       "engineer": 31,
@@ -25,8 +86,8 @@
       "data": 581
     },
     "content_density": {
-      "empty": 0,
-      "rich": 0
+      "empty": 88,
+      "rich": 12
     }
   }
 }
