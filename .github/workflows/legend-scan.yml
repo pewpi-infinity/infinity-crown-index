@@ -1,0 +1,59 @@
+name: 📜 Legend & Spine Scanner
+
+on:
+  schedule:
+    - cron: '0 */4 * * *'  # Every 4 hours
+  workflow_dispatch:
+
+jobs:
+  legend-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Scan Legend & Spine
+        run: |
+          python3 <<'EOPY'
+import json
+import requests
+
+USER = "pewpi-infinity"
+
+# Scan for legend/spine repos
+legend_repos = []
+spine_repos = []
+
+page = 1
+while page < 15:
+    r = requests.get(f"https://api.github.com/users/{USER}/repos?per_page=100&page={page}")
+    if r.status_code != 200:
+        break
+    
+    repos = r.json()
+    if not repos:
+        break
+    
+    for repo in repos:
+        name = repo['name'].lower()
+        if 'legend' in name or 'spine' in name:
+            legend_repos.append({
+                "name": repo['name'],
+                "url": repo['html_url'],
+                "type": "legend" if "legend" in name else "spine"
+            })
+    
+    page += 1
+
+with open("api/legend_spine.json", "w") as f:
+    json.dump({"legend": legend_repos, "spine": spine_repos}, f, indent=2)
+
+print(f"📜 Found {len(legend_repos)} legend/spine repos")
+EOPY
+      
+      - name: Commit
+        run: |
+          git config user.name "Legend Bot"
+          git config user.email "legend@infinity.ai"
+          git add api/legend_spine.json
+          git commit -m "📜 Legend scan ${{ github.run_number }}"
+          git push
