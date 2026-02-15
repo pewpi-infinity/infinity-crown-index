@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-02-15T13:41:41.194002+00:00",
+  "timestamp": "2026-02-15T13:47:36.239604+00:00",
   "overview": {
     "total_repos": 100,
-    "total_words": 300,
-    "empty_repos": 57,
-    "rich_repos": 43
+    "total_words": 431,
+    "empty_repos": 50,
+    "rich_repos": 47
   },
   "categories": {
     "engineer": 31,
@@ -126,8 +126,8 @@
       "data": 581
     },
     "content_density": {
-      "empty": 57,
-      "rich": 43
+      "empty": 50,
+      "rich": 47
     }
   }
 }
