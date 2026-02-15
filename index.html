@@ -1,136 +1,31 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>👑 Infinity Crown Index</title>
-<style>
-:root{--bg:#0b0f14;--panel:#0f1620;--line:rgba(255,255,255,.1);--text:#e8eef7;--muted:#a9b7c8}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(900px 600px at 20% -10%,#18243a,transparent 40%),var(--bg);
-     color:var(--text);font-family:system-ui}
-header{position:sticky;top:0;background:rgba(11,15,20,.92);backdrop-filter:blur(8px);
-       border-bottom:1px solid var(--line);z-index:10}
-.wrap{max-width:1200px;margin:auto;padding:14px}
-.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.brand{font-weight:800;letter-spacing:.4px}
-.search{flex:1;min-width:240px;border:1px solid var(--line);border-radius:999px;padding:8px 12px;display:flex;gap:8px}
-.search input{width:100%;background:transparent;border:0;outline:0;color:var(--text)}
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-top:14px}
-.card{grid-column:span 6;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.03)}
-@media(max-width:900px){.card{grid-column:span 12}}
-.hd{padding:12px;border-bottom:1px solid var(--line)}
-.repo{font-weight:700}
-.url{font-size:12px;color:var(--muted);word-break:break-all}
-.bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.e{min-width:38px;height:34px;border:1px solid var(--line);border-radius:12px;
-   display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px}
-.e:hover{transform:translateY(-1px)}
-.body{padding:12px}
-.steps{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
-.step{border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:12px;cursor:pointer}
-.step.active{background:rgba(255,255,255,.1)}
-.panel{border:1px solid var(--line);border-radius:14px;padding:10px;background:rgba(0,0,0,.25)}
-.links{display:flex;gap:8px;flex-wrap:wrap}
-.lnk{border:1px solid var(--line);border-radius:12px;padding:7px 10px;font-size:12px}
-footer{border-top:1px solid var(--line);margin-top:24px}
-.tiny{font-size:11px;color:var(--muted)}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinity Crown Index</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<header>
-  <div class="wrap row">
-    <div class="brand">👑 Infinity Crown Index</div>
-    <div class="search"><span>🕹️</span><input id="q" placeholder="Search crowns…"></div>
-    <div class="tiny" id="count"></div>
-  </div>
-</header>
-
-<main class="wrap">
-  <div class="grid" id="grid"></div>
-</main>
-
-<footer class="wrap tiny">
-  Card-local interaction engine • Emoji = mode • No outbound redirects
-</footer>
-
-<script>
-const ladder=["🟡","👑","🤓","🦾","⚙️","💰","💲"];
-const emojis=["⚙️","🦾","💎","🍄","👑","🟡","🤓","💰","💲","🧱"];
-const cardState={activeMode:{}};
-const $=id=>document.getElementById(id);
-
-function inferTools(repo){
-  const r=repo.toLowerCase();
-  const t=[];
-  if(r.includes("spark"))t.push("🎨 Page Builder","🧱 Component Editor");
-  if(r.includes("infinity"))t.push("🧠 AI Panel","🟡 Token Engine");
-  if(r.includes("market"))t.push("💰 Pricing Engine","📈 Trends");
-  if(r.includes("data"))t.push("📊 Charts","🧮 Analyzer");
-  return t.length?t:["🔍 Inspector","🧱 Repo Viewer"];
-}
-
-function handleEmoji(repo,emoji){
-  cardState.activeMode[repo]=emoji;
-  render();
-}
-
-function renderPanel(repo,url){
-  const m=cardState.activeMode[repo];
-  if(!m)return "";
-  if(m==="⚙️"){
-    return `<div class="panel"><strong>⚙️ Tools</strong><div class="links">${
-      inferTools(repo).map(t=>`<div class="lnk">${t}</div>`).join("")
-    }</div></div>`;
-  }
-  if(m==="🦾")return `<div class="panel">🦾 Automation queued (local)</div>`;
-  if(m==="💎")return `<div class="panel">💎 Facet saved locally</div>`;
-  if(m==="🍄")return `<div class="panel">🍄 Expanded context view</div>`;
-  if(m==="👑")return `<div class="panel">👑 Royal mode active</div>`;
-  if(m==="🟡")return `<div class="panel">🟡 Token intent set (local)</div>`;
-  if(m==="🤓")return `<div class="panel">🤓 Research workspace (local)</div>`;
-  if(m==="💰")return `<div class="panel">💰 Value analysis panel</div>`;
-  if(m==="💲")return `<div class="panel">💲 Asset builder panel</div>`;
-  return "";
-}
-
-function card(item){
-  const mode=cardState.activeMode[item.repo];
-  return `<div class="card">
-    <div class="hd">
-      <div class="repo">👑 ${item.repo}</div>
-      <div class="url">${item.url}</div>
-      <div class="bar">${
-        emojis.map(e=>`<div class="e" onclick="handleEmoji('${item.repo}','${e}')">${e}</div>`).join("")
-      }</div>
-    </div>
-    <div class="body">
-      ${renderPanel(item.repo,item.url)}
-    </div>
-  </div>`;
-}
-
-async function load(){
-  const data=await (await fetch("data/crown_sites.json",{cache:"no-store"})).json();
-  window.data=data;
-  $("count").textContent="👑 "+data.length;
-  render();
-}
-
-function render(){
-  const q=($("q").value||"").toLowerCase();
-  $("grid").innerHTML=window.data
-    .filter(x=>!q||x.repo.toLowerCase().includes(q)||x.url.toLowerCase().includes(q))
-    .map(card).join("");
-}
-
-$("q").oninput=render;
-load();
-</script>
-<!-- Emoji Control Panels -->
-<div style="position:fixed;bottom:12px;right:12px;">
-<a href="panels/emoji_panels.html" target="_blank" style="font-size:24px;">🎛️</a>
-</div>
+    <header>
+        <h1>Welcome to Infinity Crown</h1>
+    </header>
+    <main>
+        <section>
+            <h2>About Us</h2>
+            <p>Infinity Crown is a project dedicated to creating infinite possibilities.</p>
+        </section>
+        <section>
+            <h2>Services</h2>
+            <ul>
+                <li>Consulting</li>
+                <li>Development</li>
+                <li>Design</li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Infinity Crown. All rights reserved.</p>
+    </footer>
 </body>
 </html>
