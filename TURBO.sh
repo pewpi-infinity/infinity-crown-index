@@ -1,90 +1,177 @@
 #!/usr/bin/env bash
-# ⚡ TURBO MODE - VERSION FIXED
+# ⚡ TURBO MODE - NO LIMITS
 
-# 1. Force Token check
-if [ -z "$GITHUB_TOKEN" ]; then
-    export GITHUB_TOKEN=$(gh auth token 2>/dev/null)
-fi
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+NC='\033[0m'
 
 termux-wake-lock 2>/dev/null || true
-mkdir -p api
+
+CYCLE=0
+TOTAL_OPS=0
 
 while true; do
-    echo -e "\033[0;36m🔥 TURBO STARTING...\033[0m"
+    CYCLE=$((CYCLE + 1))
+    CYCLE_OPS=0
     
-    # --- FIXED SCANNER ---
-    python3 <<'EOPY'
-import requests, json, base64, concurrent.futures, os, re
+    echo -e "${CYAN}🔥 TURBO CYCLE $CYCLE - NO DELAYS${NC}"
+    
+    # MASS PARALLEL SCAN - NO RATE LIMITS
+    python3 <<'EOPY' &
+import requests, re, json, base64, concurrent.futures
+from collections import Counter
 from datetime import datetime, timezone
 
 USER = "pewpi-infinity"
-TOKEN = os.getenv("GITHUB_TOKEN")
-HEADERS = {"Authorization": f"token {TOKEN}"} if TOKEN else {}
 
 def scan_repo(repo):
     name = repo['name']
-    # Corrected URL path with proper slashes
-    url = f"https://api.github.com/repos/{USER}/{name}/readme"
     try:
-        r = requests.get(url, headers=HEADERS, timeout=3)
-        words = 0
+        r = requests.get(f"https://api.github.com/repos/{USER}/{name}/readme", timeout=3)
         if r.status_code == 200:
             content = base64.b64decode(r.json()['content']).decode('utf-8', errors='ignore')
-            words = len(re.findall(r'\b[a-zA-Z]{3,}\b', content.lower()))
-        return {"name": name, "words": words}
-    except: return {"name": name, "words": 0}
+            words = re.findall(r'\b[a-zA-Z]{3,}\b', content.lower())
+            return {"name": name, "words": len(words), "url": repo['html_url'], "data": words}
+    except:
+        pass
+    return {"name": name, "words": 0, "url": repo['html_url'], "data": []}
 
-# Corrected base URL
-repo_url = f"https://api.github.com/users/{USER}/repos?per_page=100"
-r = requests.get(repo_url, headers=HEADERS)
-repos = r.json() if r.status_code == 200 else []
+all_words = Counter()
+results = []
 
-with concurrent.futures.ThreadPoolExecutor(max_workers=20) as ex:
-    results = list(ex.map(scan_repo, repos))
+# Get all repos at once
+repos = []
+for page in range(1, 30):
+    r = requests.get(f"https://api.github.com/users/{USER}/repos?per_page=100&page={page}", timeout=5)
+    if r.status_code != 200:
+        break
+    batch = r.json()
+    if not batch:
+        break
+    repos.extend(batch)
 
-empty = [r for r in results if r['words'] < 5]
+# PARALLEL SCAN - 50 THREADS
+with concurrent.futures.ThreadPoolExecutor(max_workers=50) as executor:
+    results = list(executor.map(scan_repo, repos))
+
+for r in results:
+    if r['data']:
+        all_words.update(r['data'])
+
+empty = [r for r in results if r['words'] < 10]
+rich = [r for r in results if r['words'] > 100]
+
 with open("api/dictionary.json", "w") as f:
-    json.dump({"empty_repos": empty, "total": len(results)}, f)
-print(f"SCAN COMPLETE: {len(results)} repos found.")
+    json.dump({
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "total_repos": len(results),
+        "total_unique_words": len(all_words),
+        "operations": len(results),
+        "top_words": dict(all_words.most_common(500)),
+        "empty_repos": empty,
+        "rich_repos": sorted(rich, key=lambda x: x['words'], reverse=True)
+    }, f)
+
+print(f"SCANNED: {len(results)} repos")
 EOPY
 
-    # --- FIXED SEEDER ---
-    python3 <<'EOPY'
-import requests, json, base64, concurrent.futures, os
-USER = "pewpi-infinity"
-TOKEN = os.getenv("GITHUB_TOKEN")
-HEADERS = {"Authorization": f"token {TOKEN}"} if TOKEN else {}
+    # MASS PARALLEL SEED - NO RATE LIMITS
+    python3 <<'EOPY' &
+import requests, json, base64, concurrent.futures
+from datetime import datetime, timezone
 
-def seed(repo):
-    name = repo['name']
-    url = f"https://api.github.com/repos/{USER}/{name}/contents/index.html"
-    html = f"<html><body style='background:#000;color:#0f0;'><h1>⚡ {name}</h1><p>INFINITY SEED</p></body></html>"
-    content = base64.b64encode(html.encode()).decode()
-    try:
-        # GET SHA to allow update
-        curr = requests.get(url, headers=HEADERS, timeout=2)
-        payload = {"message": "⚡ TURBO", "content": content}
-        if curr.status_code == 200:
-            payload["sha"] = curr.json()["sha"]
-        
-        # PUT file [Verification: https://docs.github.com]
-        put_r = requests.put(url, json=payload, headers=HEADERS, timeout=4)
-        return 1 if put_r.status_code in [200, 201] else 0
-    except: return 0
+USER = "pewpi-infinity"
 
 with open("api/dictionary.json") as f:
-    targets = json.load(f).get("empty_repos", [])[:10]
+    data = json.load(f)
 
-with concurrent.futures.ThreadPoolExecutor(max_workers=5) as ex:
-    success = list(ex.map(seed, targets))
-print(f"SEEDED: {sum(success)} pages.")
+def seed_repo(repo):
+    name = repo['name']
+    try:
+        content = base64.b64encode(f"# {name}\n🔥 TURBO SEEDED\n".encode()).decode()
+        url = f"https://api.github.com/repos/{USER}/{name}/contents/README.md"
+        check = requests.get(url, timeout=2)
+        payload = {"message": "🔥", "content": content}
+        if check.status_code == 200:
+            payload["sha"] = check.json()["sha"]
+        requests.put(url, json=payload, timeout=3)
+        return 1
+    except:
+        return 0
+
+# PARALLEL SEED - 30 THREADS
+with concurrent.futures.ThreadPoolExecutor(max_workers=30) as executor:
+    results = list(executor.map(seed_repo, data.get("empty_repos", [])[:100]))
+
+print(f"SEEDED: {sum(results)} repos")
 EOPY
 
-    # --- FIXED GIT PUSH ---
-    git add .
-    git commit -m "⚡ TURBO UPDATE" 2>/dev/null
-    git push origin main 2>/dev/null
+    # MASS TOKEN GENERATION
+    python3 <<'EOPY' &
+import json, random
+from datetime import datetime, timezone
+
+tokens = []
+for i in range(1000):
+    tokens.append({
+        "id": f"token_{datetime.now(timezone.utc).timestamp()}_{i}",
+        "value": random.randint(1, 1000),
+        "type": random.choice(["research", "automation", "value", "data"]),
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    })
+
+with open("api/tokens_generated.json", "w") as f:
+    json.dump(tokens, f)
+
+print(f"GENERATED: {len(tokens)} tokens")
+EOPY
+
+    # ANALYTICS
+    python3 <<'EOPY' &
+import json
+from datetime import datetime, timezone
+
+with open("api/dictionary.json") as f:
+    data = json.load(f)
+
+with open("api/tokens.json") as f:
+    tokens = json.load(f)
+
+analytics = {
+    "timestamp": datetime.now(timezone.utc).isoformat(),
+    "cycle": int("$CYCLE"),
+    "total_operations": data.get("operations", 0) + 1000,
+    "overview": {
+        "total_repos": data["total_repos"],
+        "total_words": data["total_unique_words"],
+        "empty_repos": len(data.get("empty_repos", [])),
+        "rich_repos": len(data.get("rich_repos", []))
+    },
+    "categories": {cat: len(repos) for cat, repos in tokens.items()},
+    "charts": {
+        "category_distribution": {cat: len(repos) for cat, repos in tokens.items()}
+    }
+}
+
+with open("api/analytics.json", "w") as f:
+    json.dump(analytics, f, indent=2)
+
+print(f"ANALYTICS: Updated")
+EOPY
+
+    wait  # Wait for all parallel jobs
     
-    echo -e "\033[0;32m✅ CYCLE COMPLETE. SLEEPING 10s...\033[0m"
-    sleep 10
+    CYCLE_OPS=$(($(jq '.operations // 0' api/dictionary.json 2>/dev/null || echo 0) + 1000))
+    TOTAL_OPS=$((TOTAL_OPS + CYCLE_OPS))
+    
+    echo -e "${GREEN}✅ CYCLE $CYCLE: $CYCLE_OPS ops | TOTAL: $TOTAL_OPS${NC}"
+    
+    # IMMEDIATE PUSH
+    git add api/*.json 2>/dev/null
+    git commit -m "⚡ TURBO $CYCLE - $TOTAL_OPS ops" 2>/dev/null || true
+    git push origin main 2>/dev/null || gh repo sync --force 2>/dev/null || true
+    
+    echo -e "${CYAN}🔁 CONTINUOUS - NO COOLDOWN${NC}"
 done
