@@ -1,0 +1,140 @@
+name: 👑 Production Scanner
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'  # Every 30 minutes
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Scan & Categorize
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 <<'EOPY'
+import requests
+import json
+import base64
+import re
+import os
+from collections import Counter
+from datetime import datetime, timezone
+
+USER = "pewpi-infinity"
+TOKEN = os.environ["GITHUB_TOKEN"]
+HEADERS = {"Authorization": f"token {TOKEN}"}
+
+print("📡 Scanning repos with authentication...")
+
+# Get all repos (authenticated)
+repos = []
+page = 1
+while page < 15:
+    r = requests.get(
+        f"https://api.github.com/users/{USER}/repos?per_page=100&page={page}",
+        headers=HEADERS,
+        timeout=10
+    )
+    
+    if r.status_code != 200:
+        print(f"  API error: {r.status_code}")
+        break
+    
+    batch = r.json()
+    if not batch:
+        break
+    
+    repos.extend(batch)
+    page += 1
+    print(f"  Page {page-1}: {len(batch)} repos")
+
+print(f"✅ Found {len(repos)} total repos")
+
+# Categorize by name patterns (fast, no API key needed)
+categories = {
+    "engineer": [],
+    "ceo": [],
+    "import": [],
+    "investigate": [],
+    "routes": [],
+    "data": []
+}
+
+all_words = Counter()
+
+for repo in repos:
+    name = repo['name'].lower()
+    
+    # Try to get README for word count
+    readme_r = requests.get(
+        f"https://api.github.com/repos/{USER}/{repo['name']}/readme",
+        headers=HEADERS,
+        timeout=5
+    )
+    
+    words = 0
+    if readme_r.status_code == 200:
+        try:
+            content = base64.b64decode(
+                readme_r.json()['content']
+            ).decode('utf-8', errors='ignore')
+            word_list = re.findall(r'\b[a-zA-Z]{3,}\b', content.lower())
+            all_words.update(word_list)
+            words = len(word_list)
+        except:
+            pass
+    
+    # Smart categorization
+    if any(x in name for x in ['hydrogen', 'research', 'paper', 'science', 'ion']):
+        cat = "engineer"
+    elif any(x in name for x in ['token', 'wallet', 'spark', 'value', 'coin']):
+        cat = "ceo"
+    elif any(x in name for x in ['scrape', 'fetch', 'import', 'data']):
+        cat = "import"
+    elif any(x in name for x in ['brain', 'mongoose', 'scan', 'investigate']):
+        cat = "investigate"
+    elif any(x in name for x in ['route', 'path', 'link', 'chain', 'spine', 'legend']):
+        cat = "routes"
+    else:
+        cat = "data"
+    
+    categories[cat].append({
+        "name": repo['name'],
+        "url": repo['html_url'],
+        "title": repo['name'].replace('-', ' ').title(),
+        "topics": [cat],
+        "value": min(words, 100),
+        "updated": repo.get('updated_at', '')
+    })
+
+# Save tokens
+with open("api/tokens.json", "w") as f:
+    json.dump(categories, f, indent=2)
+
+# Save analytics
+with open("api/analytics.json", "w") as f:
+    json.dump({
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "total_repos": len(repos),
+        "total_unique_words": len(all_words),
+        "categorized": sum(len(v) for v in categories.values()),
+        "categories": {k: len(v) for k, v in categories.items()}
+    }, f, indent=2)
+
+print(f"✅ Categorized {sum(len(v) for v in categories.values())} repos:")
+for cat, items in categories.items():
+    print(f"  {cat}: {len(items)}")
+EOPY
+      
+      - name: Commit
+        run: |
+          git config user.name "Production Scanner"
+          git config user.email "scanner@infinity.ai"
+          git add api/tokens.json api/analytics.json
+          git diff --staged --quiet || git commit -m "👑 Production scan - $(date)"
+          git push
