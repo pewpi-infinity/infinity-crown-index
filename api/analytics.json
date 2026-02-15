@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-02-15T18:40:03.653491+00:00",
+  "timestamp": "2026-02-15T18:45:09.404100+00:00",
   "overview": {
-    "total_repos": 100,
-    "total_words": 431,
-    "empty_repos": 50,
-    "rich_repos": 47
+    "total_repos": 0,
+    "total_words": 0,
+    "empty_repos": 0,
+    "rich_repos": 0
   },
   "categories": {
     "engineer": 31,
@@ -14,108 +14,7 @@
     "routes": 0,
     "data": 581
   },
-  "top_content_repos": [
-    {
-      "name": "---",
-      "url": "https://github.com/pewpi-infinity/---",
-      "words": 436
-    },
-    {
-      "name": "-Jade-Beacon-Oracle-",
-      "url": "https://github.com/pewpi-infinity/-Jade-Beacon-Oracle-",
-      "words": 253
-    },
-    {
-      "name": "-Comet-Delta-Noble-",
-      "url": "https://github.com/pewpi-infinity/-Comet-Delta-Noble-",
-      "words": 252
-    },
-    {
-      "name": "-Halo-Aurora-Prism-",
-      "url": "https://github.com/pewpi-infinity/-Halo-Aurora-Prism-",
-      "words": 250
-    },
-    {
-      "name": "-Halo-Juniper-Solace-",
-      "url": "https://github.com/pewpi-infinity/-Halo-Juniper-Solace-",
-      "words": 247
-    },
-    {
-      "name": "-Atlas-Glyph-Oracle-",
-      "url": "https://github.com/pewpi-infinity/-Atlas-Glyph-Oracle-",
-      "words": 244
-    },
-    {
-      "name": "-Atlas-Glyph-Quartz-",
-      "url": "https://github.com/pewpi-infinity/-Atlas-Glyph-Quartz-",
-      "words": 244
-    },
-    {
-      "name": "-Comet-Cipher-Noble-",
-      "url": "https://github.com/pewpi-infinity/-Comet-Cipher-Noble-",
-      "words": 244
-    },
-    {
-      "name": "-Comet-Delta-Oracle-",
-      "url": "https://github.com/pewpi-infinity/-Comet-Delta-Oracle-",
-      "words": 244
-    },
-    {
-      "name": "-Comet-Echo-Prism-",
-      "url": "https://github.com/pewpi-infinity/-Comet-Echo-Prism-",
-      "words": 244
-    },
-    {
-      "name": "-Ember-Aurora-Mint-",
-      "url": "https://github.com/pewpi-infinity/-Ember-Aurora-Mint-",
-      "words": 244
-    },
-    {
-      "name": "-Ember-Aurora-Noble-",
-      "url": "https://github.com/pewpi-infinity/-Ember-Aurora-Noble-",
-      "words": 244
-    },
-    {
-      "name": "-Ember-Aurora-Solace-",
-      "url": "https://github.com/pewpi-infinity/-Ember-Aurora-Solace-",
-      "words": 244
-    },
-    {
-      "name": "-Ember-Cipher-Noble-",
-      "url": "https://github.com/pewpi-infinity/-Ember-Cipher-Noble-",
-      "words": 244
-    },
-    {
-      "name": "-Ember-Echo-Oracle-",
-      "url": "https://github.com/pewpi-infinity/-Ember-Echo-Oracle-",
-      "words": 244
-    },
-    {
-      "name": "-Ember-Glyph-Ripple-",
-      "url": "https://github.com/pewpi-infinity/-Ember-Glyph-Ripple-",
-      "words": 244
-    },
-    {
-      "name": "-Ember-Horizon-Prism-",
-      "url": "https://github.com/pewpi-infinity/-Ember-Horizon-Prism-",
-      "words": 244
-    },
-    {
-      "name": "-Ember-Juniper-Ripple-",
-      "url": "https://github.com/pewpi-infinity/-Ember-Juniper-Ripple-",
-      "words": 244
-    },
-    {
-      "name": "-Falcon-Aurora-Mint-",
-      "url": "https://github.com/pewpi-infinity/-Falcon-Aurora-Mint-",
-      "words": 244
-    },
-    {
-      "name": "-Falcon-Ivory-Noble-",
-      "url": "https://github.com/pewpi-infinity/-Falcon-Ivory-Noble-",
-      "words": 244
-    }
-  ],
+  "top_content_repos": [],
   "charts": {
     "category_distribution": {
       "engineer": 31,
@@ -126,8 +25,8 @@
       "data": 581
     },
     "content_density": {
-      "empty": 50,
-      "rich": 47
+      "empty": 0,
+      "rich": 0
     }
   }
 }
