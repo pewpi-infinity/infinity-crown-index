@@ -62,6 +62,7 @@ let crownSites = [];
 let tokenData = {};
 let analyticsData = {};
 let dictionaryData = {};
+let sparkNetwork = {};
 let activeCategory = null;
 let cardModes = {};
 
@@ -70,17 +71,19 @@ const $ = id => document.getElementById(id);
 // ── Data Loading ──
 
 async function loadAll() {
-  const [sitesRes, tokensRes, analyticsRes, dictRes] = await Promise.allSettled([
+  const [sitesRes, tokensRes, analyticsRes, dictRes, sparkRes] = await Promise.allSettled([
     fetch("data/crown_sites.json", { cache: "no-store" }).then(r => r.json()),
     fetch("api/tokens.json",       { cache: "no-store" }).then(r => r.json()),
     fetch("api/analytics.json",    { cache: "no-store" }).then(r => r.json()),
-    fetch("api/dictionary.json",   { cache: "no-store" }).then(r => r.json())
+    fetch("api/dictionary.json",   { cache: "no-store" }).then(r => r.json()),
+    fetch("api/spark_network.json",{ cache: "no-store" }).then(r => r.json())
   ]);
 
   crownSites    = sitesRes.status    === "fulfilled" ? sitesRes.value    : [];
   tokenData     = tokensRes.status   === "fulfilled" ? tokensRes.value   : {};
   analyticsData = analyticsRes.status=== "fulfilled" ? analyticsRes.value: {};
   dictionaryData= dictRes.status     === "fulfilled" ? dictRes.value     : {};
+  sparkNetwork  = sparkRes.status    === "fulfilled" ? sparkRes.value    : {};
 
   buildCategoryIndex();
   renderStats();
@@ -296,11 +299,21 @@ function panelResearch(repo) {
   const richRepo = (dictionaryData.rich_repos || []).find(r => r.name === repo);
   const wordCount = richRepo ? richRepo.words : 0;
 
+  // Check spark network
+  const sparkNode = (sparkNetwork.nodes || []).find(n => n.name === repo);
+  const sparkEdges = (sparkNetwork.edges || []).filter(e => e.from === repo || e.to === repo);
+  const sparkInfo = sparkNode
+    ? `<div class="panel-row"><span>Spark Role</span><strong>${sparkNode.role} (tier ${sparkNode.tier})</strong></div>
+       <div class="panel-row"><span>Connections</span><span>${sparkEdges.length} links</span></div>`
+    : "";
+
   return panel("Research", `
     <div class="panel-row"><span>Content Depth</span><strong>${wordCount} words</strong></div>
+    ${sparkInfo}
     <div class="panel-row">
       <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/find/main" target="_blank">Search Files</a>
       <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/commits/main" target="_blank">History</a>
+      <a class="tool-link" href="https://pewpi-infinity.github.io/infinity-spark-market/" target="_blank">Buy/Sell</a>
     </div>
   `);
 }
