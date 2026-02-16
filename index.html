@@ -5,6 +5,32 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Infinity Crown Index</title>
 <link rel="stylesheet" href="css/crown.css">
+<style>
+/* Builder overlay */
+.builder-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);z-index:1000;display:none;overflow-y:auto}
+.builder-overlay.active{display:flex;align-items:flex-start;justify-content:center;padding:2rem}
+.builder-panel{background:#1a1a2e;border:1px solid rgba(139,92,246,.3);border-radius:16px;max-width:700px;width:100%;padding:2rem;margin-top:2rem}
+.builder-panel h2{color:#a78bfa;margin-bottom:1rem}
+.builder-panel .close-btn{float:right;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;opacity:.6}
+.builder-panel .close-btn:hover{opacity:1}
+.builder-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:.8rem;color:#fff;font-family:monospace;margin:.5rem 0}
+.builder-input:focus{outline:none;border-color:#a78bfa}
+textarea.builder-input{min-height:200px;resize:vertical}
+.builder-btn{display:inline-block;padding:.6rem 1.2rem;border-radius:8px;border:none;cursor:pointer;font-weight:bold;margin:.3rem;transition:all .3s}
+.builder-btn-primary{background:#a78bfa;color:#fff}.builder-btn-primary:hover{background:#8b5cf6}
+.builder-btn-danger{background:#ef4444;color:#fff}.builder-btn-danger:hover{background:#dc2626}
+.builder-btn-secondary{background:rgba(255,255,255,.1);color:#e0e0e0;border:1px solid rgba(255,255,255,.2)}
+.builder-log{background:#0a0a1a;border-radius:8px;padding:1rem;max-height:300px;overflow-y:auto;font-family:monospace;font-size:.85rem;margin-top:1rem;white-space:pre-wrap}
+.builder-log .ok{color:#10b981}.builder-log .err{color:#ef4444}.builder-log .info{color:#60a5fa}
+/* Sync indicator */
+.sync-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:20px;padding:.3rem .8rem;font-size:.75rem;color:#10b981}
+.sync-dot{width:8px;height:8px;background:#10b981;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+/* Builder actions toolbar */
+.toolbar{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0;padding:.8rem;background:rgba(139,92,246,.05);border:1px solid rgba(139,92,246,.15);border-radius:10px}
+.toolbar button{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#e0e0e0;padding:.5rem 1rem;border-radius:6px;cursor:pointer;font-size:.85rem;transition:all .2s}
+.toolbar button:hover{background:rgba(139,92,246,.2);border-color:#a78bfa}
+</style>
 </head>
 <body>
 
@@ -15,15 +41,29 @@
     <nav class="nav-links">
       <a href="dashboard/">Dashboard</a>
       <a href="panels/emoji_panels.html">Panels</a>
-      <a href="https://pewpi-infinity.github.io/infinity-spark-market/">💰 Market</a>
-      <a href="https://pewpi-infinity.github.io/smug_look/">🧱 Octave</a>
-      <a href="https://pewpi-infinity.github.io/MARIO-TOKENS/">🎮 Mario</a>
+      <a href="https://pewpi-infinity.github.io/infinity-crown-hub/">Hub</a>
+      <a href="https://pewpi-infinity.github.io/infinity-spark-market/">Market</a>
+      <a href="https://pewpi-infinity.github.io/smug_look/">Octave</a>
+      <a href="https://pewpi-infinity.github.io/MARIO-TOKENS/">Mario</a>
     </nav>
-    <div class="tiny" id="count"></div>
+    <div class="tiny">
+      <span id="count"></span>
+      <span class="sync-badge"><span class="sync-dot"></span><span id="syncStatus">Syncing...</span></span>
+    </div>
   </div>
 </header>
 
 <main class="wrap">
+  <!-- Builder toolbar -->
+  <div class="toolbar" id="builderToolbar">
+    <button onclick="openBuilder('repair')">&#x1F527; Repair Page</button>
+    <button onclick="openBuilder('add')">&#x2795; Add Content</button>
+    <button onclick="openBuilder('template')">&#x1F4CB; Apply Template</button>
+    <button onclick="openBuilder('sync')">&#x1F504; Force Sync</button>
+    <button onclick="openBuilder('inspect')">&#x1F50E; Inspect Repo</button>
+    <button onclick="openBuilder('batch')">&#x26A1; Batch Action</button>
+  </div>
+
   <!-- Category filter bar -->
   <div id="category-bar" class="category-bar"></div>
 
@@ -35,18 +75,31 @@
 </main>
 
 <footer class="wrap tiny">
-  Infinity Crown Index &mdash; Emoji-driven repo management<br>
-  Contact: 808-342-9975 · marvasweater@gmail.com
+  Infinity Crown Index &mdash; Emoji-driven repo management &amp; builder<br>
+  <a href="https://pewpi-infinity.github.io/infinity-crown-hub/" style="color:#a78bfa">Crown Hub</a> &middot;
+  Contact: 808-342-9975 &middot; marvasweater@gmail.com
 </footer>
 
+<!-- Builder Overlay -->
+<div class="builder-overlay" id="builderOverlay">
+  <div class="builder-panel">
+    <button class="close-btn" onclick="closeBuilder()">&times;</button>
+    <h2 id="builderTitle">Builder</h2>
+    <div id="builderContent"></div>
+  </div>
+</div>
+
 <script>
+const USER = "pewpi-infinity";
+const API = "https://api.github.com";
+
 const EMOJIS = {
   "mushroom":   { icon: "\uD83C\uDF44", label: "Double",     key: "mushroom" },
   "circle":     { icon: "\uD83D\uDFE1", label: "Wallet",     key: "circle" },
   "star":       { icon: "\u2B50",        label: "Trending",   key: "star" },
   "crown":      { icon: "\uD83D\uDC51", label: "Royal",      key: "crown" },
   "gem":        { icon: "\uD83D\uDC8E", label: "Facet",      key: "gem" },
-  "brick":      { icon: "\uD83E\uDDF1", label: "Hash",       key: "brick" },
+  "brick":      { icon: "\uD83E\uDDF1", label: "Hash/Build", key: "brick" },
   "robot":      { icon: "\uD83E\uDD16", label: "Auto-Bot",   key: "robot" },
   "magnet":     { icon: "\uD83E\uDDF2", label: "Pull",       key: "magnet" },
   "joystick":   { icon: "\uD83D\uDD79\uFE0F", label: "Search", key: "joystick" }
@@ -68,6 +121,7 @@ let dictionaryData = {};
 let sparkNetwork = {};
 let activeCategory = null;
 let cardModes = {};
+let selectedRepo = null;
 
 const $ = id => document.getElementById(id);
 
@@ -87,6 +141,9 @@ async function loadAll() {
   analyticsData = analyticsRes.status=== "fulfilled" ? analyticsRes.value: {};
   dictionaryData= dictRes.status     === "fulfilled" ? dictRes.value     : {};
   sparkNetwork  = sparkRes.status    === "fulfilled" ? sparkRes.value    : {};
+
+  const syncTime = analyticsData?.overview?.last_sync || (crownSites[0]?.scanned_at || "never");
+  $("syncStatus").textContent = "Synced: " + syncTime;
 
   buildCategoryIndex();
   renderStats();
@@ -116,14 +173,14 @@ function getCategory(repoName) {
 function renderStats() {
   const overview = analyticsData.overview || {};
   const totalRepos = overview.total_repos || crownSites.length || 0;
-  const totalWords = overview.total_words || 0;
+  const pagesEnabled = overview.pages_enabled || crownSites.filter(s => s.has_pages).length;
   const emptyRepos = overview.empty_repos || 0;
   const richRepos  = overview.rich_repos  || 0;
 
   $("stats-strip").innerHTML = [
     stat(totalRepos, "Repos"),
+    stat(pagesEnabled, "Pages Active"),
     stat(Object.keys(tokenData).length, "Categories"),
-    stat(totalWords, "Unique Words"),
     stat(richRepos, "Content-Rich"),
     stat(emptyRepos, "Empty")
   ].join("");
@@ -157,11 +214,12 @@ function filterCategory(cat) {
 function render() {
   const query = ($("q").value || "").toLowerCase();
   const filtered = crownSites.filter(item => {
+    const name = item.repo || "";
     const matchesQuery = !query
-      || item.repo.toLowerCase().includes(query)
-      || item.url.toLowerCase().includes(query)
-      || getCategory(item.repo).includes(query);
-    const matchesCat = !activeCategory || getCategory(item.repo) === activeCategory;
+      || name.toLowerCase().includes(query)
+      || (item.url || "").toLowerCase().includes(query)
+      || getCategory(name).includes(query);
+    const matchesCat = !activeCategory || getCategory(name) === activeCategory;
     return matchesQuery && matchesCat;
   });
 
@@ -173,14 +231,17 @@ function card(item) {
   const cat = getCategory(item.repo);
   const catInfo = CATEGORY_MAP[cat] || { label: cat, color: "#888" };
   const mode = cardModes[item.repo];
+  const pagesIcon = item.has_pages ? '<span title="Pages active" style="color:#10b981">&#x2705;</span>' : '<span title="No pages" style="opacity:.3">&#x26AA;</span>';
+  const sizeInfo = item.size ? `<span style="opacity:.4;font-size:.75rem">${item.size}KB</span>` : '';
 
-  return `<div class="card">
+  return `<div class="card" data-repo="${item.repo}">
     <div class="hd">
       <div class="card-top-row">
         <span class="repo">${item.repo}</span>
+        ${pagesIcon} ${sizeInfo}
         <span class="cat-tag" style="--cat-color:${catInfo.color}">${catInfo.label}</span>
       </div>
-      <div class="url">${item.url}</div>
+      <div class="url"><a href="${item.url}" target="_blank" style="color:inherit">${item.url}</a></div>
       <div class="bar">${Object.values(EMOJIS).map(e =>
         `<button class="e${mode === e.key ? " e-active" : ""}" title="${e.label}" onclick="handleEmoji('${item.repo}','${e.key}')">${e.icon}</button>`
       ).join("")}</div>
@@ -189,11 +250,17 @@ function card(item) {
   </div>`;
 }
 
-// ── Emoji Panel Logic (the actual 80%) ──
+// ── Emoji Panel Logic ──
 
 function handleEmoji(repo, key) {
   cardModes[repo] = cardModes[repo] === key ? null : key;
-  render();
+  if (key === "brick") {
+    selectedRepo = repo;
+    openBuilder("repair");
+    cardModes[repo] = null;
+  } else {
+    render();
+  }
 }
 
 function renderPanel(repo, url, category) {
@@ -214,20 +281,6 @@ function renderPanel(repo, url, category) {
   }
 }
 
-function panelTools(repo, url, category) {
-  const tools = [];
-  if (category === "engineer")    tools.push("Lab Notebook", "Hypothesis Tracker", "Data Pipeline");
-  if (category === "ceo")         tools.push("Token Minter", "Value Dashboard", "Strategy Board");
-  if (category === "investigate") tools.push("Anomaly Scanner", "Pattern Matcher", "Evidence Log");
-  if (category === "import")      tools.push("Feed Ingester", "Transform Editor", "Schedule Manager");
-  if (category === "routes")      tools.push("Dependency Graph", "Route Mapper", "Link Checker");
-  if (tools.length === 0)         tools.push("Repo Inspector", "File Browser", "Commit Log");
-
-  return panel("Tools", tools.map(t =>
-    `<a class="tool-link" href="${url}" target="_blank">${t}</a>`
-  ).join(""));
-}
-
 function panelAutomate(repo, url) {
   return panel("Automate", `
     <div class="panel-row">
@@ -236,11 +289,14 @@ function panelAutomate(repo, url) {
     </div>
     <div class="panel-row">
       <span>Actions</span>
-      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/actions" target="_blank">View Runs</a>
+      <a class="tool-link" href="https://github.com/${USER}/${repo}/actions" target="_blank">View Runs</a>
     </div>
     <div class="panel-row">
       <span>Workflows</span>
-      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/tree/main/.github/workflows" target="_blank">Edit</a>
+      <a class="tool-link" href="https://github.com/${USER}/${repo}/tree/main/.github/workflows" target="_blank">Edit</a>
+    </div>
+    <div class="panel-row">
+      <button class="builder-btn builder-btn-primary" onclick="selectedRepo='${repo}';openBuilder('repair')">Open Builder</button>
     </div>
   `);
 }
@@ -252,7 +308,7 @@ function panelFacets(repo, category) {
 
   return panel("Facets", `
     <div class="panel-row"><span>Category</span><strong>${category}</strong></div>
-    <div class="panel-row"><span>Topics</span><span>${topics.join(", ")}</span></div>
+    <div class="panel-row"><span>Topics</span><span>${Array.isArray(topics) ? topics.join(", ") : topics}</span></div>
     <div class="panel-row"><span>Token Value</span><span>${value}</span></div>
     <div class="panel-row"><span>Crowned</span><span>Yes</span></div>
   `);
@@ -264,13 +320,12 @@ function panelExpand(repo) {
   const wordCount = richRepo ? richRepo.words : (emptyRepo ? emptyRepo.words : "N/A");
   const status = richRepo ? "Content-rich" : (emptyRepo ? "Needs content" : "Unknown");
 
-  const topWords = dictionaryData.top_words || {};
-  const repoWords = Object.keys(topWords).slice(0, 8);
-
   return panel("Expand", `
     <div class="panel-row"><span>Word Count</span><strong>${wordCount}</strong></div>
     <div class="panel-row"><span>Status</span><span>${status}</span></div>
-    <div class="panel-row"><span>Dictionary Sample</span><span class="tiny">${repoWords.join(", ")}</span></div>
+    <div class="panel-row">
+      <button class="builder-btn builder-btn-secondary" onclick="selectedRepo='${repo}';openBuilder('inspect')">Inspect Files</button>
+    </div>
   `);
 }
 
@@ -278,10 +333,14 @@ function panelRoyal(repo, url, category) {
   return panel("Royal Overview", `
     <div class="panel-row">
       <a class="tool-link" href="${url}" target="_blank">Open Site</a>
-      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}" target="_blank">GitHub</a>
-      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/settings" target="_blank">Settings</a>
+      <a class="tool-link" href="https://github.com/${USER}/${repo}" target="_blank">GitHub</a>
+      <a class="tool-link" href="https://github.com/${USER}/${repo}/settings" target="_blank">Settings</a>
     </div>
     <div class="panel-row"><span>Category</span><strong>${(CATEGORY_MAP[category] || {}).label || category}</strong></div>
+    <div class="panel-row">
+      <button class="builder-btn builder-btn-primary" onclick="selectedRepo='${repo}';openBuilder('repair')">Builder</button>
+      <button class="builder-btn builder-btn-secondary" onclick="selectedRepo='${repo}';openBuilder('add')">Add Content</button>
+    </div>
   `);
 }
 
@@ -298,10 +357,6 @@ function panelTokens(repo, category) {
 }
 
 function panelResearch(repo) {
-  const richRepo = (dictionaryData.rich_repos || []).find(r => r.name === repo);
-  const wordCount = richRepo ? richRepo.words : 0;
-
-  // Check spark network
   const sparkNode = (sparkNetwork.nodes || []).find(n => n.name === repo);
   const sparkEdges = (sparkNetwork.edges || []).filter(e => e.from === repo || e.to === repo);
   const sparkInfo = sparkNode
@@ -310,12 +365,10 @@ function panelResearch(repo) {
     : "";
 
   return panel("Research", `
-    <div class="panel-row"><span>Content Depth</span><strong>${wordCount} words</strong></div>
     ${sparkInfo}
     <div class="panel-row">
-      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/find/main" target="_blank">Search Files</a>
-      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/commits/main" target="_blank">History</a>
-      <a class="tool-link" href="https://pewpi-infinity.github.io/infinity-spark-market/" target="_blank">Buy/Sell</a>
+      <a class="tool-link" href="https://github.com/${USER}/${repo}/find/main" target="_blank">Search Files</a>
+      <a class="tool-link" href="https://github.com/${USER}/${repo}/commits/main" target="_blank">History</a>
     </div>
   `);
 }
@@ -329,7 +382,6 @@ function panelValue(repo, category) {
     <div class="panel-row"><span>Base Value</span><strong>${value}</strong></div>
     <div class="panel-row"><span>Category</span><span>${catInfo.label || category}</span></div>
     <div class="panel-row"><span>Multiplier</span><span>${category === "ceo" ? "2x" : category === "engineer" ? "1.5x" : "1x"}</span></div>
-    <div class="panel-row"><span>Effective Value</span><strong>${Math.round(value * (category === "ceo" ? 2 : category === "engineer" ? 1.5 : 1))}</strong></div>
   `);
 }
 
@@ -337,11 +389,10 @@ function panelAssets(repo, url) {
   return panel("Assets", `
     <div class="panel-row">
       <a class="tool-link" href="${url}" target="_blank">Deployed Site</a>
-      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}" target="_blank">Source Code</a>
+      <a class="tool-link" href="https://github.com/${USER}/${repo}" target="_blank">Source Code</a>
     </div>
     <div class="panel-row">
-      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/releases" target="_blank">Releases</a>
-      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/network/dependents" target="_blank">Dependents</a>
+      <a class="tool-link" href="https://github.com/${USER}/${repo}/releases" target="_blank">Releases</a>
     </div>
   `);
 }
@@ -349,12 +400,12 @@ function panelAssets(repo, url) {
 function panelBuild(repo, url) {
   return panel("Build", `
     <div class="panel-row">
-      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/actions" target="_blank">CI/CD Status</a>
-      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/deployments" target="_blank">Deployments</a>
+      <button class="builder-btn builder-btn-primary" onclick="selectedRepo='${repo}';openBuilder('repair')">Repair Page</button>
+      <button class="builder-btn builder-btn-primary" onclick="selectedRepo='${repo}';openBuilder('add')">Add Content</button>
     </div>
     <div class="panel-row">
-      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/issues/new" target="_blank">New Issue</a>
-      <a class="tool-link" href="https://github.com/pewpi-infinity/${repo}/pulls" target="_blank">Pull Requests</a>
+      <button class="builder-btn builder-btn-secondary" onclick="selectedRepo='${repo}';openBuilder('template')">Apply Template</button>
+      <button class="builder-btn builder-btn-secondary" onclick="selectedRepo='${repo}';openBuilder('inspect')">Inspect</button>
     </div>
   `);
 }
@@ -372,6 +423,273 @@ function findRepoInTokens(repo) {
     if (found) return found;
   }
   return null;
+}
+
+// ══════════════════════════════════════════
+// BUILDER SYSTEM - Repair/Add/Template/Sync
+// ══════════════════════════════════════════
+
+function openBuilder(mode) {
+  const overlay = $("builderOverlay");
+  overlay.classList.add("active");
+  const title = $("builderTitle");
+  const content = $("builderContent");
+
+  const repo = selectedRepo || "";
+
+  switch(mode) {
+    case "repair":
+      title.textContent = "Repair Page: " + repo;
+      content.innerHTML = `
+        <p style="opacity:.7;margin-bottom:1rem">Fetch current index.html, edit it, and push back.</p>
+        <label>Repository: <input class="builder-input" id="bRepo" value="${repo}"></label>
+        <label>File path: <input class="builder-input" id="bPath" value="index.html"></label>
+        <button class="builder-btn builder-btn-primary" onclick="builderFetchFile()">Fetch Current Content</button>
+        <textarea class="builder-input" id="bContent" placeholder="Content will appear here after fetch..."></textarea>
+        <button class="builder-btn builder-btn-primary" onclick="builderPushFile()">Push Changes</button>
+        <button class="builder-btn builder-btn-danger" onclick="closeBuilder()">Cancel</button>
+        <div class="builder-log" id="bLog"></div>
+      `;
+      break;
+
+    case "add":
+      title.textContent = "Add Content to: " + repo;
+      content.innerHTML = `
+        <p style="opacity:.7;margin-bottom:1rem">Add a new file to the repository.</p>
+        <label>Repository: <input class="builder-input" id="bRepo" value="${repo}"></label>
+        <label>New file path: <input class="builder-input" id="bPath" value=""></label>
+        <textarea class="builder-input" id="bContent" placeholder="Enter file content..."></textarea>
+        <button class="builder-btn builder-btn-primary" onclick="builderPushFile()">Create File</button>
+        <button class="builder-btn builder-btn-danger" onclick="closeBuilder()">Cancel</button>
+        <div class="builder-log" id="bLog"></div>
+      `;
+      break;
+
+    case "template":
+      title.textContent = "Apply Template to: " + repo;
+      content.innerHTML = `
+        <p style="opacity:.7;margin-bottom:1rem">Apply a standard template to the repo's index.html.</p>
+        <label>Repository: <input class="builder-input" id="bRepo" value="${repo}"></label>
+        <div style="margin:1rem 0">
+          <button class="builder-btn builder-btn-secondary" onclick="loadTemplate('spark')">Spark Template</button>
+          <button class="builder-btn builder-btn-secondary" onclick="loadTemplate('category')">Category Template</button>
+          <button class="builder-btn builder-btn-secondary" onclick="loadTemplate('minimal')">Minimal Page</button>
+          <button class="builder-btn builder-btn-secondary" onclick="loadTemplate('dashboard')">Dashboard</button>
+        </div>
+        <textarea class="builder-input" id="bContent" placeholder="Template will load here..."></textarea>
+        <input class="builder-input" id="bPath" value="index.html" style="display:none">
+        <button class="builder-btn builder-btn-primary" onclick="builderPushFile()">Apply Template</button>
+        <button class="builder-btn builder-btn-danger" onclick="closeBuilder()">Cancel</button>
+        <div class="builder-log" id="bLog"></div>
+      `;
+      break;
+
+    case "sync":
+      title.textContent = "Force Sync";
+      content.innerHTML = `
+        <p style="opacity:.7;margin-bottom:1rem">Trigger a full rescan of all repos and update crown_sites.json.</p>
+        <p>This will use GitHub Actions to scan all repos and rebuild the index.</p>
+        <button class="builder-btn builder-btn-primary" onclick="triggerSync()">Trigger Sync Now</button>
+        <button class="builder-btn builder-btn-danger" onclick="closeBuilder()">Cancel</button>
+        <div class="builder-log" id="bLog"></div>
+      `;
+      break;
+
+    case "inspect":
+      title.textContent = "Inspect: " + repo;
+      content.innerHTML = `
+        <p style="opacity:.7;margin-bottom:1rem">View files and structure of the repository.</p>
+        <label>Repository: <input class="builder-input" id="bRepo" value="${repo}"></label>
+        <button class="builder-btn builder-btn-primary" onclick="builderInspect()">Load File List</button>
+        <div class="builder-log" id="bLog" style="min-height:200px"></div>
+      `;
+      break;
+
+    case "batch":
+      title.textContent = "Batch Action";
+      content.innerHTML = `
+        <p style="opacity:.7;margin-bottom:1rem">Run an action across multiple repos at once.</p>
+        <label>Repos (comma-separated or "all"): <input class="builder-input" id="bRepos" value=""></label>
+        <label>Action:
+          <select class="builder-input" id="bAction">
+            <option value="enable-pages">Enable GitHub Pages</option>
+            <option value="check-index">Check index.html exists</option>
+            <option value="add-cross-links">Add cross-links</option>
+          </select>
+        </label>
+        <button class="builder-btn builder-btn-primary" onclick="builderBatch()">Run Batch</button>
+        <button class="builder-btn builder-btn-danger" onclick="closeBuilder()">Cancel</button>
+        <div class="builder-log" id="bLog"></div>
+      `;
+      break;
+  }
+}
+
+function closeBuilder() {
+  $("builderOverlay").classList.remove("active");
+}
+
+function bLog(msg, cls) {
+  const log = $("bLog");
+  if (log) log.innerHTML += `<span class="${cls||'info'}">${msg}</span>\n`;
+}
+
+// Builder: Fetch file from repo
+async function builderFetchFile() {
+  const repo = $("bRepo").value.trim();
+  const path = $("bPath").value.trim() || "index.html";
+  if (!repo) { bLog("No repo specified", "err"); return; }
+
+  bLog(`Fetching ${repo}/${path}...`, "info");
+  try {
+    const r = await fetch(`${API}/repos/${USER}/${repo}/contents/${path}`);
+    if (!r.ok) { bLog(`HTTP ${r.status} - file not found`, "err"); return; }
+    const data = await r.json();
+    const content = atob(data.content);
+    $("bContent").value = content;
+    $("bContent").dataset.sha = data.sha;
+    bLog(`Loaded ${content.length} bytes (SHA: ${data.sha.slice(0,8)})`, "ok");
+  } catch(e) {
+    bLog(`Error: ${e.message}`, "err");
+  }
+}
+
+// Builder: Push file to repo (requires token in localStorage)
+async function builderPushFile() {
+  const repo = $("bRepo").value.trim();
+  const path = $("bPath").value.trim() || "index.html";
+  const content = $("bContent").value;
+  const sha = $("bContent").dataset?.sha;
+
+  if (!repo || !content) { bLog("Need repo and content", "err"); return; }
+
+  const token = localStorage.getItem("gh_token");
+  if (!token) {
+    bLog("No GitHub token found. Set one in localStorage:", "err");
+    bLog('  localStorage.setItem("gh_token", "ghp_YOUR_TOKEN")', "info");
+    return;
+  }
+
+  bLog(`Pushing to ${repo}/${path}...`, "info");
+  try {
+    const payload = {
+      message: `Crown Builder: update ${path}`,
+      content: btoa(unescape(encodeURIComponent(content))),
+    };
+    if (sha) payload.sha = sha;
+
+    const r = await fetch(`${API}/repos/${USER}/${repo}/contents/${path}`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `token ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    if (r.ok) {
+      bLog(`Successfully pushed ${path} to ${repo}`, "ok");
+    } else {
+      const err = await r.text();
+      bLog(`Push failed: HTTP ${r.status} ${err.slice(0,200)}`, "err");
+    }
+  } catch(e) {
+    bLog(`Error: ${e.message}`, "err");
+  }
+}
+
+// Builder: Inspect repo files
+async function builderInspect() {
+  const repo = $("bRepo").value.trim();
+  if (!repo) { bLog("No repo specified", "err"); return; }
+
+  bLog(`Inspecting ${repo}...`, "info");
+  try {
+    const r = await fetch(`${API}/repos/${USER}/${repo}/contents/`);
+    if (!r.ok) { bLog(`HTTP ${r.status}`, "err"); return; }
+    const files = await r.json();
+    bLog(`\n${files.length} items:`, "ok");
+    for (const f of files) {
+      const icon = f.type === "dir" ? "\uD83D\uDCC1" : "\uD83D\uDCC4";
+      bLog(`  ${icon} ${f.name} ${f.type === "file" ? `(${f.size}B)` : ""}`, "info");
+    }
+  } catch(e) {
+    bLog(`Error: ${e.message}`, "err");
+  }
+}
+
+// Builder: Templates
+function loadTemplate(type) {
+  const repo = $("bRepo").value.trim();
+  const templates = {
+    minimal: `<!DOCTYPE html>\n<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${repo}</title><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a1a;color:#e0e0e0;font-family:system-ui;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:2rem}.card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:3rem;max-width:600px}h1{font-size:2rem;margin-bottom:1rem;background:linear-gradient(90deg,#a78bfa,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}a{color:#a78bfa}</style></head><body><div class="card"><h1>${repo}</h1><p>Part of the <a href="https://${USER}.github.io/infinity-crown-index/">Infinity Ecosystem</a></p></div></body></html>`,
+
+    spark: `<!DOCTYPE html>\n<html><head><meta charset="utf-8"><title>${repo} - Infinity Spark</title></head><body><h1>${repo}</h1><p>Spark repo</p><a href="https://${USER}.github.io/infinity-crown-index/">Crown Index</a></body></html>`,
+
+    category: `<!DOCTYPE html>\n<html><head><meta charset="utf-8"><title>${repo} - Infinity Category</title></head><body><h1>${repo}</h1><p>Category repo</p><a href="https://${USER}.github.io/infinity-crown-index/">Crown Index</a></body></html>`,
+
+    dashboard: `<!DOCTYPE html>\n<html><head><meta charset="utf-8"><title>${repo} Dashboard</title></head><body><h1>${repo} Dashboard</h1><a href="https://${USER}.github.io/infinity-crown-index/">Crown Index</a></body></html>`,
+  };
+  $("bContent").value = templates[type] || templates.minimal;
+  bLog(`Loaded ${type} template`, "ok");
+}
+
+// Builder: Trigger sync
+async function triggerSync() {
+  const token = localStorage.getItem("gh_token");
+  if (!token) {
+    bLog("No GitHub token. Set: localStorage.setItem('gh_token', 'ghp_...')", "err");
+    return;
+  }
+  bLog("Triggering sync workflow...", "info");
+  try {
+    const r = await fetch(`${API}/repos/${USER}/infinity-crown-index/dispatches`, {
+      method: "POST",
+      headers: {
+        "Authorization": `token ${token}`,
+        "Accept": "application/vnd.github.v3+json",
+      },
+      body: JSON.stringify({ event_type: "sync-crown" }),
+    });
+    if (r.ok || r.status === 204) {
+      bLog("Sync triggered! Will update in a few minutes.", "ok");
+    } else {
+      bLog(`Trigger failed: HTTP ${r.status}`, "err");
+    }
+  } catch(e) {
+    bLog(`Error: ${e.message}`, "err");
+  }
+}
+
+// Builder: Batch action
+async function builderBatch() {
+  const reposInput = $("bRepos").value.trim();
+  const action = $("bAction").value;
+
+  let repos = [];
+  if (reposInput === "all") {
+    repos = crownSites.map(s => s.repo);
+  } else {
+    repos = reposInput.split(",").map(r => r.trim()).filter(Boolean);
+  }
+
+  if (!repos.length) { bLog("No repos specified", "err"); return; }
+  bLog(`Running ${action} on ${repos.length} repos...`, "info");
+
+  for (const repo of repos.slice(0, 20)) {
+    try {
+      if (action === "check-index") {
+        const r = await fetch(`${API}/repos/${USER}/${repo}/contents/index.html`);
+        bLog(`  ${repo}: ${r.ok ? "has index.html" : "NO index.html"}`, r.ok ? "ok" : "err");
+      } else if (action === "enable-pages") {
+        bLog(`  ${repo}: pages enable requires token`, "info");
+      } else {
+        bLog(`  ${repo}: ${action} (preview only)`, "info");
+      }
+    } catch(e) {
+      bLog(`  ${repo}: error - ${e.message}`, "err");
+    }
+  }
+  if (repos.length > 20) bLog(`...and ${repos.length - 20} more`, "info");
 }
 
 // ── Init ──
