@@ -15,6 +15,9 @@
     <nav class="nav-links">
       <a href="dashboard/">Dashboard</a>
       <a href="panels/emoji_panels.html">Panels</a>
+      <a href="https://pewpi-infinity.github.io/infinity-spark-market/">💰 Market</a>
+      <a href="https://pewpi-infinity.github.io/smug_look/">🧱 Octave</a>
+      <a href="https://pewpi-infinity.github.io/MARIO-TOKENS/">🎮 Mario</a>
     </nav>
     <div class="tiny" id="count"></div>
   </div>
@@ -37,16 +40,15 @@
 
 <script>
 const EMOJIS = {
-  "gear":       { icon: "\u2699\uFE0F", label: "Tools",      key: "gear" },
-  "robot":      { icon: "\uD83E\uDD16", label: "Automate",   key: "robot" },
-  "gem":        { icon: "\uD83D\uDC8E", label: "Facets",     key: "gem" },
-  "mushroom":   { icon: "\uD83C\uDF44", label: "Expand",     key: "mushroom" },
+  "mushroom":   { icon: "\uD83C\uDF44", label: "Double",     key: "mushroom" },
+  "circle":     { icon: "\uD83D\uDFE1", label: "Wallet",     key: "circle" },
+  "star":       { icon: "\u2B50",        label: "Trending",   key: "star" },
   "crown":      { icon: "\uD83D\uDC51", label: "Royal",      key: "crown" },
-  "circle":     { icon: "\uD83D\uDFE1", label: "Tokens",     key: "circle" },
-  "nerd":       { icon: "\uD83E\uDD13", label: "Research",   key: "nerd" },
-  "money":      { icon: "\uD83D\uDCB0", label: "Value",      key: "money" },
-  "dollar":     { icon: "\uD83D\uDCB2", label: "Assets",     key: "dollar" },
-  "brick":      { icon: "\uD83E\uDDF1", label: "Build",      key: "brick" }
+  "gem":        { icon: "\uD83D\uDC8E", label: "Facet",      key: "gem" },
+  "brick":      { icon: "\uD83E\uDDF1", label: "Hash",       key: "brick" },
+  "robot":      { icon: "\uD83E\uDD16", label: "Auto-Bot",   key: "robot" },
+  "magnet":     { icon: "\uD83E\uDDF2", label: "Pull",       key: "magnet" },
+  "joystick":   { icon: "\uD83D\uDD79\uFE0F", label: "Search", key: "joystick" }
 };
 
 const CATEGORY_MAP = {
@@ -198,16 +200,15 @@ function renderPanel(repo, url, category) {
   if (!mode) return "";
 
   switch (mode) {
-    case "gear":   return panelTools(repo, url, category);
-    case "robot":  return panelAutomate(repo, url);
-    case "gem":    return panelFacets(repo, category);
     case "mushroom": return panelExpand(repo);
-    case "crown":  return panelRoyal(repo, url, category);
     case "circle": return panelTokens(repo, category);
-    case "nerd":   return panelResearch(repo);
-    case "money":  return panelValue(repo, category);
-    case "dollar": return panelAssets(repo, url);
+    case "star":   return panelValue(repo, category);
+    case "crown":  return panelRoyal(repo, url, category);
+    case "gem":    return panelFacets(repo, category);
     case "brick":  return panelBuild(repo, url);
+    case "robot":  return panelAutomate(repo, url);
+    case "magnet": return panelAssets(repo, url);
+    case "joystick": return panelResearch(repo);
     default: return "";
   }
 }
