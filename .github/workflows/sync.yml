@@ -1,0 +1,75 @@
+name: Sync Crown Index
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+  repository_dispatch:
+    types: [sync-crown]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch all repos
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Fetching all repos..."
+          repos="[]"
+          page=1
+          while true; do
+            batch=$(gh api "users/pewpi-infinity/repos?per_page=100&page=$page&sort=updated" 2>/dev/null || echo "[]")
+            count=$(echo "$batch" | jq length)
+            if [ "$count" -eq 0 ]; then break; fi
+            repos=$(echo "$repos $batch" | jq -s 'add')
+            page=$((page + 1))
+          done
+
+          echo "Total repos: $(echo "$repos" | jq length)"
+
+          # Build crown_sites.json
+          now=$(date +%Y%m%d_%H%M%S)
+          echo "$repos" | jq --arg now "$now" '[.[] | {
+            repo: .name,
+            url: ("https://pewpi-infinity.github.io/" + .name + "/"),
+            crowned: true,
+            has_pages: .has_pages,
+            size: .size,
+            updated_at: .updated_at,
+            scanned_at: $now
+          }] | sort_by(.repo)' > data/crown_sites.json
+
+          total=$(cat data/crown_sites.json | jq length)
+          pages=$(cat data/crown_sites.json | jq '[.[] | select(.has_pages)] | length')
+          empty=$(cat data/crown_sites.json | jq '[.[] | select(.size == 0)] | length')
+          rich=$(cat data/crown_sites.json | jq '[.[] | select(.size > 100)] | length')
+
+          # Build analytics.json
+          cat > api/analytics.json << EOFANALYTICS
+          {
+            "overview": {
+              "total_repos": $total,
+              "pages_enabled": $pages,
+              "empty_repos": $empty,
+              "rich_repos": $rich,
+              "total_words": 0,
+              "last_sync": "$now"
+            },
+            "categories": {}
+          }
+          EOFANALYTICS
+
+          echo "Crown sites: $total repos, $pages with pages"
+
+      - name: Commit and push
+        run: |
+          git config user.name "Crown Auto-Sync"
+          git config user.email "actions@github.com"
+          git add data/crown_sites.json api/analytics.json
+          git diff --cached --quiet || git commit -m "Auto-sync: $(cat data/crown_sites.json | jq length) repos indexed"
+          git push
