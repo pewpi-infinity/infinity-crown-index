@@ -1,32 +1,18 @@
 {
-  "timestamp": "2026-02-15T20:00:16.986751+00:00",
   "overview": {
-    "total_repos": 0,
+    "total_repos": 958,
+    "pages_enabled": 865,
+    "empty_repos": 252,
+    "rich_repos": 90,
     "total_words": 0,
-    "empty_repos": 0,
-    "rich_repos": 0
+    "last_sync": "20260216_143615"
   },
   "categories": {
-    "engineer": 31,
-    "ceo": 142,
-    "import": 1,
-    "investigate": 118,
-    "routes": 0,
-    "data": 581
-  },
-  "top_content_repos": [],
-  "charts": {
-    "category_distribution": {
-      "engineer": 31,
-      "ceo": 142,
-      "import": 1,
-      "investigate": 118,
-      "routes": 0,
-      "data": 581
-    },
-    "content_density": {
-      "empty": 0,
-      "rich": 0
-    }
+    "engineer": 146,
+    "ceo": 23,
+    "import": 3,
+    "investigate": 193,
+    "routes": 19,
+    "data": 574
   }
 }
