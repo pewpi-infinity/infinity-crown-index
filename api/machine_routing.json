@@ -1,0 +1,583 @@
+{
+  "infinity-socket": {
+    "url": "https://pewpi-infinity.github.io/infinity-socket/",
+    "prev": "infinity-tiktok",
+    "next": "infinity-chain",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 0
+  },
+  "infinity-chain": {
+    "url": "https://pewpi-infinity.github.io/infinity-chain/",
+    "prev": "infinity-socket",
+    "next": "infinity-frame",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 1
+  },
+  "infinity-frame": {
+    "url": "https://pewpi-infinity.github.io/infinity-frame/",
+    "prev": "infinity-chain",
+    "next": "infinity-tire",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 2
+  },
+  "infinity-tire": {
+    "url": "https://pewpi-infinity.github.io/infinity-tire/",
+    "prev": "infinity-frame",
+    "next": "infinity-belt",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 3
+  },
+  "infinity-belt": {
+    "url": "https://pewpi-infinity.github.io/infinity-belt/",
+    "prev": "infinity-tire",
+    "next": "infinity-cylinder",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 4
+  },
+  "infinity-cylinder": {
+    "url": "https://pewpi-infinity.github.io/infinity-cylinder/",
+    "prev": "infinity-belt",
+    "next": "infinity-printer",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 5
+  },
+  "infinity-printer": {
+    "url": "https://pewpi-infinity.github.io/infinity-printer/",
+    "prev": "infinity-cylinder",
+    "next": "infinity-reader",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 6
+  },
+  "infinity-reader": {
+    "url": "https://pewpi-infinity.github.io/infinity-reader/",
+    "prev": "infinity-printer",
+    "next": "infinity-data-collection",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 7
+  },
+  "infinity-data-collection": {
+    "url": "https://pewpi-infinity.github.io/infinity-data-collection/",
+    "prev": "infinity-reader",
+    "next": "infinity-data-disseminate",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 8
+  },
+  "infinity-data-disseminate": {
+    "url": "https://pewpi-infinity.github.io/infinity-data-disseminate/",
+    "prev": "infinity-data-collection",
+    "next": "infinity-assimilation",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 9
+  },
+  "infinity-assimilation": {
+    "url": "https://pewpi-infinity.github.io/infinity-assimilation/",
+    "prev": "infinity-data-disseminate",
+    "next": "infinity-audit",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 10
+  },
+  "infinity-audit": {
+    "url": "https://pewpi-infinity.github.io/infinity-audit/",
+    "prev": "infinity-assimilation",
+    "next": "infinity-watcher",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 11
+  },
+  "infinity-watcher": {
+    "url": "https://pewpi-infinity.github.io/infinity-watcher/",
+    "prev": "infinity-audit",
+    "next": "infinity-viewer",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 12
+  },
+  "infinity-viewer": {
+    "url": "https://pewpi-infinity.github.io/infinity-viewer/",
+    "prev": "infinity-watcher",
+    "next": "infinity-listener",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 13
+  },
+  "infinity-listener": {
+    "url": "https://pewpi-infinity.github.io/infinity-listener/",
+    "prev": "infinity-viewer",
+    "next": "infinity-voice",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 14
+  },
+  "infinity-voice": {
+    "url": "https://pewpi-infinity.github.io/infinity-voice/",
+    "prev": "infinity-listener",
+    "next": "infinity-commands",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 15
+  },
+  "infinity-commands": {
+    "url": "https://pewpi-infinity.github.io/infinity-commands/",
+    "prev": "infinity-voice",
+    "next": "infinity-directions",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 16
+  },
+  "infinity-directions": {
+    "url": "https://pewpi-infinity.github.io/infinity-directions/",
+    "prev": "infinity-commands",
+    "next": "infinity-maps",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 17
+  },
+  "infinity-maps": {
+    "url": "https://pewpi-infinity.github.io/infinity-maps/",
+    "prev": "infinity-directions",
+    "next": "infinity-legends",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 18
+  },
+  "infinity-legends": {
+    "url": "https://pewpi-infinity.github.io/infinity-legends/",
+    "prev": "infinity-maps",
+    "next": "infinity-money",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 19
+  },
+  "infinity-money": {
+    "url": "https://pewpi-infinity.github.io/infinity-money/",
+    "prev": "infinity-legends",
+    "next": "infinity-currency",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 20
+  },
+  "infinity-currency": {
+    "url": "https://pewpi-infinity.github.io/infinity-currency/",
+    "prev": "infinity-money",
+    "next": "infinity-merchants",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 21
+  },
+  "infinity-merchants": {
+    "url": "https://pewpi-infinity.github.io/infinity-merchants/",
+    "prev": "infinity-currency",
+    "next": "infinity-banking",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 22
+  },
+  "infinity-banking": {
+    "url": "https://pewpi-infinity.github.io/infinity-banking/",
+    "prev": "infinity-merchants",
+    "next": "infinity-commerce",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 23
+  },
+  "infinity-commerce": {
+    "url": "https://pewpi-infinity.github.io/infinity-commerce/",
+    "prev": "infinity-banking",
+    "next": "infinity-dictionary",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 24
+  },
+  "infinity-dictionary": {
+    "url": "https://pewpi-infinity.github.io/infinity-dictionary/",
+    "prev": "infinity-commerce",
+    "next": "infinity-language-interpreter",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 25
+  },
+  "infinity-language-interpreter": {
+    "url": "https://pewpi-infinity.github.io/infinity-language-interpreter/",
+    "prev": "infinity-dictionary",
+    "next": "infinity-semantics",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 26
+  },
+  "infinity-semantics": {
+    "url": "https://pewpi-infinity.github.io/infinity-semantics/",
+    "prev": "infinity-language-interpreter",
+    "next": "infinity-logic",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 27
+  },
+  "infinity-logic": {
+    "url": "https://pewpi-infinity.github.io/infinity-logic/",
+    "prev": "infinity-semantics",
+    "next": "infinity-reasoning",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 28
+  },
+  "infinity-reasoning": {
+    "url": "https://pewpi-infinity.github.io/infinity-reasoning/",
+    "prev": "infinity-logic",
+    "next": "infinity-topics",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 29
+  },
+  "infinity-topics": {
+    "url": "https://pewpi-infinity.github.io/infinity-topics/",
+    "prev": "infinity-reasoning",
+    "next": "infinity-threader",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 30
+  },
+  "infinity-threader": {
+    "url": "https://pewpi-infinity.github.io/infinity-threader/",
+    "prev": "infinity-topics",
+    "next": "infinity-literature",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 31
+  },
+  "infinity-literature": {
+    "url": "https://pewpi-infinity.github.io/infinity-literature/",
+    "prev": "infinity-threader",
+    "next": "infinity-math",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 32
+  },
+  "infinity-math": {
+    "url": "https://pewpi-infinity.github.io/infinity-math/",
+    "prev": "infinity-literature",
+    "next": "infinity-history",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 33
+  },
+  "infinity-history": {
+    "url": "https://pewpi-infinity.github.io/infinity-history/",
+    "prev": "infinity-math",
+    "next": "infinity-society",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 34
+  },
+  "infinity-society": {
+    "url": "https://pewpi-infinity.github.io/infinity-society/",
+    "prev": "infinity-history",
+    "next": "infinity-travel",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 35
+  },
+  "infinity-travel": {
+    "url": "https://pewpi-infinity.github.io/infinity-travel/",
+    "prev": "infinity-society",
+    "next": "infinity-housing",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 36
+  },
+  "infinity-housing": {
+    "url": "https://pewpi-infinity.github.io/infinity-housing/",
+    "prev": "infinity-travel",
+    "next": "infinity-transport",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 37
+  },
+  "infinity-transport": {
+    "url": "https://pewpi-infinity.github.io/infinity-transport/",
+    "prev": "infinity-housing",
+    "next": "infinity-religion",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 38
+  },
+  "infinity-religion": {
+    "url": "https://pewpi-infinity.github.io/infinity-religion/",
+    "prev": "infinity-transport",
+    "next": "infinity-networking",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 39
+  },
+  "infinity-networking": {
+    "url": "https://pewpi-infinity.github.io/infinity-networking/",
+    "prev": "infinity-religion",
+    "next": "infinity-plans",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 40
+  },
+  "infinity-plans": {
+    "url": "https://pewpi-infinity.github.io/infinity-plans/",
+    "prev": "infinity-networking",
+    "next": "infinity-schedules",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 41
+  },
+  "infinity-schedules": {
+    "url": "https://pewpi-infinity.github.io/infinity-schedules/",
+    "prev": "infinity-plans",
+    "next": "infinity-events",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 42
+  },
+  "infinity-events": {
+    "url": "https://pewpi-infinity.github.io/infinity-events/",
+    "prev": "infinity-schedules",
+    "next": "infinity-trackers",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 43
+  },
+  "infinity-trackers": {
+    "url": "https://pewpi-infinity.github.io/infinity-trackers/",
+    "prev": "infinity-events",
+    "next": "infinity-project-managers",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 44
+  },
+  "infinity-project-managers": {
+    "url": "https://pewpi-infinity.github.io/infinity-project-managers/",
+    "prev": "infinity-trackers",
+    "next": "infinity-robots",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 45
+  },
+  "infinity-robots": {
+    "url": "https://pewpi-infinity.github.io/infinity-robots/",
+    "prev": "infinity-project-managers",
+    "next": "infinity-components",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 46
+  },
+  "infinity-components": {
+    "url": "https://pewpi-infinity.github.io/infinity-components/",
+    "prev": "infinity-robots",
+    "next": "infinity-layers",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 47
+  },
+  "infinity-layers": {
+    "url": "https://pewpi-infinity.github.io/infinity-layers/",
+    "prev": "infinity-components",
+    "next": "infinity-builders",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 48
+  },
+  "infinity-builders": {
+    "url": "https://pewpi-infinity.github.io/infinity-builders/",
+    "prev": "infinity-layers",
+    "next": "infinity-tangibles",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 49
+  },
+  "infinity-tangibles": {
+    "url": "https://pewpi-infinity.github.io/infinity-tangibles/",
+    "prev": "infinity-builders",
+    "next": "infinity-power",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 50
+  },
+  "infinity-power": {
+    "url": "https://pewpi-infinity.github.io/infinity-power/",
+    "prev": "infinity-tangibles",
+    "next": "infinity-energy",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 51
+  },
+  "infinity-energy": {
+    "url": "https://pewpi-infinity.github.io/infinity-energy/",
+    "prev": "infinity-power",
+    "next": "infinity-dynamics",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 52
+  },
+  "infinity-dynamics": {
+    "url": "https://pewpi-infinity.github.io/infinity-dynamics/",
+    "prev": "infinity-energy",
+    "next": "infinity-dreamscapes",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 53
+  },
+  "infinity-dreamscapes": {
+    "url": "https://pewpi-infinity.github.io/infinity-dreamscapes/",
+    "prev": "infinity-dynamics",
+    "next": "infinity-architecture",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 54
+  },
+  "infinity-architecture": {
+    "url": "https://pewpi-infinity.github.io/infinity-architecture/",
+    "prev": "infinity-dreamscapes",
+    "next": "infinity-web-design",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 55
+  },
+  "infinity-web-design": {
+    "url": "https://pewpi-infinity.github.io/infinity-web-design/",
+    "prev": "infinity-architecture",
+    "next": "infinity-layout",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 56
+  },
+  "infinity-layout": {
+    "url": "https://pewpi-infinity.github.io/infinity-layout/",
+    "prev": "infinity-web-design",
+    "next": "infinity-fonts",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 57
+  },
+  "infinity-fonts": {
+    "url": "https://pewpi-infinity.github.io/infinity-fonts/",
+    "prev": "infinity-layout",
+    "next": "infinity-displays",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 58
+  },
+  "infinity-displays": {
+    "url": "https://pewpi-infinity.github.io/infinity-displays/",
+    "prev": "infinity-fonts",
+    "next": "infinity-synch",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 59
+  },
+  "infinity-synch": {
+    "url": "https://pewpi-infinity.github.io/infinity-synch/",
+    "prev": "infinity-displays",
+    "next": "infinity-lock",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 60
+  },
+  "infinity-lock": {
+    "url": "https://pewpi-infinity.github.io/infinity-lock/",
+    "prev": "infinity-synch",
+    "next": "infinity-protect",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 61
+  },
+  "infinity-protect": {
+    "url": "https://pewpi-infinity.github.io/infinity-protect/",
+    "prev": "infinity-lock",
+    "next": "infinity-import",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 62
+  },
+  "infinity-import": {
+    "url": "https://pewpi-infinity.github.io/infinity-import/",
+    "prev": "infinity-protect",
+    "next": "infinity-export",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 63
+  },
+  "infinity-export": {
+    "url": "https://pewpi-infinity.github.io/infinity-export/",
+    "prev": "infinity-import",
+    "next": "infinity-img-video",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 64
+  },
+  "infinity-img-video": {
+    "url": "https://pewpi-infinity.github.io/infinity-img-video/",
+    "prev": "infinity-export",
+    "next": "infinity-sound",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 65
+  },
+  "infinity-sound": {
+    "url": "https://pewpi-infinity.github.io/infinity-sound/",
+    "prev": "infinity-img-video",
+    "next": "infinity-quantum-lighting",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 66
+  },
+  "infinity-quantum-lighting": {
+    "url": "https://pewpi-infinity.github.io/infinity-quantum-lighting/",
+    "prev": "infinity-sound",
+    "next": "infinity-hash-generator",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 67
+  },
+  "infinity-hash-generator": {
+    "url": "https://pewpi-infinity.github.io/infinity-hash-generator/",
+    "prev": "infinity-quantum-lighting",
+    "next": "infinity-memory",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 68
+  },
+  "infinity-memory": {
+    "url": "https://pewpi-infinity.github.io/infinity-memory/",
+    "prev": "infinity-hash-generator",
+    "next": "infinity-modulators",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 69
+  },
+  "infinity-modulators": {
+    "url": "https://pewpi-infinity.github.io/infinity-modulators/",
+    "prev": "infinity-memory",
+    "next": "infinity-sweeper",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 70
+  },
+  "infinity-sweeper": {
+    "url": "https://pewpi-infinity.github.io/infinity-sweeper/",
+    "prev": "infinity-modulators",
+    "next": "infinity-developers",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 71
+  },
+  "infinity-developers": {
+    "url": "https://pewpi-infinity.github.io/infinity-developers/",
+    "prev": "infinity-sweeper",
+    "next": "infinity-unifying",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 72
+  },
+  "infinity-unifying": {
+    "url": "https://pewpi-infinity.github.io/infinity-unifying/",
+    "prev": "infinity-developers",
+    "next": "infinity-labeling",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 73
+  },
+  "infinity-labeling": {
+    "url": "https://pewpi-infinity.github.io/infinity-labeling/",
+    "prev": "infinity-unifying",
+    "next": "infinity-regulations",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 74
+  },
+  "infinity-regulations": {
+    "url": "https://pewpi-infinity.github.io/infinity-regulations/",
+    "prev": "infinity-labeling",
+    "next": "infinity-royalties",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 75
+  },
+  "infinity-royalties": {
+    "url": "https://pewpi-infinity.github.io/infinity-royalties/",
+    "prev": "infinity-regulations",
+    "next": "infinity-facebook",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 76
+  },
+  "infinity-facebook": {
+    "url": "https://pewpi-infinity.github.io/infinity-facebook/",
+    "prev": "infinity-royalties",
+    "next": "infinity-twitter",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 77
+  },
+  "infinity-twitter": {
+    "url": "https://pewpi-infinity.github.io/infinity-twitter/",
+    "prev": "infinity-facebook",
+    "next": "infinity-ebay",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 78
+  },
+  "infinity-ebay": {
+    "url": "https://pewpi-infinity.github.io/infinity-ebay/",
+    "prev": "infinity-twitter",
+    "next": "infinity-youtube",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 79
+  },
+  "infinity-youtube": {
+    "url": "https://pewpi-infinity.github.io/infinity-youtube/",
+    "prev": "infinity-ebay",
+    "next": "infinity-instagram",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 80
+  },
+  "infinity-instagram": {
+    "url": "https://pewpi-infinity.github.io/infinity-instagram/",
+    "prev": "infinity-youtube",
+    "next": "infinity-tiktok",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 81
+  },
+  "infinity-tiktok": {
+    "url": "https://pewpi-infinity.github.io/infinity-tiktok/",
+    "prev": "infinity-instagram",
+    "next": "infinity-socket",
+    "hub": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "index": 82
+  }
+}
