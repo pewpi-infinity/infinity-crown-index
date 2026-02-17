@@ -1,0 +1,39 @@
+{
+  "standard": "GOLD",
+  "color_code": "#FFD700",
+  "freq_hz": 432,
+  "daily_allowance": 48,
+  "unit_value": "$1.00",
+  "backing": "Infinity Research + C13B0 Transformer Architecture",
+  "distribution": "100% Peer-to-Peer",
+  "legacy_standard": "PLATINUM (archived)",
+  "master_hash": "GOLD_2026_RECOVERY_01",
+  "quanta_categories": [
+    {
+      "id": "quanta_propulsion",
+      "function": "Speed up repo generation",
+      "trigger": "lightning"
+    },
+    {
+      "id": "quanta_coins",
+      "function": "Probability-based value tracking",
+      "trigger": "money"
+    },
+    {
+      "id": "quanta_traffic",
+      "function": "Route data between transformer repos",
+      "trigger": "network"
+    },
+    {
+      "id": "quanta_union",
+      "function": "Merge data bridges into unified index",
+      "trigger": "trident"
+    }
+  ],
+  "hierarchy": {
+    "GOLD": "Current operating standard \u2014 purest value, active transactions",
+    "PLATINUM": "Legacy foundation \u2014 archived repos, original machines (Mario 1)",
+    "GOLD_MINT": "New repos forged under Gold Standard improve on Platinum base"
+  },
+  "updated": "20260217_054221"
+}
