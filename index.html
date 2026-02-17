@@ -137,7 +137,11 @@ async function loadAll() {
     fetch("api/spark_network.json",{ cache: "no-store" }).then(r => r.json())
   ]);
 
-  crownSites    = sitesRes.status    === "fulfilled" ? sitesRes.value    : [];
+  crownSites    = (sitesRes.status    === "fulfilled" ? sitesRes.value    : []).map(s => ({
+      ...s,
+      repo: s.repo || s.name || "",
+      has_pages: s.has_pages !== undefined ? s.has_pages : s.pages,
+    }));
   tokenData     = tokensRes.status   === "fulfilled" ? tokensRes.value   : {};
   analyticsData = analyticsRes.status=== "fulfilled" ? analyticsRes.value: {};
   dictionaryData= dictRes.status     === "fulfilled" ? dictRes.value     : {};
@@ -174,7 +178,7 @@ function getCategory(repoName) {
 function renderStats() {
   const overview = analyticsData.overview || {};
   const totalRepos = overview.total_repos || crownSites.length || 0;
-  const pagesEnabled = overview.pages_enabled || crownSites.filter(s => s.has_pages).length;
+  const pagesEnabled = overview.pages_enabled || crownSites.filter(s => s.has_pages || s.pages).length;
   const emptyRepos = overview.empty_repos || 0;
   const richRepos  = overview.rich_repos  || 0;
 
