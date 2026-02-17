@@ -1,0 +1,84 @@
+{
+  "forge_version": "1.0",
+  "buttons": [
+    "\ud83c\udf44",
+    "\ud83d\udfe1",
+    "\u2b50",
+    "\ud83d\udc51",
+    "\ud83d\udc8e",
+    "\ud83e\uddf1",
+    "\ud83e\uddbe",
+    "\ud83e\uddf2",
+    "\ud83d\udd79\ufe0f"
+  ],
+  "button_map": {
+    "\ud83c\udf44": {
+      "name": "Double Down",
+      "action": "research_depth",
+      "color": "red"
+    },
+    "\ud83d\udfe1": {
+      "name": "Token Wallet",
+      "action": "wallet_metrics",
+      "color": "gold"
+    },
+    "\u2b50": {
+      "name": "Trend Flight",
+      "action": "inject_metadata",
+      "color": "orange"
+    },
+    "\ud83d\udc51": {
+      "name": "Royal Treatment",
+      "action": "ai_crosslink",
+      "color": "purple"
+    },
+    "\ud83d\udc8e": {
+      "name": "Facet",
+      "action": "data_extract",
+      "color": "cyan"
+    },
+    "\ud83e\uddf1": {
+      "name": "Hash/Lock",
+      "action": "4hash_encode",
+      "color": "brown"
+    },
+    "\ud83e\uddbe": {
+      "name": "Bot Auto",
+      "action": "deploy_agents",
+      "color": "gray"
+    },
+    "\ud83e\uddf2": {
+      "name": "Magnet",
+      "action": "pull_assets",
+      "color": "red"
+    },
+    "\ud83d\udd79\ufe0f": {
+      "name": "Search Mech",
+      "action": "node_search",
+      "color": "green"
+    }
+  },
+  "hash_system": {
+    "layer_1": "Sovereign Research \u2014 Primary jump-links",
+    "layer_2": "Validation Data \u2014 Raw logic & source verification",
+    "layer_3": "Bibliography/Network \u2014 Research articles",
+    "layer_4": "Master Zip \u2014 Unified blockchain token"
+  },
+  "token": {
+    "base_value": 1111,
+    "daily_growth": 1,
+    "start_date": "2025-02-15",
+    "daily_universal_credit": 48,
+    "id": "\ud83e\uddf1Kris\ud83d\udd11"
+  },
+  "color_protocol": {
+    "red": "Logic \u2014 takes to more valuable avenues",
+    "orange": "Evolution \u2014 choices evolved in link",
+    "yellow": "Data Extractor \u2014 extract data from content",
+    "blue": "Import \u2014 bring something into the content",
+    "green": "Engineering \u2014 build and deploy",
+    "purple": "Royal \u2014 AI-guided sovereign intelligence"
+  },
+  "mode": "Royal-Treatment",
+  "auth": "Sovereign-Infinity-Spark"
+}
