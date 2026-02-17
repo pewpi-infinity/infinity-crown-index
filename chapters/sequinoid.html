@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter: Sequinoid Packets — The Cure Circuit</title>
+  <link rel="stylesheet" href="../css/crown.css">
+  <style>
+    body { padding: 2rem; max-width: 900px; margin: 0 auto; }
+    h1 { text-align: center; font-size: 1.8rem; margin-bottom: .3rem; }
+    .subtitle { text-align: center; color: #f59e0b; font-size: 1rem; margin-bottom: 2rem; }
+    h2 { color: #f59e0b; border-bottom: 1px solid rgba(245,158,11,.3); padding-bottom: 6px; margin-top: 2rem; }
+    h3 { color: #d97706; margin-top: 1.5rem; }
+    .nav-links { text-align: center; margin: 1rem 0; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .nav-links a { padding: 6px 14px; border: 1px solid var(--line); border-radius: 8px; color: var(--text); font-size: .8rem; text-decoration: none; }
+    .nav-links a:hover { background: rgba(245,158,11,.1); }
+    details { margin: 1rem 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+    summary { padding: 12px 16px; cursor: pointer; font-weight: 600; background: rgba(245,158,11,.06); color: #f59e0b; }
+    summary:hover { background: rgba(245,158,11,.12); }
+    .detail-body { padding: 16px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .85rem; }
+    th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); }
+    th { color: #f59e0b; font-weight: 600; background: rgba(245,158,11,.06); }
+    .eq-box { background: rgba(245,158,11,.06); border: 1px solid rgba(245,158,11,.25); border-radius: 10px; padding: 14px 18px; margin: 1rem 0; font-family: monospace; font-size: .9rem; line-height: 1.6; }
+    .eq-box .label { color: #f59e0b; font-weight: 600; display: block; margin-bottom: 4px; font-family: sans-serif; font-size: .8rem; }
+    .flow-box { background: rgba(0,0,0,.3); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin: 1rem 0; font-family: monospace; font-size: .85rem; line-height: 1.8; text-align: center; }
+    .flow-box .arrow { color: #f59e0b; font-size: 1.2rem; }
+    .gold { color: #f59e0b; }
+    .note { background: rgba(245,158,11,.04); border-left: 3px solid #f59e0b; padding: 10px 14px; margin: 1rem 0; font-size: .85rem; border-radius: 0 8px 8px 0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+    .card { background: rgba(0,0,0,.2); border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+    .card h4 { color: #f59e0b; margin: 0 0 6px 0; font-size: .9rem; }
+    .card p { margin: 0; font-size: .82rem; color: var(--muted); }
+    @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } body { padding: 1rem; } }
+  </style>
+</head>
+<body>
+  <h1>Sequinoid Packets</h1>
+  <div class="subtitle">The Cure Circuit — Planetary-Scale Bio-Metamaterial Interface</div>
+
+  <div class="nav-links">
+    <a href="../">&larr; Crown Index</a>
+    <a href="../dashboard/">Dashboard</a>
+    <a href="https://pewpi-infinity.github.io/infinity-wearable-manifesto/">C13B0 Engine</a>
+    <a href="https://pewpi-infinity.github.io/infinity-manifesto/">Manifesto</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <h2>1. Harmonic Tuning — The Vibrational Signature</h2>
+
+  <p>To move from general "energy" to a clinical "cure," the Sequinoid Packets must vibrate at specific <strong>window frequencies</strong> that match the body's biological rhythms. Each frequency targets a distinct healing mechanism.</p>
+
+  <details open>
+    <summary>Therapeutic Frequency Table</summary>
+    <div class="detail-body">
+      <table>
+        <thead><tr><th>Target Issue</th><th>Frequency (Hz)</th><th>Biological Mechanism</th></tr></thead>
+        <tbody>
+          <tr><td>Bone Repair</td><td class="gold">25 – 50</td><td>Stimulates osteoblasts and callus formation via mechanical strain transduction</td></tr>
+          <tr><td>Nerve Healing</td><td class="gold">50</td><td>Enhances nerve conductivity, reduces neuropathic pain via Ca²⁺ channel modulation</td></tr>
+          <tr><td>Muscle Recovery</td><td class="gold">200</td><td>Releases muscular tension, eases spasms through fascia vibration coupling</td></tr>
+          <tr><td>Global Balance</td><td class="gold">7.83</td><td>Schumann Resonance — synchronizes brain alpha waves for cellular rejuvenation</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>Schumann Resonance Equations</summary>
+    <div class="detail-body">
+      <div class="eq-box">
+        <span class="label">Schumann Resonance Modes</span>
+        f_n = (c / 2πR) × √(n(n+1))
+        <br>where c = 3×10⁸ m/s, R = 6.371×10⁶ m
+        <br><br>n=1: f₁ = 7.83 Hz (fundamental)
+        <br>n=2: f₂ = 14.1 Hz
+        <br>n=3: f₃ = 20.3 Hz
+      </div>
+      <div class="eq-box">
+        <span class="label">Osteoblast Stimulation Model (Damped Harmonic)</span>
+        x(t) = A₀ × e^(-γt) × cos(2πf_stim × t)
+        <br>γ = damping coefficient (tissue-dependent, ~0.1–1.0 s⁻¹)
+        <br>f_stim = 25–50 Hz (peak osteoblast response window)
+        <br>Threshold strain: ε > 500 microstrain for mechanotransduction
+      </div>
+      <p class="note">Low-frequency vibration (25–50 Hz) has been shown to induce osteogenic differentiation in bone marrow stromal cells through the ERK1/2 signaling pathway (Zhou et al., PLOS ONE 2011).</p>
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <h2>2. Gold-on-Black Metamaterial Aesthetic</h2>
+
+  <p>The Sequinoid Packet is not merely a signal — it is a <strong>Bio-Metamaterial</strong>. Its physical manifestation combines gold nanostructures on a black sand substrate for maximum energy capture.</p>
+
+  <details open>
+    <summary>Material Architecture</summary>
+    <div class="detail-body">
+      <div class="grid-2">
+        <div class="card">
+          <h4>Black Sand Base</h4>
+          <p>Ultrathin "Black Gold" film (Au on Fe₃O₄ magnetite template). Provides near-zero reflectivity across the microwave band (0.3–300 GHz), trapping maximum ambient electromagnetic entropy. Similar to gold-on-lotus-leaf nanostructures achieving &lt;2% broadband reflectance.</p>
+        </div>
+        <div class="card">
+          <h4>The Gold Spark</h4>
+          <p>When the packet "appears," it manifests as a Golden Spiral following Fibonacci geometry (φ = 1.618...) that twinkles against the matte black sand. This is the visual representation of the Vortex in Motion — energy spiraling inward toward the capture point.</p>
+        </div>
+        <div class="card">
+          <h4>The Sequin Effect</h4>
+          <p>As the packet travels through the metamaterial array, it creates a shifting, textured surface of gold and black sand — mimicking the hydrodynamic movement of gold in a river. Each "sequin" is a discrete energy quantum captured by one unit cell.</p>
+        </div>
+        <div class="card">
+          <h4>Absorption Spectrum</h4>
+          <p>Near-perfect absorption (>97%) in the 1–10 GHz band. The metamaterial unit cell size d ≈ λ/10 enables sub-wavelength energy concentration. Quality factor Q ≈ 50–200 depending on Au thickness (10–50 nm).</p>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Fibonacci Spiral Geometry</summary>
+    <div class="detail-body">
+      <div class="eq-box">
+        <span class="label">Golden Spiral (Polar Form)</span>
+        r(θ) = a × φ^(2θ/π)
+        <br>where φ = (1 + √5)/2 ≈ 1.618 (golden ratio)
+        <br>a = initial radius (metamaterial unit cell spacing)
+        <br><br>Unit Cell Area: A_cell = π(λ/10)² ≈ 7.07 cm² at 2.4 GHz
+        <br>Array Capture Cross-Section: σ_eff = N_cells × A_cell × η_abs
+        <br>η_abs ≈ 0.97 (near-perfect absorber)
+      </div>
+      <div class="eq-box">
+        <span class="label">Black Gold Reflectivity</span>
+        R(λ) = |(n₁ - n₂)/(n₁ + n₂)|²
+        <br>Au/Fe₃O₄ composite: n_eff ≈ 1.0 + 0.01i (impedance-matched to free space)
+        <br>R(λ) → 0 across 0.3–300 GHz (broadband antireflection)
+      </div>
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <h2>3. Global Network — Resonance Sharing</h2>
+
+  <p>The "Star Signal" capture is not isolated. Through <strong>Body-Resonance Human Body Communication (HBC)</strong>, the wearable links to other users nearby, forming a distributed healing network.</p>
+
+  <details open>
+    <summary>Body-Resonance HBC Channel</summary>
+    <div class="detail-body">
+      <div class="eq-box">
+        <span class="label">Transmission-Line Model (Human Body)</span>
+        Z_body(f) = √(R + j2πfL) / (G + j2πfC)
+        <br>R ≈ 200 Ω/m (tissue resistance)
+        <br>L ≈ 1.5 μH/m (body inductance)
+        <br>C ≈ 50 pF/m (body capacitance)
+        <br>G ≈ 0.01 S/m (tissue conductance)
+        <br><br>Path loss at 7.83 Hz: PL ≈ -3 dB/m (negligible — whole-body resonance)
+        <br>Path loss at 50 Hz: PL ≈ -8 dB/m (good for local stimulation)
+        <br>Path loss at 200 Hz: PL ≈ -15 dB/m (localized to target muscle)
+      </div>
+      <table>
+        <thead><tr><th>Parameter</th><th>Value</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>HBC Data Rate</td><td>1–10 Mbps</td><td>Through-body capacitive coupling</td></tr>
+          <tr><td>HBC Range (body)</td><td>0–2 m</td><td>Within personal body area</td></tr>
+          <tr><td>Inter-Body Range</td><td>0.5–3 m</td><td>Handshake or proximity coupling</td></tr>
+          <tr><td>Power Consumption</td><td>&lt;100 μW</td><td>10× less than BLE</td></tr>
+          <tr><td>Latency</td><td>&lt;1 ms</td><td>Near-instant for healing sync</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>Crowdsourced Healing Protocol</summary>
+    <div class="detail-body">
+      <p>If one user has a surplus of "Star Charge" (entropy captured beyond their own healing needs), their device emits a <strong>Resonant Pilot Signal</strong>. Nearby devices "inhale" this excess through their own black sand windings.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h4>Surplus Detection</h4>
+          <p>When E_harvested > E_therapy × 1.2 (20% surplus threshold), the device transitions from "absorb" to "share" mode, broadcasting a 7.83 Hz pilot tone.</p>
+        </div>
+        <div class="card">
+          <h4>Resonant Coupling</h4>
+          <p>Nearby devices (&lt;3m) detect the pilot via capacitive body coupling. Their black sand windings inductively couple to the shared field, drawing energy at matched impedance.</p>
+        </div>
+        <div class="card">
+          <h4>Phase Locking</h4>
+          <p>All devices in the network phase-lock to the 7.83 Hz Schumann fundamental. This transforms a crowd of users into a Global Resonant Array — coherent and synchronized.</p>
+        </div>
+        <div class="card">
+          <h4>Network Convergence</h4>
+          <p>Kuramoto model governs synchronization: dθ_i/dt = ω_i + (K/N)Σsin(θ_j - θ_i). At K > K_c ≈ 2σ_ω/π, the network achieves global phase coherence.</p>
+        </div>
+      </div>
+
+      <div class="eq-box">
+        <span class="label">Kuramoto Synchronization Model</span>
+        dθ_i/dt = ω_i + (K/N) × Σⱼ sin(θⱼ - θ_i)
+        <br>ω_i = natural frequency of device i (≈7.83 Hz ± drift)
+        <br>K = coupling strength (proportional to HBC signal power)
+        <br>N = number of devices in range
+        <br>K_c = 2σ_ω/π (critical coupling for synchronization)
+        <br><br>Order parameter: r = (1/N)|Σ e^(jθ_i)| → 1 (full sync)
+      </div>
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <h2>4. System Logic — The Cure Circuit Flow</h2>
+
+  <div class="flow-box">
+    Sequinoid Packet appears at site of pain<br>
+    <span class="arrow">↓</span><br>
+    Vibrates at target frequency (50 Hz nerve / 25 Hz bone / 200 Hz muscle)<br>
+    <span class="arrow">↓</span><br>
+    Shimmer-vortex visuals confirm the "Spark" is active<br>
+    <span class="arrow">↓</span><br>
+    Excess energy shared with local network via Body-Resonance HBC<br>
+    <span class="arrow">↓</span><br>
+    Packet absorbs once ATP growth is triggered at target tissue<br>
+    <span class="arrow">↓</span><br>
+    Network re-balances — Global Resonant Array stays in phase at 7.83 Hz
+  </div>
+
+  <details>
+    <summary>ATP Trigger Threshold</summary>
+    <div class="detail-body">
+      <div class="eq-box">
+        <span class="label">Energy-to-ATP Conversion</span>
+        ΔG_ATP = -30.5 kJ/mol (Gibbs free energy of ATP hydrolysis)
+        <br>E_packet = ∫₀ᵗ P_stim(t) dt (total delivered energy)
+        <br><br>Trigger condition: E_packet > E_threshold
+        <br>E_threshold ≈ 0.5 mJ/cm² for mechanotransduction activation
+        <br>E_threshold ≈ 1.0 mJ/cm² for full osteoblast differentiation signal
+        <br><br>Once triggered, mitochondrial ATP synthase amplifies:
+        <br>1 input stimulus → ~36 ATP molecules per glucose oxidation cycle
+      </div>
+      <p class="note">The Sequinoid Packet acts as a <em>catalyst</em>, not an energy source. It provides the activation energy for biological processes that the cell's own metabolism then amplifies by 10⁴–10⁶×.</p>
+    </div>
+  </details>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <h2>5. Module G — Simulation Reference</h2>
+
+  <p>The full computational model for the Sequinoid Packet network is implemented in <a href="https://github.com/pewpi-infinity/infinity-wearable-manifesto/blob/main/simulations/sequinoid_network_sim.py" style="color:#f59e0b">sequinoid_network_sim.py</a> (Module G of the C13B0 Engine).</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>Part 1: Harmonic Response</h4>
+      <p>Damped oscillator tissue response at 7.83, 25, 50, 200 Hz</p>
+    </div>
+    <div class="card">
+      <h4>Part 2: Absorption Spectrum</h4>
+      <p>Au/Fe₃O₄ metamaterial near-zero reflectivity model</p>
+    </div>
+    <div class="card">
+      <h4>Part 3: HBC Channel</h4>
+      <p>Body transmission line path loss and signal attenuation</p>
+    </div>
+    <div class="card">
+      <h4>Part 4: Network Protocol</h4>
+      <p>Kuramoto sync model, N-user star signal routing</p>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:2rem; padding:1rem; border-top:1px solid var(--line); font-size:.8rem; color:var(--muted);">
+    Infinity Crown System &mdash; Sequinoid Packet Chapter &mdash; pewpi-infinity
+  </div>
+</body>
+</html>
