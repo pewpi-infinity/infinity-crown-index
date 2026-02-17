@@ -1,0 +1,32 @@
+{
+  "mesh_version": "1.0.0",
+  "repo": "infinity-crown-index",
+  "machine_type": "crown",
+  "role": "crown_index",
+  "cart_logic": "cart_MONGOOSE_MASTER_INDEX",
+  "color": "#FFD700",
+  "upstream": [
+    "vision-index-20260212_190124",
+    "vision-index-20260210_123751",
+    "vision-index-20260209_120825",
+    "c13b0-site-20251227-204454",
+    "c13b0-node-20251227-101721"
+  ],
+  "downstream": [
+    "infinity-wearable-manifesto",
+    "infinity-mega-labs",
+    "infinity-manifesto",
+    "infinity-spark-node-20260201_031717",
+    "infinity-spark-node-20260201_031655"
+  ],
+  "sovereign_endpoint": "https://pewpi-infinity.github.io/sovereign-interface/",
+  "crown_index": "https://pewpi-infinity.github.io/infinity-crown-index/",
+  "auto_discovery": true,
+  "wired_at": "2026-02-17T08:15:16",
+  "links": {
+    "self": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "github": "https://github.com/pewpi-infinity/infinity-crown-index",
+    "crown": "https://pewpi-infinity.github.io/infinity-crown-index/",
+    "sovereign": "https://pewpi-infinity.github.io/sovereign-interface/"
+  }
+}
