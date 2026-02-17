@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "updated": "20260217_051518",
+  "updated": "20260217_052159",
   "source": "Research Writer \u2014 rationalized data from all research tokens",
   "categories": {
     "bioengineering": {
@@ -60,7 +60,22 @@
       "ECOSYSTEM_LINKER": "Script that links category repos, spark repos, and fixes blank pages.",
       "BUILD_MACHINES": "Script that creates machine pages, tools repo, and 510-term dictionary.",
       "RESEARCH_WRITER": "Script that mass-produces research tokens, dictionary entries, and chapter pages."
+    },
+    "quantum-triggers": {
+      "Intent Vector": "Color-coded click that maps multidimensional user interest into a specific forge action.",
+      "Ascension (Red)": "Find higher-authority, higher-value versions of current content.",
+      "Evolution (Orange)": "Branch logic \u2014 discover what comes next in the sequence.",
+      "Extractor (Yellow)": "Scrape and regex \u2014 pull raw data points into the hive database.",
+      "Synthesis (Blue)": "Merge personal history and files into current content context.",
+      "Engineer (Green)": "Pass to Architect Agent \u2014 build the physical repo/structure.",
+      "Assimilator (Purple)": "Total absorption \u2014 map content into the full transformer index.",
+      "Platinum Token": "Clone-and-save script ensuring new repo improves on the last.",
+      "Prime Time Loop": "Content generator that extracts aesthetic, searches trends, and builds.",
+      "Electron Cloud Algorithm": "HNSW-based pattern matching that collapses possibilities into top 3 actions.",
+      "HNSW": "Hierarchical Navigable Small World \u2014 graph-based approximate nearest neighbor algorithm.",
+      "Quantum Surface": "The fixed UI control panel with 13 forge command buttons.",
+      "Probability Cloud": "All possible actions before intent collapse \u2014 narrowed by color-coded vectors."
     }
   },
-  "total_terms": 48
+  "total_terms": 61
 }
