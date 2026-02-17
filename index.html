@@ -1,717 +1,232 @@
-<!doctype html>
-<!-- v:20260217_045351 crown-index clean build -->
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
 <title>Infinity Crown Index</title>
-<link rel="stylesheet" href="css/crown.css">
+<meta name="description" content="Central command for the Infinity ecosystem — 980+ repos, machines, tools"/>
 <style>
-/* Builder overlay */
-.builder-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);z-index:1000;display:none;overflow-y:auto}
-.builder-overlay.active{display:flex;align-items:flex-start;justify-content:center;padding:2rem}
-.builder-panel{background:#1a1a2e;border:1px solid rgba(139,92,246,.3);border-radius:16px;max-width:700px;width:100%;padding:2rem;margin-top:2rem}
-.builder-panel h2{color:#a78bfa;margin-bottom:1rem}
-.builder-panel .close-btn{float:right;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;opacity:.6}
-.builder-panel .close-btn:hover{opacity:1}
-.builder-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:.8rem;color:#fff;font-family:monospace;margin:.5rem 0}
-.builder-input:focus{outline:none;border-color:#a78bfa}
-textarea.builder-input{min-height:200px;resize:vertical}
-.builder-btn{display:inline-block;padding:.6rem 1.2rem;border-radius:8px;border:none;cursor:pointer;font-weight:bold;margin:.3rem;transition:all .3s}
-.builder-btn-primary{background:#a78bfa;color:#fff}.builder-btn-primary:hover{background:#8b5cf6}
-.builder-btn-danger{background:#ef4444;color:#fff}.builder-btn-danger:hover{background:#dc2626}
-.builder-btn-secondary{background:rgba(255,255,255,.1);color:#e0e0e0;border:1px solid rgba(255,255,255,.2)}
-.builder-log{background:#0a0a1a;border-radius:8px;padding:1rem;max-height:300px;overflow-y:auto;font-family:monospace;font-size:.85rem;margin-top:1rem;white-space:pre-wrap}
-.builder-log .ok{color:#10b981}.builder-log .err{color:#ef4444}.builder-log .info{color:#60a5fa}
-/* Sync indicator */
-.sync-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:20px;padding:.3rem .8rem;font-size:.75rem;color:#10b981}
-.sync-dot{width:8px;height:8px;background:#10b981;border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-/* Builder actions toolbar */
-.toolbar{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0;padding:.8rem;background:rgba(139,92,246,.05);border:1px solid rgba(139,92,246,.15);border-radius:10px}
-.toolbar button{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#e0e0e0;padding:.5rem 1rem;border-radius:6px;cursor:pointer;font-size:.85rem;transition:all .2s}
-.toolbar button:hover{background:rgba(139,92,246,.2);border-color:#a78bfa}
+:root{--bg:#060a10;--sf:#0d1117;--cd:#151b25;--bd:#1e2836;--ac:#8b5cf6;--ac2:#6c63ff;--gold:#f5c542;--grn:#10b981;--txt:#e6edf3;--dim:#6e7681;--red:#ef4444;--blue:#3b82f6}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,sans-serif;line-height:1.5;overflow-x:hidden}
+a{color:var(--ac);text-decoration:none}a:hover{text-decoration:underline}
+.hdr{background:var(--sf);border-bottom:2px solid var(--ac);padding:10px 16px;position:sticky;top:0;z-index:100}
+.hdr-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;max-width:1200px;margin:0 auto}
+.brand{font-weight:800;font-size:1.15rem;white-space:nowrap}
+.brand em{color:var(--gold);font-style:normal}
+.search-box{flex:1;min-width:180px;max-width:400px;position:relative}
+.search-box input{width:100%;background:var(--cd);border:1px solid var(--bd);border-radius:8px;padding:7px 12px 7px 32px;color:var(--txt);font-size:0.85rem;outline:none}
+.search-box input:focus{border-color:var(--ac)}
+.search-icon{position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:0.8rem}
+.nav{display:flex;gap:4px;flex-wrap:wrap}
+.nav a{font-size:0.72rem;padding:4px 10px;border:1px solid var(--bd);border-radius:6px;color:var(--txt);white-space:nowrap;transition:all 0.15s}
+.nav a:hover{background:rgba(139,92,246,.15);border-color:var(--ac);text-decoration:none}
+.stats{display:flex;gap:8px;flex-wrap:wrap;padding:12px 16px;max-width:1200px;margin:0 auto}
+.stat{background:var(--cd);border:1px solid var(--bd);border-radius:10px;padding:8px 14px;text-align:center;min-width:90px}
+.stat strong{display:block;font-size:1.2rem;color:var(--gold)}
+.stat span{font-size:0.65rem;color:var(--dim);text-transform:uppercase;letter-spacing:0.5px}
+.cats{display:flex;gap:4px;flex-wrap:wrap;padding:8px 16px;max-width:1200px;margin:0 auto}
+.cat-btn{background:var(--cd);border:1px solid var(--bd);border-radius:20px;padding:4px 12px;font-size:0.72rem;color:var(--dim);cursor:pointer;transition:all 0.15s;white-space:nowrap}
+.cat-btn:hover,.cat-btn.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;padding:12px 16px;max-width:1200px;margin:0 auto}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:12px;transition:border-color 0.15s}
+.card:hover{border-color:var(--ac)}
+.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.card-name{font-weight:700;font-size:0.85rem;color:var(--txt);word-break:break-all}
+.card-tag{font-size:0.6rem;padding:2px 8px;border-radius:10px;background:rgba(139,92,246,.15);color:var(--ac);white-space:nowrap}
+.card-url{font-size:0.7rem;color:var(--dim);margin-bottom:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card-url a{color:var(--dim)}
+.card-url a:hover{color:var(--ac)}
+.card-badges{display:flex;gap:4px;flex-wrap:wrap}
+.badge{font-size:0.6rem;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,.04);color:var(--dim);border:1px solid var(--bd);text-decoration:none}
+.badge.on{background:rgba(16,185,129,.1);color:var(--grn);border-color:rgba(16,185,129,.3)}
+.badge:hover{border-color:var(--ac);text-decoration:none}
+.hubs{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;padding:12px 16px;max-width:1200px;margin:0 auto}
+.hub{background:linear-gradient(135deg,var(--cd),var(--sf));border:1px solid var(--bd);border-radius:12px;padding:14px;text-align:center;transition:all 0.2s;cursor:pointer;text-decoration:none;color:var(--txt)}
+.hub:hover{border-color:var(--gold);transform:translateY(-2px);text-decoration:none}
+.hub-icon{font-size:1.8rem;display:block;margin-bottom:4px}
+.hub-name{font-weight:700;font-size:0.8rem}
+.hub-desc{font-size:0.6rem;color:var(--dim);margin-top:2px}
+.sec{padding:12px 16px 4px;max-width:1200px;margin:0 auto}
+.sec h2{font-size:0.9rem;color:var(--gold);border-bottom:1px solid var(--bd);padding-bottom:4px}
+.footer{text-align:center;padding:20px 16px;font-size:0.65rem;color:var(--dim);border-top:1px solid var(--bd);margin-top:20px}
+.loading{text-align:center;padding:40px;color:var(--dim)}
+.spin{display:inline-block;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.count{font-size:0.75rem;color:var(--dim);white-space:nowrap}
 </style>
-
 </head>
 <body>
 
-<header>
-  <div class="wrap row">
-    <div class="brand">Infinity Crown Index</div>
-    <div class="search"><span>&#x1F50D;</span><input id="q" placeholder="Search repos or categories..."></div>
-    <nav class="nav-links">
-      <a href="dashboard/">Dashboard</a>
-      <a href="panels/emoji_panels.html">Panels</a>
-      <a href="https://pewpi-infinity.github.io/infinity-crown-hub/">Hub</a>
-      <a href="https://pewpi-infinity.github.io/infinity-spark-market/">Market</a>
-      <a href="https://pewpi-infinity.github.io/smug_look/">Octave</a>
-      <a href="https://pewpi-infinity.github.io/MARIO-TOKENS/">Mario</a>
-      <a href="version_viewer.html">Versions</a>
-    </nav>
-    <div class="tiny">
-      <span id="count"></span>
-      <span class="sync-badge"><span class="sync-dot"></span><span id="syncStatus">Syncing...</span></span>
+<div class="hdr">
+  <div class="hdr-row">
+    <div class="brand"><em>&#x221E;</em> Crown Index</div>
+    <div class="search-box"><span class="search-icon">&#x1F50D;</span><input id="q" placeholder="Search 980+ repos..." autocomplete="off"/></div>
+    <div class="nav">
+      <a href="https://pewpi-infinity.github.io/infinity-master-hub/">&#x1F310; Hub</a>
+      <a href="https://pewpi-infinity.github.io/infinity-spark-market/">&#x1F4B0; Market</a>
+      <a href="https://pewpi-infinity.github.io/smug_look/">&#x1F9F1; Octave</a>
+      <a href="https://pewpi-infinity.github.io/mongoose.os/">&#x1F9F2; MOS</a>
+      <a href="https://pewpi-infinity.github.io/MARIO-TOKENS/">&#x1F3AE; Mario</a>
+      <a href="https://pewpi-infinity.github.io/infinity-tools/">&#x1F527; Tools</a>
+      <a href="https://pewpi-infinity.github.io/DJVertigo-token/">&#x1F9BE; DJV</a>
     </div>
-  </div>
-</header>
-
-<main class="wrap">
-  <!-- Builder toolbar -->
-  <div class="toolbar" id="builderToolbar">
-    <button onclick="openBuilder('repair')">&#x1F527; Repair Page</button>
-    <button onclick="openBuilder('add')">&#x2795; Add Content</button>
-    <button onclick="openBuilder('template')">&#x1F4CB; Apply Template</button>
-    <button onclick="openBuilder('sync')">&#x1F504; Force Sync</button>
-    <button onclick="openBuilder('inspect')">&#x1F50E; Inspect Repo</button>
-    <button onclick="openBuilder('batch')">&#x26A1; Batch Action</button>
-  </div>
-
-  <!-- Category filter bar -->
-  <div id="category-bar" class="category-bar"></div>
-
-  <!-- Stats strip -->
-  <div id="stats-strip" class="stats-strip"></div>
-
-  <!-- Card grid -->
-  <div class="grid" id="grid"></div>
-</main>
-
-<footer class="wrap tiny">
-  Infinity Crown Index &mdash; Emoji-driven repo management &amp; builder<br>
-  <a href="https://pewpi-infinity.github.io/infinity-crown-hub/" style="color:#a78bfa">Crown Hub</a> &middot;
-  Contact: 808-342-9975 &middot; marvasweater@gmail.com
-</footer>
-
-<!-- Builder Overlay -->
-<div class="builder-overlay" id="builderOverlay">
-  <div class="builder-panel">
-    <button class="close-btn" onclick="closeBuilder()">&times;</button>
-    <h2 id="builderTitle">Builder</h2>
-    <div id="builderContent"></div>
+    <div class="count" id="count"></div>
   </div>
 </div>
 
+<div class="sec"><h2>&#x1F451; Command Hubs</h2></div>
+<div class="hubs" id="hubs"></div>
+
+<div class="sec"><h2>&#x1F4CA; System Status</h2></div>
+<div class="stats" id="stats"></div>
+
+<div class="sec"><h2>&#x1F3F7;&#xFE0F; Categories</h2></div>
+<div class="cats" id="cats"></div>
+
+<div class="sec"><h2>&#x1F4E6; Repositories</h2></div>
+<div class="grid" id="grid"><div class="loading"><span class="spin">&#x2699;</span> Loading repos...</div></div>
+
+<div class="footer">
+  Infinity Crown Index &mdash; 980+ repositories &mdash; Part of the <a href="https://pewpi-infinity.github.io/infinity-master-hub/">Infinity Ecosystem</a><br/>
+  Contact: 808-342-9975 &middot; marvasweater@gmail.com
+</div>
+
 <script>
-const USER = "pewpi-infinity";
-const API = "https://api.github.com";
+(function(){
+  "use strict";
+  var USER = "pewpi-infinity";
+  var BASE = "https://" + USER + ".github.io";
 
-const EMOJIS = {
-  "mushroom":   { icon: "\uD83C\uDF44", label: "Double",     key: "mushroom" },
-  "circle":     { icon: "\uD83D\uDFE1", label: "Wallet",     key: "circle" },
-  "star":       { icon: "\u2B50",        label: "Trending",   key: "star" },
-  "crown":      { icon: "\uD83D\uDC51", label: "Royal",      key: "crown" },
-  "gem":        { icon: "\uD83D\uDC8E", label: "Facet",      key: "gem" },
-  "brick":      { icon: "\uD83E\uDDF1", label: "Hash/Build", key: "brick" },
-  "robot":      { icon: "\uD83E\uDD16", label: "Auto-Bot",   key: "robot" },
-  "magnet":     { icon: "\uD83E\uDDF2", label: "Pull",       key: "magnet" },
-  "joystick":   { icon: "\uD83D\uDD79\uFE0F", label: "Search", key: "joystick" }
-};
+  var HUBS = [
+    {name:"infinity-crown-index",icon:"\u{1F451}",label:"Crown Index",desc:"You are here"},
+    {name:"infinity-master-hub",icon:"\u{1F310}",label:"Master Hub",desc:"Global navigation"},
+    {name:"infinity-spark-market",icon:"\u{1F4B0}",label:"Marketplace",desc:"Components & trade"},
+    {name:"infinity-tools",icon:"\u{1F527}",label:"Tools",desc:"Upload & scripts"},
+    {name:"mongoose.os",icon:"\u{1F9F2}",label:"Mongoose OS",desc:"Research database"},
+    {name:"smug_look",icon:"\u{1F9F1}",label:"Octave",desc:"C13B0 system"},
+    {name:"MARIO-TOKENS",icon:"\u{1F3AE}",label:"Mario Tokens",desc:"Token system"},
+    {name:"DJVertigo-token",icon:"\u{1F9BE}",label:"DJVertigo",desc:"DJV dashboard"}
+  ];
 
-const CATEGORY_MAP = {
-  engineer:    { label: "Engineer",    color: "#10b981" },
-  ceo:         { label: "CEO",         color: "#f59e0b" },
-  import:      { label: "Import",      color: "#3b82f6" },
-  investigate: { label: "Investigate", color: "#ec4899" },
-  routes:      { label: "Routes",      color: "#8b5cf6" },
-  data:        { label: "Data",        color: "#6b7280" }
-};
+  var sites = [];
+  var activeFilter = null;
 
-let crownSites = [];
-let tokenData = {};
-let analyticsData = {};
-let dictionaryData = {};
-let sparkNetwork = {};
-let activeCategory = null;
-let cardModes = {};
-let selectedRepo = null;
-
-const $ = id => document.getElementById(id);
-
-// ── Data Loading ──
-
-async function loadAll() {
-  const [sitesRes, tokensRes, analyticsRes, dictRes, sparkRes] = await Promise.allSettled([
-    fetch("data/crown_sites.json", { cache: "no-store" }).then(r => r.json()),
-    fetch("api/tokens.json",       { cache: "no-store" }).then(r => r.json()),
-    fetch("api/analytics.json",    { cache: "no-store" }).then(r => r.json()),
-    fetch("api/dictionary.json",   { cache: "no-store" }).then(r => r.json()),
-    fetch("api/spark_network.json",{ cache: "no-store" }).then(r => r.json())
-  ]);
-
-  crownSites    = (sitesRes.status    === "fulfilled" ? sitesRes.value    : []).map(s => ({
-      ...s,
-      repo: s.repo || s.name || "",
-      has_pages: s.has_pages !== undefined ? s.has_pages : s.pages,
-    }));
-  tokenData     = tokensRes.status   === "fulfilled" ? tokensRes.value   : {};
-  analyticsData = analyticsRes.status=== "fulfilled" ? analyticsRes.value: {};
-  dictionaryData= dictRes.status     === "fulfilled" ? dictRes.value     : {};
-  sparkNetwork  = sparkRes.status    === "fulfilled" ? sparkRes.value    : {};
-
-  const syncTime = analyticsData?.overview?.last_sync || (crownSites[0]?.scanned_at || "never");
-  $("syncStatus").textContent = "Synced: " + syncTime;
-
-  buildCategoryIndex();
-  renderStats();
-  renderCategoryBar();
-  render();
-}
-
-// ── Build a lookup: repoName -> category ──
-
-const repoCategoryIndex = {};
-
-function buildCategoryIndex() {
-  for (const [cat, repos] of Object.entries(tokenData)) {
-    if (!Array.isArray(repos)) continue;
-    for (const r of repos) {
-      repoCategoryIndex[(r.name || "").toLowerCase()] = cat;
-    }
-  }
-}
-
-function getCategory(repoName) {
-  return repoCategoryIndex[repoName.toLowerCase()] || "data";
-}
-
-// ── Stats ──
-
-function renderStats() {
-  const overview = analyticsData.overview || {};
-  const totalRepos = overview.total_repos || crownSites.length || 0;
-  const pagesEnabled = overview.pages_enabled || crownSites.filter(s => s.has_pages || s.pages).length;
-  const emptyRepos = overview.empty_repos || 0;
-  const richRepos  = overview.rich_repos  || 0;
-
-  $("stats-strip").innerHTML = [
-    stat(totalRepos, "Repos"),
-    stat(pagesEnabled, "Pages Active"),
-    stat(Object.keys(tokenData).length, "Categories"),
-    stat(richRepos, "Content-Rich"),
-    stat(emptyRepos, "Empty")
-  ].join("");
-}
-
-function stat(value, label) {
-  return `<div class="stat-pill"><strong>${value}</strong> ${label}</div>`;
-}
-
-// ── Category Bar ──
-
-function renderCategoryBar() {
-  const cats = analyticsData.categories || {};
-  let html = `<button class="cat-btn${!activeCategory ? " active" : ""}" onclick="filterCategory(null)">All</button>`;
-  for (const [cat, count] of Object.entries(cats)) {
-    const info = CATEGORY_MAP[cat] || { label: cat, color: "#888" };
-    const isActive = activeCategory === cat ? " active" : "";
-    html += `<button class="cat-btn${isActive}" style="--cat-color:${info.color}" onclick="filterCategory('${cat}')">${info.label} <span class="cat-count">${count}</span></button>`;
-  }
-  $("category-bar").innerHTML = html;
-}
-
-function filterCategory(cat) {
-  activeCategory = cat;
-  renderCategoryBar();
-  render();
-}
-
-// ── Card Rendering ──
-
-function render() {
-  const query = ($("q").value || "").toLowerCase();
-  const filtered = crownSites.filter(item => {
-    const name = item.repo || "";
-    const matchesQuery = !query
-      || name.toLowerCase().includes(query)
-      || (item.url || "").toLowerCase().includes(query)
-      || getCategory(name).includes(query);
-    const matchesCat = !activeCategory || getCategory(name) === activeCategory;
-    return matchesQuery && matchesCat;
-  });
-
-  $("count").textContent = filtered.length + " repos";
-  $("grid").innerHTML = filtered.map(card).join("");
-}
-
-function card(item) {
-  const cat = getCategory(item.repo);
-  const catInfo = CATEGORY_MAP[cat] || { label: cat, color: "#888" };
-  const mode = cardModes[item.repo];
-  const pagesIcon = item.has_pages ? '<span title="Pages active" style="color:#10b981">&#x2705;</span>' : '<span title="No pages" style="opacity:.3">&#x26AA;</span>';
-  const sizeInfo = item.size ? `<span style="opacity:.4;font-size:.75rem">${item.size}KB</span>` : '';
-
-  return `<div class="card" data-repo="${item.repo}">
-    <div class="hd">
-      <div class="card-top-row">
-        <span class="repo">${item.repo}</span>
-        ${pagesIcon} ${sizeInfo}
-        <span class="cat-tag" style="--cat-color:${catInfo.color}">${catInfo.label}</span>
-      </div>
-      <div class="url"><a href="${item.url}" target="_blank" style="color:inherit">${item.url}</a></div>
-      <div class="bar">${Object.values(EMOJIS).map(e =>
-        `<button class="e${mode === e.key ? " e-active" : ""}" title="${e.label}" onclick="handleEmoji('${item.repo}','${e.key}')">${e.icon}</button>`
-      ).join("")}</div>
-    </div>
-    <div class="body">${renderPanel(item.repo, item.url, cat)}</div>
-  </div>`;
-}
-
-// ── Emoji Panel Logic ──
-
-function handleEmoji(repo, key) {
-  cardModes[repo] = cardModes[repo] === key ? null : key;
-  if (key === "brick") {
-    selectedRepo = repo;
-    openBuilder("repair");
-    cardModes[repo] = null;
-  } else {
-    render();
-  }
-}
-
-function renderPanel(repo, url, category) {
-  const mode = cardModes[repo];
-  if (!mode) return "";
-
-  switch (mode) {
-    case "mushroom": return panelExpand(repo);
-    case "circle": return panelTokens(repo, category);
-    case "star":   return panelValue(repo, category);
-    case "crown":  return panelRoyal(repo, url, category);
-    case "gem":    return panelFacets(repo, category);
-    case "brick":  return panelBuild(repo, url);
-    case "robot":  return panelAutomate(repo, url);
-    case "magnet": return panelAssets(repo, url);
-    case "joystick": return panelResearch(repo);
-    default: return "";
-  }
-}
-
-function panelAutomate(repo, url) {
-  return panel("Automate", `
-    <div class="panel-row">
-      <span>GitHub Pages</span>
-      <a class="tool-link" href="${url}" target="_blank">Visit Site</a>
-    </div>
-    <div class="panel-row">
-      <span>Actions</span>
-      <a class="tool-link" href="https://github.com/${USER}/${repo}/actions" target="_blank">View Runs</a>
-    </div>
-    <div class="panel-row">
-      <span>Workflows</span>
-      <a class="tool-link" href="https://github.com/${USER}/${repo}/tree/main/.github/workflows" target="_blank">Edit</a>
-    </div>
-    <div class="panel-row">
-      <button class="builder-btn builder-btn-primary" onclick="selectedRepo='${repo}';openBuilder('repair')">Open Builder</button>
-    </div>
-  `);
-}
-
-function panelFacets(repo, category) {
-  const repoTokens = findRepoInTokens(repo);
-  const topics = repoTokens ? (repoTokens.topics || [category]) : [category];
-  const value = repoTokens ? (repoTokens.value || 0) : 0;
-
-  return panel("Facets", `
-    <div class="panel-row"><span>Category</span><strong>${category}</strong></div>
-    <div class="panel-row"><span>Topics</span><span>${Array.isArray(topics) ? topics.join(", ") : topics}</span></div>
-    <div class="panel-row"><span>Token Value</span><span>${value}</span></div>
-    <div class="panel-row"><span>Crowned</span><span>Yes</span></div>
-  `);
-}
-
-function panelExpand(repo) {
-  const richRepo = (dictionaryData.rich_repos || []).find(r => r.name === repo);
-  const emptyRepo = (dictionaryData.empty_repos || []).find(r => r.name === repo);
-  const wordCount = richRepo ? richRepo.words : (emptyRepo ? emptyRepo.words : "N/A");
-  const status = richRepo ? "Content-rich" : (emptyRepo ? "Needs content" : "Unknown");
-
-  return panel("Expand", `
-    <div class="panel-row"><span>Word Count</span><strong>${wordCount}</strong></div>
-    <div class="panel-row"><span>Status</span><span>${status}</span></div>
-    <div class="panel-row">
-      <button class="builder-btn builder-btn-secondary" onclick="selectedRepo='${repo}';openBuilder('inspect')">Inspect Files</button>
-    </div>
-  `);
-}
-
-function panelRoyal(repo, url, category) {
-  return panel("Royal Overview", `
-    <div class="panel-row">
-      <a class="tool-link" href="${url}" target="_blank">Open Site</a>
-      <a class="tool-link" href="https://github.com/${USER}/${repo}" target="_blank">GitHub</a>
-      <a class="tool-link" href="https://github.com/${USER}/${repo}/settings" target="_blank">Settings</a>
-    </div>
-    <div class="panel-row"><span>Category</span><strong>${(CATEGORY_MAP[category] || {}).label || category}</strong></div>
-    <div class="panel-row">
-      <button class="builder-btn builder-btn-primary" onclick="selectedRepo='${repo}';openBuilder('repair')">Builder</button>
-      <button class="builder-btn builder-btn-secondary" onclick="selectedRepo='${repo}';openBuilder('add')">Add Content</button>
-    </div>
-  `);
-}
-
-function panelTokens(repo, category) {
-  const catRepos = tokenData[category] || [];
-  const position = catRepos.findIndex(r => r.name === repo);
-  const total = catRepos.length;
-
-  return panel("Token Position", `
-    <div class="panel-row"><span>Category</span><strong>${category}</strong></div>
-    <div class="panel-row"><span>Position</span><span>${position >= 0 ? position + 1 : "?"} / ${total}</span></div>
-    <div class="panel-row"><span>Category Size</span><span>${total} repos</span></div>
-  `);
-}
-
-function panelResearch(repo) {
-  const sparkNode = (sparkNetwork.nodes || []).find(n => n.name === repo);
-  const sparkEdges = (sparkNetwork.edges || []).filter(e => e.from === repo || e.to === repo);
-  const sparkInfo = sparkNode
-    ? `<div class="panel-row"><span>Spark Role</span><strong>${sparkNode.role} (tier ${sparkNode.tier})</strong></div>
-       <div class="panel-row"><span>Connections</span><span>${sparkEdges.length} links</span></div>`
-    : "";
-
-  return panel("Research", `
-    ${sparkInfo}
-    <div class="panel-row">
-      <a class="tool-link" href="https://github.com/${USER}/${repo}/find/main" target="_blank">Search Files</a>
-      <a class="tool-link" href="https://github.com/${USER}/${repo}/commits/main" target="_blank">History</a>
-    </div>
-  `);
-}
-
-function panelValue(repo, category) {
-  const repoTokens = findRepoInTokens(repo);
-  const value = repoTokens ? (repoTokens.value || 50) : 50;
-  const catInfo = CATEGORY_MAP[category] || {};
-
-  return panel("Value Analysis", `
-    <div class="panel-row"><span>Base Value</span><strong>${value}</strong></div>
-    <div class="panel-row"><span>Category</span><span>${catInfo.label || category}</span></div>
-    <div class="panel-row"><span>Multiplier</span><span>${category === "ceo" ? "2x" : category === "engineer" ? "1.5x" : "1x"}</span></div>
-  `);
-}
-
-function panelAssets(repo, url) {
-  return panel("Assets", `
-    <div class="panel-row">
-      <a class="tool-link" href="${url}" target="_blank">Deployed Site</a>
-      <a class="tool-link" href="https://github.com/${USER}/${repo}" target="_blank">Source Code</a>
-    </div>
-    <div class="panel-row">
-      <a class="tool-link" href="https://github.com/${USER}/${repo}/releases" target="_blank">Releases</a>
-    </div>
-  `);
-}
-
-function panelBuild(repo, url) {
-  return panel("Build", `
-    <div class="panel-row">
-      <button class="builder-btn builder-btn-primary" onclick="selectedRepo='${repo}';openBuilder('repair')">Repair Page</button>
-      <button class="builder-btn builder-btn-primary" onclick="selectedRepo='${repo}';openBuilder('add')">Add Content</button>
-    </div>
-    <div class="panel-row">
-      <button class="builder-btn builder-btn-secondary" onclick="selectedRepo='${repo}';openBuilder('template')">Apply Template</button>
-      <button class="builder-btn builder-btn-secondary" onclick="selectedRepo='${repo}';openBuilder('inspect')">Inspect</button>
-    </div>
-  `);
-}
-
-// ── Helpers ──
-
-function panel(title, content) {
-  return `<div class="panel"><div class="panel-title">${title}</div>${content}</div>`;
-}
-
-function findRepoInTokens(repo) {
-  for (const repos of Object.values(tokenData)) {
-    if (!Array.isArray(repos)) continue;
-    const found = repos.find(r => r.name === repo);
-    if (found) return found;
-  }
-  return null;
-}
-
-// ══════════════════════════════════════════
-// BUILDER SYSTEM - Repair/Add/Template/Sync
-// ══════════════════════════════════════════
-
-function openBuilder(mode) {
-  const overlay = $("builderOverlay");
-  overlay.classList.add("active");
-  const title = $("builderTitle");
-  const content = $("builderContent");
-
-  const repo = selectedRepo || "";
-
-  switch(mode) {
-    case "repair":
-      title.textContent = "Repair Page: " + repo;
-      content.innerHTML = `
-        <p style="opacity:.7;margin-bottom:1rem">Fetch current index.html, edit it, and push back.</p>
-        <label>Repository: <input class="builder-input" id="bRepo" value="${repo}"></label>
-        <label>File path: <input class="builder-input" id="bPath" value="index.html"></label>
-        <button class="builder-btn builder-btn-primary" onclick="builderFetchFile()">Fetch Current Content</button>
-        <textarea class="builder-input" id="bContent" placeholder="Content will appear here after fetch..."></textarea>
-        <button class="builder-btn builder-btn-primary" onclick="builderPushFile()">Push Changes</button>
-        <button class="builder-btn builder-btn-danger" onclick="closeBuilder()">Cancel</button>
-        <div class="builder-log" id="bLog"></div>
-      `;
-      break;
-
-    case "add":
-      title.textContent = "Add Content to: " + repo;
-      content.innerHTML = `
-        <p style="opacity:.7;margin-bottom:1rem">Add a new file to the repository.</p>
-        <label>Repository: <input class="builder-input" id="bRepo" value="${repo}"></label>
-        <label>New file path: <input class="builder-input" id="bPath" value=""></label>
-        <textarea class="builder-input" id="bContent" placeholder="Enter file content..."></textarea>
-        <button class="builder-btn builder-btn-primary" onclick="builderPushFile()">Create File</button>
-        <button class="builder-btn builder-btn-danger" onclick="closeBuilder()">Cancel</button>
-        <div class="builder-log" id="bLog"></div>
-      `;
-      break;
-
-    case "template":
-      title.textContent = "Apply Template to: " + repo;
-      content.innerHTML = `
-        <p style="opacity:.7;margin-bottom:1rem">Apply a standard template to the repo's index.html.</p>
-        <label>Repository: <input class="builder-input" id="bRepo" value="${repo}"></label>
-        <div style="margin:1rem 0">
-          <button class="builder-btn builder-btn-secondary" onclick="loadTemplate('spark')">Spark Template</button>
-          <button class="builder-btn builder-btn-secondary" onclick="loadTemplate('category')">Category Template</button>
-          <button class="builder-btn builder-btn-secondary" onclick="loadTemplate('minimal')">Minimal Page</button>
-          <button class="builder-btn builder-btn-secondary" onclick="loadTemplate('dashboard')">Dashboard</button>
-        </div>
-        <textarea class="builder-input" id="bContent" placeholder="Template will load here..."></textarea>
-        <input class="builder-input" id="bPath" value="index.html" style="display:none">
-        <button class="builder-btn builder-btn-primary" onclick="builderPushFile()">Apply Template</button>
-        <button class="builder-btn builder-btn-danger" onclick="closeBuilder()">Cancel</button>
-        <div class="builder-log" id="bLog"></div>
-      `;
-      break;
-
-    case "sync":
-      title.textContent = "Force Sync";
-      content.innerHTML = `
-        <p style="opacity:.7;margin-bottom:1rem">Trigger a full rescan of all repos and update crown_sites.json.</p>
-        <p>This will use GitHub Actions to scan all repos and rebuild the index.</p>
-        <button class="builder-btn builder-btn-primary" onclick="triggerSync()">Trigger Sync Now</button>
-        <button class="builder-btn builder-btn-danger" onclick="closeBuilder()">Cancel</button>
-        <div class="builder-log" id="bLog"></div>
-      `;
-      break;
-
-    case "inspect":
-      title.textContent = "Inspect: " + repo;
-      content.innerHTML = `
-        <p style="opacity:.7;margin-bottom:1rem">View files and structure of the repository.</p>
-        <label>Repository: <input class="builder-input" id="bRepo" value="${repo}"></label>
-        <button class="builder-btn builder-btn-primary" onclick="builderInspect()">Load File List</button>
-        <div class="builder-log" id="bLog" style="min-height:200px"></div>
-      `;
-      break;
-
-    case "batch":
-      title.textContent = "Batch Action";
-      content.innerHTML = `
-        <p style="opacity:.7;margin-bottom:1rem">Run an action across multiple repos at once.</p>
-        <label>Repos (comma-separated or "all"): <input class="builder-input" id="bRepos" value=""></label>
-        <label>Action:
-          <select class="builder-input" id="bAction">
-            <option value="enable-pages">Enable GitHub Pages</option>
-            <option value="check-index">Check index.html exists</option>
-            <option value="add-cross-links">Add cross-links</option>
-          </select>
-        </label>
-        <button class="builder-btn builder-btn-primary" onclick="builderBatch()">Run Batch</button>
-        <button class="builder-btn builder-btn-danger" onclick="closeBuilder()">Cancel</button>
-        <div class="builder-log" id="bLog"></div>
-      `;
-      break;
-  }
-}
-
-function closeBuilder() {
-  $("builderOverlay").classList.remove("active");
-}
-
-function bLog(msg, cls) {
-  const log = $("bLog");
-  if (log) log.innerHTML += `<span class="${cls||'info'}">${msg}</span>\n`;
-}
-
-// Builder: Fetch file from repo
-async function builderFetchFile() {
-  const repo = $("bRepo").value.trim();
-  const path = $("bPath").value.trim() || "index.html";
-  if (!repo) { bLog("No repo specified", "err"); return; }
-
-  bLog(`Fetching ${repo}/${path}...`, "info");
-  try {
-    const r = await fetch(`${API}/repos/${USER}/${repo}/contents/${path}`);
-    if (!r.ok) { bLog(`HTTP ${r.status} - file not found`, "err"); return; }
-    const data = await r.json();
-    const content = atob(data.content);
-    $("bContent").value = content;
-    $("bContent").dataset.sha = data.sha;
-    bLog(`Loaded ${content.length} bytes (SHA: ${data.sha.slice(0,8)})`, "ok");
-  } catch(e) {
-    bLog(`Error: ${e.message}`, "err");
-  }
-}
-
-// Builder: Push file to repo (requires token in localStorage)
-async function builderPushFile() {
-  const repo = $("bRepo").value.trim();
-  const path = $("bPath").value.trim() || "index.html";
-  const content = $("bContent").value;
-  const sha = $("bContent").dataset?.sha;
-
-  if (!repo || !content) { bLog("Need repo and content", "err"); return; }
-
-  const token = localStorage.getItem("gh_token");
-  if (!token) {
-    bLog("No GitHub token found. Set one in localStorage:", "err");
-    bLog('  localStorage.setItem("gh_token", "ghp_YOUR_TOKEN")', "info");
-    return;
+  function renderHubs() {
+    var el = document.getElementById("hubs");
+    el.innerHTML = HUBS.map(function(h) {
+      return '<a class="hub" href="' + BASE + '/' + h.name + '/">' +
+        '<span class="hub-icon">' + h.icon + '</span>' +
+        '<div class="hub-name">' + h.label + '</div>' +
+        '<div class="hub-desc">' + h.desc + '</div></a>';
+    }).join("");
   }
 
-  bLog(`Pushing to ${repo}/${path}...`, "info");
-  try {
-    const payload = {
-      message: `Crown Builder: update ${path}`,
-      content: btoa(unescape(encodeURIComponent(content))),
-    };
-    if (sha) payload.sha = sha;
-
-    const r = await fetch(`${API}/repos/${USER}/${repo}/contents/${path}`, {
-      method: "PUT",
-      headers: {
-        "Authorization": `token ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-    if (r.ok) {
-      bLog(`Successfully pushed ${path} to ${repo}`, "ok");
-    } else {
-      const err = await r.text();
-      bLog(`Push failed: HTTP ${r.status} ${err.slice(0,200)}`, "err");
-    }
-  } catch(e) {
-    bLog(`Error: ${e.message}`, "err");
-  }
-}
-
-// Builder: Inspect repo files
-async function builderInspect() {
-  const repo = $("bRepo").value.trim();
-  if (!repo) { bLog("No repo specified", "err"); return; }
-
-  bLog(`Inspecting ${repo}...`, "info");
-  try {
-    const r = await fetch(`${API}/repos/${USER}/${repo}/contents/`);
-    if (!r.ok) { bLog(`HTTP ${r.status}`, "err"); return; }
-    const files = await r.json();
-    bLog(`\n${files.length} items:`, "ok");
-    for (const f of files) {
-      const icon = f.type === "dir" ? "\uD83D\uDCC1" : "\uD83D\uDCC4";
-      bLog(`  ${icon} ${f.name} ${f.type === "file" ? `(${f.size}B)` : ""}`, "info");
-    }
-  } catch(e) {
-    bLog(`Error: ${e.message}`, "err");
-  }
-}
-
-// Builder: Templates
-function loadTemplate(type) {
-  const repo = $("bRepo").value.trim();
-  const templates = {
-    minimal: `<!DOCTYPE html>\n<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${repo}</title><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a1a;color:#e0e0e0;font-family:system-ui;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:2rem}.card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:3rem;max-width:600px}h1{font-size:2rem;margin-bottom:1rem;background:linear-gradient(90deg,#a78bfa,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}a{color:#a78bfa}</style>
-\n<script src="https://pewpi-infinity.github.io/infinity-crown-index/js/infinity-router.js"></script>\n</head><body><div class="card"><h1>${repo}</h1><p>Part of the <a href="https://${USER}.github.io/infinity-crown-index/">Infinity Ecosystem</a></p></div>
-\n<script defer src="https://pewpi-infinity.github.io/infinity-crown-index/js/infinity-emoji-logic.js"></script>\n</body></html>`,
-
-    spark: `<!DOCTYPE html>\n<html><head><meta charset="utf-8"><title>${repo} - Infinity Spark</title>
-\n<script src="https://pewpi-infinity.github.io/infinity-crown-index/js/infinity-router.js"></script>\n</head><body><h1>${repo}</h1><p>Spark repo</p><a href="https://${USER}.github.io/infinity-crown-index/">Crown Index</a>
-\n<script defer src="https://pewpi-infinity.github.io/infinity-crown-index/js/infinity-emoji-logic.js"></script>\n</body></html>`,
-
-    category: `<!DOCTYPE html>\n<html><head><meta charset="utf-8"><title>${repo} - Infinity Category</title>
-\n<script src="https://pewpi-infinity.github.io/infinity-crown-index/js/infinity-router.js"></script>\n</head><body><h1>${repo}</h1><p>Category repo</p><a href="https://${USER}.github.io/infinity-crown-index/">Crown Index</a>
-\n<script defer src="https://pewpi-infinity.github.io/infinity-crown-index/js/infinity-emoji-logic.js"></script>\n</body></html>`,
-
-    dashboard: `<!DOCTYPE html>\n<html><head><meta charset="utf-8"><title>${repo} Dashboard</title>
-\n<script src="https://pewpi-infinity.github.io/infinity-crown-index/js/infinity-router.js"></script>\n</head><body><h1>${repo} Dashboard</h1><a href="https://${USER}.github.io/infinity-crown-index/">Crown Index</a>
-\n<script defer src="https://pewpi-infinity.github.io/infinity-crown-index/js/infinity-emoji-logic.js"></script>\n</body></html>`,
-  };
-  $("bContent").value = templates[type] || templates.minimal;
-  bLog(`Loaded ${type} template`, "ok");
-}
-
-// Builder: Trigger sync
-async function triggerSync() {
-  const token = localStorage.getItem("gh_token");
-  if (!token) {
-    bLog("No GitHub token. Set: localStorage.setItem('gh_token', 'ghp_...')", "err");
-    return;
-  }
-  bLog("Triggering sync workflow...", "info");
-  try {
-    const r = await fetch(`${API}/repos/${USER}/infinity-crown-index/dispatches`, {
-      method: "POST",
-      headers: {
-        "Authorization": `token ${token}`,
-        "Accept": "application/vnd.github.v3+json",
-      },
-      body: JSON.stringify({ event_type: "sync-crown" }),
-    });
-    if (r.ok || r.status === 204) {
-      bLog("Sync triggered! Will update in a few minutes.", "ok");
-    } else {
-      bLog(`Trigger failed: HTTP ${r.status}`, "err");
-    }
-  } catch(e) {
-    bLog(`Error: ${e.message}`, "err");
-  }
-}
-
-// Builder: Batch action
-async function builderBatch() {
-  const reposInput = $("bRepos").value.trim();
-  const action = $("bAction").value;
-
-  let repos = [];
-  if (reposInput === "all") {
-    repos = crownSites.map(s => s.repo);
-  } else {
-    repos = reposInput.split(",").map(r => r.trim()).filter(Boolean);
-  }
-
-  if (!repos.length) { bLog("No repos specified", "err"); return; }
-  bLog(`Running ${action} on ${repos.length} repos...`, "info");
-
-  for (const repo of repos.slice(0, 20)) {
+  async function loadData() {
     try {
-      if (action === "check-index") {
-        const r = await fetch(`${API}/repos/${USER}/${repo}/contents/index.html`);
-        bLog(`  ${repo}: ${r.ok ? "has index.html" : "NO index.html"}`, r.ok ? "ok" : "err");
-      } else if (action === "enable-pages") {
-        bLog(`  ${repo}: pages enable requires token`, "info");
-      } else {
-        bLog(`  ${repo}: ${action} (preview only)`, "info");
-      }
+      var r = await fetch("data/crown_sites.json", {cache:"no-store"});
+      if (r.ok) sites = await r.json();
     } catch(e) {
-      bLog(`  ${repo}: error - ${e.message}`, "err");
+      console.warn("crown_sites load error:", e);
     }
+    if (!sites.length) {
+      document.getElementById("grid").innerHTML = '<div class="loading">No data — check data/crown_sites.json</div>';
+      return;
+    }
+    renderStats();
+    renderCategories();
+    renderGrid();
   }
-  if (repos.length > 20) bLog(`...and ${repos.length - 20} more`, "info");
-}
 
-// ── Init ──
+  function renderStats() {
+    var total = sites.length;
+    var withPages = sites.filter(function(s){ return s.crowned || s.has_pages; }).length;
+    var cats = {};
+    sites.forEach(function(s){ var c = getCategory(s.repo || s.name || ""); cats[c] = 1; });
+    document.getElementById("stats").innerHTML =
+      stat(total, "Total Repos") +
+      stat(withPages, "Crowned") +
+      stat(Object.keys(cats).length, "Categories") +
+      stat(HUBS.length, "Hub Repos");
+  }
 
-$("q").oninput = render;
-loadAll();
+  function stat(val, label) {
+    return '<div class="stat"><strong>' + val + '</strong><span>' + label + '</span></div>';
+  }
+
+  function getCategory(name) {
+    if (!name) return "other";
+    var n = name.toLowerCase();
+    if (n.startsWith("infinity-spark")) return "spark";
+    if (n.startsWith("infinity-brain")) return "brain";
+    if (n.startsWith("infinity-")) return "infinity";
+    if (n.startsWith("b55-")) return "b55";
+    if (n.startsWith("diodes")) return "diodes";
+    if (n.startsWith("cart_")) return "cart";
+    if (n.indexOf("sim-") >= 0) return "sim";
+    if (n.indexOf("rotation") >= 0) return "rotation";
+    if (n.indexOf("vision") >= 0) return "vision";
+    if (n.indexOf("helium") >= 0) return "helium";
+    return "other";
+  }
+
+  function renderCategories() {
+    var counts = {};
+    sites.forEach(function(s) {
+      var cat = getCategory(s.repo || s.name || "");
+      counts[cat] = (counts[cat] || 0) + 1;
+    });
+    var sorted = Object.entries(counts).sort(function(a,b){ return b[1] - a[1]; });
+    var html = '<button class="cat-btn' + (!activeFilter ? ' on' : '') + '" onclick="window._filter(null)">All (' + sites.length + ')</button>';
+    sorted.forEach(function(pair) {
+      var cat = pair[0], count = pair[1];
+      html += '<button class="cat-btn' + (activeFilter === cat ? ' on' : '') + '" onclick="window._filter(\'' + cat + '\')">' + cat + ' (' + count + ')</button>';
+    });
+    document.getElementById("cats").innerHTML = html;
+  }
+
+  window._filter = function(cat) {
+    activeFilter = activeFilter === cat ? null : cat;
+    renderCategories();
+    renderGrid();
+  };
+
+  function renderGrid() {
+    var query = (document.getElementById("q").value || "").toLowerCase();
+    var filtered = sites.filter(function(s) {
+      var name = (s.repo || s.name || "").toLowerCase();
+      var cat = getCategory(name);
+      var matchQ = !query || name.indexOf(query) >= 0 || cat.indexOf(query) >= 0;
+      var matchCat = !activeFilter || cat === activeFilter;
+      return matchQ && matchCat;
+    });
+
+    document.getElementById("count").textContent = filtered.length + " / " + sites.length + " repos";
+
+    if (!filtered.length) {
+      document.getElementById("grid").innerHTML = '<div class="loading">No matching repos</div>';
+      return;
+    }
+
+    var shown = filtered.slice(0, 200);
+    document.getElementById("grid").innerHTML = shown.map(function(s) {
+      var name = s.repo || s.name || "unknown";
+      var url = s.url || (BASE + "/" + name + "/");
+      var cat = getCategory(name);
+      var crowned = s.crowned ? '<span class="badge on">crowned</span>' : '';
+      return '<div class="card">' +
+        '<div class="card-top"><span class="card-name">' + name + '</span><span class="card-tag">' + cat + '</span></div>' +
+        '<div class="card-url"><a href="' + url + '" target="_blank">' + url + '</a></div>' +
+        '<div class="card-badges">' + crowned +
+        '<a class="badge" href="https://github.com/' + USER + '/' + name + '" target="_blank">GitHub</a> ' +
+        '<a class="badge" href="' + url + '" target="_blank">Visit</a></div></div>';
+    }).join("") + (filtered.length > 200 ? '<div class="loading">Showing 200 of ' + filtered.length + ' — search to narrow</div>' : '');
+  }
+
+  document.getElementById("q").addEventListener("input", renderGrid);
+  renderHubs();
+  loadData();
+})();
 </script>
-
 </body>
 </html>
