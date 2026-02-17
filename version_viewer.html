@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Version Viewer - Infinity Index History</title>
+<style>
+:root {
+  --bg: #0a0e13;
+  --panel: #0f1520;
+  --line: rgba(255,255,255,.1);
+  --text: #e8eef7;
+  --muted: #8a99ab;
+  --accent: #6366f1;
+  --green: #10b981;
+  --orange: #f59e0b;
+  --red: #ef4444;
+  --pink: #ec4899;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Layout */
+.app { display: grid; grid-template-columns: 320px 1fr; grid-template-rows: auto 1fr; height: 100vh; }
+@media (max-width: 768px) {
+  .app { grid-template-columns: 1fr; grid-template-rows: auto auto 1fr; }
+  .sidebar { max-height: 40vh; }
+}
+
+/* Header */
+header {
+  grid-column: 1 / -1;
+  background: rgba(15,21,32,.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  padding: 10px 16px;
+  display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+  z-index: 20;
+}
+.logo { font-weight: 800; font-size: 1rem; white-space: nowrap; }
+.search-box {
+  flex: 1; min-width: 200px;
+  display: flex; gap: 8px; align-items: center;
+  border: 1px solid var(--line); border-radius: 10px;
+  padding: 6px 12px; background: rgba(255,255,255,.03);
+}
+.search-box input {
+  flex: 1; background: none; border: none; outline: none;
+  color: var(--text); font-size: 13px;
+}
+.token-input {
+  width: 260px;
+  border: 1px solid var(--line); border-radius: 10px;
+  padding: 6px 12px; background: rgba(255,255,255,.03);
+  color: var(--text); font-size: 12px;
+}
+.hdr-btn {
+  padding: 6px 12px; border: 1px solid var(--line); border-radius: 8px;
+  background: none; color: var(--text); cursor: pointer; font-size: 12px;
+  white-space: nowrap;
+}
+.hdr-btn:hover { background: rgba(255,255,255,.06); }
+.hdr-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.status { font-size: 11px; color: var(--muted); white-space: nowrap; }
+
+/* Sidebar */
+.sidebar {
+  background: var(--panel);
+  border-right: 1px solid var(--line);
+  overflow-y: auto;
+  padding: 8px;
+}
+.repo-item {
+  padding: 8px 10px; border-radius: 8px;
+  cursor: pointer; font-size: 13px;
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 2px;
+  transition: background .15s;
+}
+.repo-item:hover { background: rgba(255,255,255,.05); }
+.repo-item.active { background: rgba(99,102,241,.2); border-left: 3px solid var(--accent); }
+.repo-name { font-weight: 600; word-break: break-all; }
+.repo-commits { font-size: 11px; color: var(--muted); white-space: nowrap; margin-left: 8px; }
+.repo-type {
+  font-size: 9px; padding: 1px 6px; border-radius: 99px;
+  background: var(--accent); color: #fff; font-weight: 600;
+  white-space: nowrap; margin-left: 6px;
+}
+
+/* Main */
+.main { overflow-y: auto; padding: 16px; }
+
+/* Timeline */
+.timeline { margin-bottom: 20px; }
+.timeline h3 { font-size: 14px; margin-bottom: 10px; color: var(--muted); }
+.commit-list { list-style: none; }
+.commit-item {
+  padding: 10px 14px;
+  border: 1px solid var(--line); border-radius: 10px;
+  margin-bottom: 6px; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  transition: background .15s, border-color .15s;
+  font-size: 13px;
+}
+.commit-item:hover { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.2); }
+.commit-item.active { background: rgba(99,102,241,.15); border-color: var(--accent); }
+.commit-item.current { border-left: 3px solid var(--green); }
+.commit-msg { font-weight: 600; flex: 1; }
+.commit-date { font-size: 11px; color: var(--muted); white-space: nowrap; margin-left: 12px; }
+.commit-sha { font-size: 10px; color: var(--muted); font-family: monospace; margin-left: 8px; }
+.commit-actions { display: flex; gap: 4px; margin-left: 8px; }
+.act-btn {
+  padding: 3px 8px; border: 1px solid var(--line); border-radius: 6px;
+  background: none; color: var(--text); cursor: pointer; font-size: 11px;
+  white-space: nowrap;
+}
+.act-btn:hover { background: rgba(255,255,255,.08); }
+.act-btn.restore { border-color: var(--green); color: var(--green); }
+.act-btn.restore:hover { background: rgba(16,185,129,.15); }
+.act-btn.copy { border-color: var(--orange); color: var(--orange); }
+.act-btn.copy:hover { background: rgba(245,158,11,.15); }
+
+/* Preview */
+.preview-header {
+  display: flex; gap: 10px; align-items: center; margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.preview-header h2 { font-size: 1rem; font-weight: 700; }
+.preview-tabs { display: flex; gap: 4px; }
+.tab {
+  padding: 5px 12px; border: 1px solid var(--line); border-radius: 8px;
+  background: none; color: var(--text); cursor: pointer; font-size: 12px;
+}
+.tab:hover { background: rgba(255,255,255,.06); }
+.tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.preview-frame {
+  border: 1px solid var(--line); border-radius: 12px;
+  overflow: hidden; background: #fff;
+  min-height: 400px;
+}
+.preview-frame iframe {
+  width: 100%; height: 500px; border: none;
+}
+.code-view {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px; overflow-x: auto; font-family: monospace; font-size: 12px;
+  white-space: pre-wrap; word-break: break-all;
+  max-height: 500px; overflow-y: auto;
+  color: var(--muted); line-height: 1.6;
+}
+.diff-view {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px; overflow: auto; font-family: monospace; font-size: 12px;
+  max-height: 500px;
+}
+.diff-add { color: var(--green); }
+.diff-del { color: var(--red); }
+.diff-ctx { color: var(--muted); }
+
+/* Empty state */
+.empty-state {
+  text-align: center; padding: 60px 20px; color: var(--muted);
+}
+.empty-state h2 { font-size: 1.3rem; margin-bottom: 8px; color: var(--text); }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 20px; right: 20px; z-index: 100;
+  background: var(--green); color: #fff;
+  padding: 10px 18px; border-radius: 10px;
+  font-size: 13px; font-weight: 600;
+  transform: translateY(100px); opacity: 0;
+  transition: transform .3s, opacity .3s;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.error { background: var(--red); }
+
+/* Loading */
+.spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid var(--line); border-top-color: var(--accent); border-radius: 50%; animation: spin .6s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Restore modal */
+.modal-bg {
+  position: fixed; inset: 0; background: rgba(0,0,0,.7);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 50; display: none;
+}
+.modal-bg.show { display: flex; }
+.modal {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
+  padding: 24px; max-width: 500px; width: 90%;
+}
+.modal h3 { margin-bottom: 12px; }
+.modal p { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+.modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+.modal-btn {
+  padding: 8px 16px; border: 1px solid var(--line); border-radius: 8px;
+  background: none; color: var(--text); cursor: pointer; font-size: 13px;
+}
+.modal-btn.confirm { background: var(--green); border-color: var(--green); color: #fff; }
+.modal-btn:hover { opacity: .85; }
+.copy-target-input {
+  width: 100%; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px;
+  background: rgba(255,255,255,.05); color: var(--text); font-size: 13px;
+  margin-bottom: 12px;
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <header>
+    <span class="logo">&#x1F4DC; Version Viewer</span>
+    <div class="search-box">
+      <span>&#x1F50D;</span>
+      <input id="search" placeholder="Search repos..." oninput="filterRepos()">
+    </div>
+    <input class="token-input" id="token" type="password" placeholder="GitHub token (paste to enable restore)" oninput="saveToken()">
+    <button class="hdr-btn" onclick="loadAllRepos()">Reload Repos</button>
+    <span class="status" id="status">Ready</span>
+  </header>
+
+  <div class="sidebar" id="sidebar">
+    <div class="empty-state" id="sidebar-empty">
+      <p>Loading repos...</p>
+      <div class="spinner"></div>
+    </div>
+  </div>
+
+  <div class="main" id="main">
+    <div class="empty-state">
+      <h2>&#x1F4DC; Version Viewer</h2>
+      <p>Browse every version of every index.html across your ecosystem.<br>
+      Select a repo from the sidebar to see its commit history.</p>
+      <p style="margin-top:16px;font-size:12px">
+        &#x2022; Click a commit to preview that version<br>
+        &#x2022; Use "Restore" to put an old version back live<br>
+        &#x2022; Use "Copy To" to clone a version to another repo<br>
+        &#x2022; Paste a GitHub token to enable write operations
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Restore Modal -->
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <h3 id="modal-title">Restore Version</h3>
+    <p id="modal-desc">This will overwrite the current index.html with the selected version.</p>
+    <input class="copy-target-input" id="copy-target" placeholder="Target repo name (for Copy To)" style="display:none">
+    <div class="modal-actions">
+      <button class="modal-btn" onclick="closeModal()">Cancel</button>
+      <button class="modal-btn confirm" id="modal-confirm" onclick="confirmAction()">Restore</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const GITHUB_USER = "pewpi-infinity";
+const API = "https://api.github.com";
+const PAGES = (r) => `https://${GITHUB_USER}.github.io/${r}/`;
+
+let allRepos = [];
+let filteredRepos = [];
+let currentRepo = null;
+let commits = [];
+let selectedCommit = null;
+let selectedContent = null;
+let previewMode = "visual"; // visual | code | diff
+let pendingAction = null; // {type: "restore"|"copy", repo, sha, content}
+
+// ── Token ──
+function getToken() { return document.getElementById("token").value || localStorage.getItem("gh_token") || ""; }
+function saveToken() { const t = document.getElementById("token").value; if (t) localStorage.setItem("gh_token", t); }
+function authHeaders() {
+  const t = getToken();
+  const h = { "Accept": "application/vnd.github.v3+json" };
+  if (t) h["Authorization"] = `token ${t}`;
+  return h;
+}
+
+// ── API ──
+async function apiFetch(url) {
+  const resp = await fetch(url, { headers: authHeaders() });
+  if (!resp.ok) throw new Error(`${resp.status}`);
+  return resp.json();
+}
+
+// ── Load Repos ──
+async function loadAllRepos() {
+  setStatus("Loading repos...");
+  try {
+    // Load from crown_sites.json
+    const sites = await fetch(`${PAGES("infinity-crown-index")}data/crown_sites.json`).then(r => r.json());
+    allRepos = sites.map(s => ({ name: s.repo, url: s.url, commits: null }));
+    allRepos.sort((a, b) => a.name.localeCompare(b.name));
+    filteredRepos = [...allRepos];
+    renderSidebar();
+    setStatus(`${allRepos.length} repos loaded`);
+  } catch (e) {
+    // Fallback: use GitHub API
+    try {
+      let repos = [];
+      let page = 1;
+      while (page <= 5) {
+        const data = await apiFetch(`${API}/users/${GITHUB_USER}/repos?per_page=100&page=${page}&sort=updated`);
+        if (data.length === 0) break;
+        repos = repos.concat(data.map(r => ({ name: r.name, url: `https://${GITHUB_USER}.github.io/${r.name}/`, commits: null })));
+        page++;
+      }
+      allRepos = repos.sort((a, b) => a.name.localeCompare(b.name));
+      filteredRepos = [...allRepos];
+      renderSidebar();
+      setStatus(`${allRepos.length} repos loaded (API)`);
+    } catch (e2) {
+      setStatus("Error loading repos");
+    }
+  }
+}
+
+function filterRepos() {
+  const q = document.getElementById("search").value.toLowerCase();
+  filteredRepos = allRepos.filter(r => r.name.toLowerCase().includes(q));
+  renderSidebar();
+}
+
+function renderSidebar() {
+  const sb = document.getElementById("sidebar");
+  if (filteredRepos.length === 0) {
+    sb.innerHTML = '<div class="empty-state"><p>No repos found</p></div>';
+    return;
+  }
+  sb.innerHTML = filteredRepos.map(r => {
+    const active = currentRepo === r.name ? " active" : "";
+    const type = classifyRepo(r.name);
+    return `<div class="repo-item${active}" onclick="selectRepo('${r.name}')">
+      <span class="repo-name">${r.name}</span>
+      <span class="repo-type">${type}</span>
+    </div>`;
+  }).join("");
+}
+
+function classifyRepo(n) {
+  if (/^infinity-brain-\d+/.test(n)) return "brain";
+  if (n.startsWith("infinity-sim-") || n.includes("rotation-sim")) return "sim";
+  if (n.includes("rotation-research")) return "research";
+  if (n.includes("spark-node") || n.includes("spark-nexus")) return "spark";
+  if (n.startsWith("b55-evo-")) return "evo";
+  if (n.startsWith("b55-")) return "b55";
+  if (n.startsWith("vision-index-")) return "vision";
+  if (n.startsWith("c13b0")) return "c13b0";
+  if (n.startsWith("infinity-")) return "infra";
+  if (n.length === 1) return "core";
+  return "other";
+}
+
+// ── Select Repo ──
+async function selectRepo(name) {
+  currentRepo = name;
+  renderSidebar();
+  setStatus(`Loading commits for ${name}...`);
+
+  const main = document.getElementById("main");
+  main.innerHTML = `<div class="empty-state"><div class="spinner"></div><p>Loading commit history for <strong>${name}</strong>...</p></div>`;
+
+  try {
+    // Get commits for index.html
+    const data = await apiFetch(`${API}/repos/${GITHUB_USER}/${name}/commits?path=index.html&per_page=100`);
+    commits = data.map(c => ({
+      sha: c.sha,
+      message: c.commit.message.split("\n")[0],
+      date: c.commit.committer.date,
+      author: c.commit.committer.name
+    }));
+
+    if (commits.length === 0) {
+      // Try without path filter
+      const allCommits = await apiFetch(`${API}/repos/${GITHUB_USER}/${name}/commits?per_page=30`);
+      commits = allCommits.map(c => ({
+        sha: c.sha,
+        message: c.commit.message.split("\n")[0],
+        date: c.commit.committer.date,
+        author: c.commit.committer.name
+      }));
+    }
+
+    selectedCommit = null;
+    selectedContent = null;
+    renderMain();
+    setStatus(`${commits.length} commits for ${name}`);
+  } catch (e) {
+    main.innerHTML = `<div class="empty-state"><h2>Error</h2><p>${e.message}</p></div>`;
+    setStatus("Error loading commits");
+  }
+}
+
+function renderMain() {
+  const main = document.getElementById("main");
+
+  let html = `
+    <div class="timeline">
+      <h3>&#x1F4DC; ${currentRepo} &mdash; ${commits.length} versions</h3>
+      <div style="margin-bottom:12px;display:flex;gap:6px;flex-wrap:wrap">
+        <a class="act-btn" href="https://github.com/${GITHUB_USER}/${currentRepo}" target="_blank">GitHub</a>
+        <a class="act-btn" href="${PAGES(currentRepo)}" target="_blank">Live Site</a>
+        <a class="act-btn" href="https://github.com/${GITHUB_USER}/${currentRepo}/commits/main/index.html" target="_blank">Full History</a>
+      </div>
+      <ul class="commit-list">`;
+
+  commits.forEach((c, i) => {
+    const active = selectedCommit === c.sha ? " active" : "";
+    const current = i === 0 ? " current" : "";
+    const dateStr = new Date(c.date).toLocaleString();
+    const shortSha = c.sha.substring(0, 7);
+
+    html += `<li class="commit-item${active}${current}" onclick="loadVersion('${c.sha}', ${i})">
+      <span class="commit-msg">${i === 0 ? "&#x1F7E2; " : ""}${escHtml(c.message)}</span>
+      <span class="commit-date">${dateStr}</span>
+      <span class="commit-sha">${shortSha}</span>
+      <span class="commit-actions">
+        <button class="act-btn" onclick="event.stopPropagation();loadVersion('${c.sha}', ${i})">View</button>
+        ${i > 0 ? `<button class="act-btn restore" onclick="event.stopPropagation();restoreVersion('${c.sha}', ${i})">Restore</button>` : '<span style="font-size:10px;color:var(--green)">current</span>'}
+        <button class="act-btn copy" onclick="event.stopPropagation();copyToRepo('${c.sha}', ${i})">Copy To</button>
+      </span>
+    </li>`;
+  });
+
+  html += `</ul></div>`;
+
+  // Preview area
+  if (selectedCommit) {
+    html += `
+      <div class="preview-header">
+        <h2>Preview: ${selectedCommit.substring(0, 7)}</h2>
+        <div class="preview-tabs">
+          <button class="tab${previewMode === 'visual' ? ' active' : ''}" onclick="setPreviewMode('visual')">&#x1F441; Visual</button>
+          <button class="tab${previewMode === 'code' ? ' active' : ''}" onclick="setPreviewMode('code')">&#x1F4BB; Code</button>
+          <button class="tab${previewMode === 'diff' ? ' active' : ''}" onclick="setPreviewMode('diff')">&#x1F504; Diff vs Current</button>
+        </div>
+      </div>`;
+
+    if (previewMode === "visual" && selectedContent) {
+      html += `<div class="preview-frame"><iframe id="preview-iframe"></iframe></div>`;
+    } else if (previewMode === "code" && selectedContent) {
+      html += `<div class="code-view">${escHtml(selectedContent)}</div>`;
+    } else if (previewMode === "diff") {
+      html += `<div class="diff-view" id="diff-view">Loading diff...</div>`;
+    } else {
+      html += `<div class="empty-state"><div class="spinner"></div> Loading...</div>`;
+    }
+  }
+
+  main.innerHTML = html;
+
+  // Write to iframe if visual mode
+  if (previewMode === "visual" && selectedContent) {
+    setTimeout(() => {
+      const iframe = document.getElementById("preview-iframe");
+      if (iframe) {
+        const doc = iframe.contentDocument || iframe.contentWindow.document;
+        doc.open();
+        doc.write(selectedContent);
+        doc.close();
+      }
+    }, 50);
+  }
+
+  // Load diff if diff mode
+  if (previewMode === "diff" && selectedContent && commits.length > 0) {
+    loadDiff();
+  }
+}
+
+async function loadVersion(sha, index) {
+  selectedCommit = sha;
+  setStatus(`Loading version ${sha.substring(0, 7)}...`);
+
+  try {
+    // Get file content at this commit
+    const data = await apiFetch(`${API}/repos/${GITHUB_USER}/${currentRepo}/contents/index.html?ref=${sha}`);
+    selectedContent = atob(data.content.replace(/\n/g, ""));
+    previewMode = "visual";
+    renderMain();
+    setStatus(`Viewing ${sha.substring(0, 7)}`);
+  } catch (e) {
+    // Try getting raw commit
+    try {
+      const commit = await apiFetch(`${API}/repos/${GITHUB_USER}/${currentRepo}/git/commits/${sha}`);
+      const tree = await apiFetch(commit.tree.url + "?recursive=1");
+      const indexFile = tree.tree.find(f => f.path === "index.html");
+      if (indexFile) {
+        const blob = await apiFetch(`${API}/repos/${GITHUB_USER}/${currentRepo}/git/blobs/${indexFile.sha}`);
+        selectedContent = atob(blob.content.replace(/\n/g, ""));
+        previewMode = "visual";
+        renderMain();
+        setStatus(`Viewing ${sha.substring(0, 7)}`);
+      } else {
+        setStatus("index.html not found at this commit");
+      }
+    } catch (e2) {
+      setStatus(`Error: ${e2.message}`);
+    }
+  }
+}
+
+// ── Diff ──
+async function loadDiff() {
+  if (!selectedContent || commits.length === 0) return;
+
+  try {
+    // Get current version
+    const data = await apiFetch(`${API}/repos/${GITHUB_USER}/${currentRepo}/contents/index.html?ref=${commits[0].sha}`);
+    const currentContent = atob(data.content.replace(/\n/g, ""));
+
+    const diffHtml = simpleDiff(currentContent, selectedContent);
+    const el = document.getElementById("diff-view");
+    if (el) el.innerHTML = diffHtml;
+  } catch (e) {
+    const el = document.getElementById("diff-view");
+    if (el) el.innerHTML = `<span class="diff-ctx">Could not load diff: ${e.message}</span>`;
+  }
+}
+
+function simpleDiff(current, old) {
+  const curLines = current.split("\n");
+  const oldLines = old.split("\n");
+  let html = '<div style="margin-bottom:8px;font-size:11px;color:var(--muted)">Green = in selected version | Red = in current version only</div>';
+
+  const maxLen = Math.max(curLines.length, oldLines.length);
+  for (let i = 0; i < maxLen; i++) {
+    const cl = curLines[i] || "";
+    const ol = oldLines[i] || "";
+
+    if (cl === ol) {
+      html += `<div class="diff-ctx">${escHtml(cl)}</div>`;
+    } else {
+      if (ol) html += `<div class="diff-add">+ ${escHtml(ol)}</div>`;
+      if (cl) html += `<div class="diff-del">- ${escHtml(cl)}</div>`;
+    }
+  }
+  return html;
+}
+
+// ── Restore ──
+function restoreVersion(sha, index) {
+  if (!getToken()) {
+    toast("Paste your GitHub token first to enable restore", true);
+    return;
+  }
+  pendingAction = { type: "restore", repo: currentRepo, sha, index };
+  document.getElementById("modal-title").textContent = "Restore Version";
+  document.getElementById("modal-desc").textContent =
+    `This will restore ${currentRepo}/index.html to version ${sha.substring(0, 7)} (${new Date(commits[index].date).toLocaleString()}). The current version will become a previous commit (not lost).`;
+  document.getElementById("copy-target").style.display = "none";
+  document.getElementById("modal-confirm").textContent = "Restore";
+  document.getElementById("modal").classList.add("show");
+}
+
+function copyToRepo(sha, index) {
+  if (!getToken()) {
+    toast("Paste your GitHub token first to enable copy", true);
+    return;
+  }
+  pendingAction = { type: "copy", repo: currentRepo, sha, index };
+  document.getElementById("modal-title").textContent = "Copy Version To Another Repo";
+  document.getElementById("modal-desc").textContent =
+    `Copy this version of index.html to another repo. Enter the target repo name below.`;
+  document.getElementById("copy-target").style.display = "block";
+  document.getElementById("copy-target").value = "";
+  document.getElementById("modal-confirm").textContent = "Copy";
+  document.getElementById("modal").classList.add("show");
+}
+
+function closeModal() {
+  document.getElementById("modal").classList.remove("show");
+  pendingAction = null;
+}
+
+async function confirmAction() {
+  if (!pendingAction) return;
+  closeModal();
+
+  const { type, repo, sha, index } = pendingAction;
+
+  setStatus(`${type === "restore" ? "Restoring" : "Copying"}...`);
+
+  try {
+    // Get content at that sha
+    const data = await apiFetch(`${API}/repos/${GITHUB_USER}/${repo}/contents/index.html?ref=${sha}`);
+    const content = data.content; // already base64
+
+    const targetRepo = type === "copy" ? document.getElementById("copy-target").value.trim() : repo;
+    if (!targetRepo) { toast("No target repo specified", true); return; }
+
+    // Get current sha of target's index.html
+    let targetSha = null;
+    try {
+      const existing = await apiFetch(`${API}/repos/${GITHUB_USER}/${targetRepo}/contents/index.html`);
+      targetSha = existing.sha;
+    } catch (e) { /* no existing file */ }
+
+    // Push
+    const payload = {
+      message: type === "restore"
+        ? `Restore index.html to version ${sha.substring(0, 7)}`
+        : `Copy index.html from ${repo}@${sha.substring(0, 7)}`,
+      content: content.replace(/\n/g, ""),
+      branch: "main"
+    };
+    if (targetSha) payload.sha = targetSha;
+
+    const resp = await fetch(`${API}/repos/${GITHUB_USER}/${targetRepo}/contents/index.html`, {
+      method: "PUT",
+      headers: { ...authHeaders(), "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (resp.ok) {
+      toast(`${type === "restore" ? "Restored" : "Copied to " + targetRepo} successfully!`);
+      if (type === "restore") {
+        // Reload commits
+        await selectRepo(currentRepo);
+      }
+    } else {
+      const err = await resp.json();
+      toast(`Error: ${err.message || resp.status}`, true);
+    }
+  } catch (e) {
+    toast(`Error: ${e.message}`, true);
+  }
+
+  setStatus("Ready");
+}
+
+// ── Preview Mode ──
+function setPreviewMode(mode) {
+  previewMode = mode;
+  renderMain();
+}
+
+// ── Helpers ──
+function setStatus(msg) { document.getElementById("status").textContent = msg; }
+
+function escHtml(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+function toast(msg, isError) {
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.className = "toast show" + (isError ? " error" : "");
+  setTimeout(() => el.className = "toast", 3000);
+}
+
+// ── Init ──
+// Load token from localStorage
+const savedToken = localStorage.getItem("gh_token");
+if (savedToken) document.getElementById("token").value = savedToken;
+
+loadAllRepos();
+</script>
+</body>
+</html>
