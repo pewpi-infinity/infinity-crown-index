@@ -25,10 +25,14 @@
     "DJVertigo-token": {icon:"🦾",label:"DJV"}
   };
 
+  // Skip on hub pages that have their own navigation
+  const SKIP_REPOS = ["infinity-crown-index","infinity-master-hub"];
+
   // Build router UI
   function init() {
-    // Don't double-init
+    // Don't double-init or init on hub pages
     if (document.getElementById("infinity-router")) return;
+    if (SKIP_REPOS.includes(REPO)) return;
 
     const nav = document.createElement("div");
     nav.id = "infinity-router";
