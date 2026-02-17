@@ -621,13 +621,21 @@ async function builderInspect() {
 function loadTemplate(type) {
   const repo = $("bRepo").value.trim();
   const templates = {
-    minimal: `<!DOCTYPE html>\n<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${repo}</title><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a1a;color:#e0e0e0;font-family:system-ui;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:2rem}.card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:3rem;max-width:600px}h1{font-size:2rem;margin-bottom:1rem;background:linear-gradient(90deg,#a78bfa,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}a{color:#a78bfa}</style></head><body><div class="card"><h1>${repo}</h1><p>Part of the <a href="https://${USER}.github.io/infinity-crown-index/">Infinity Ecosystem</a></p></div></body></html>`,
+    minimal: `<!DOCTYPE html>\n<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${repo}</title><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a1a;color:#e0e0e0;font-family:system-ui;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:2rem}.card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:3rem;max-width:600px}h1{font-size:2rem;margin-bottom:1rem;background:linear-gradient(90deg,#a78bfa,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}a{color:#a78bfa}</style></head><body><div class="card"><h1>${repo}</h1><p>Part of the <a href="https://${USER}.github.io/infinity-crown-index/">Infinity Ecosystem</a></p></div>
+<script defer src="https://pewpi-infinity.github.io/infinity-crown-index/js/infinity-emoji-logic.js"></script>
+</body></html>`,
 
-    spark: `<!DOCTYPE html>\n<html><head><meta charset="utf-8"><title>${repo} - Infinity Spark</title></head><body><h1>${repo}</h1><p>Spark repo</p><a href="https://${USER}.github.io/infinity-crown-index/">Crown Index</a></body></html>`,
+    spark: `<!DOCTYPE html>\n<html><head><meta charset="utf-8"><title>${repo} - Infinity Spark</title></head><body><h1>${repo}</h1><p>Spark repo</p><a href="https://${USER}.github.io/infinity-crown-index/">Crown Index</a>
+<script defer src="https://pewpi-infinity.github.io/infinity-crown-index/js/infinity-emoji-logic.js"></script>
+</body></html>`,
 
-    category: `<!DOCTYPE html>\n<html><head><meta charset="utf-8"><title>${repo} - Infinity Category</title></head><body><h1>${repo}</h1><p>Category repo</p><a href="https://${USER}.github.io/infinity-crown-index/">Crown Index</a></body></html>`,
+    category: `<!DOCTYPE html>\n<html><head><meta charset="utf-8"><title>${repo} - Infinity Category</title></head><body><h1>${repo}</h1><p>Category repo</p><a href="https://${USER}.github.io/infinity-crown-index/">Crown Index</a>
+<script defer src="https://pewpi-infinity.github.io/infinity-crown-index/js/infinity-emoji-logic.js"></script>
+</body></html>`,
 
-    dashboard: `<!DOCTYPE html>\n<html><head><meta charset="utf-8"><title>${repo} Dashboard</title></head><body><h1>${repo} Dashboard</h1><a href="https://${USER}.github.io/infinity-crown-index/">Crown Index</a></body></html>`,
+    dashboard: `<!DOCTYPE html>\n<html><head><meta charset="utf-8"><title>${repo} Dashboard</title></head><body><h1>${repo} Dashboard</h1><a href="https://${USER}.github.io/infinity-crown-index/">Crown Index</a>
+<script defer src="https://pewpi-infinity.github.io/infinity-crown-index/js/infinity-emoji-logic.js"></script>
+</body></html>`,
   };
   $("bContent").value = templates[type] || templates.minimal;
   bLog(`Loaded ${type} template`, "ok");
@@ -697,5 +705,7 @@ async function builderBatch() {
 $("q").oninput = render;
 loadAll();
 </script>
+
+<script defer src="https://pewpi-infinity.github.io/infinity-crown-index/js/infinity-emoji-logic.js"></script>
 </body>
 </html>
