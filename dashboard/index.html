@@ -14,7 +14,7 @@
       background: rgba(16,185,129,.08); border: 1px solid #10b981; border-radius: 12px;
     }
     .dash-stats {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
       gap: 1rem; margin: 1.5rem 0;
     }
     .dash-stat {
@@ -30,6 +30,41 @@
     }
     .chart-box h3 { font-size: .9rem; margin-bottom: .8rem; color: #a78bfa; }
     canvas { max-height: 280px; }
+    .section { margin: 1.5rem 0; }
+    .section h3 { font-size: .95rem; margin-bottom: .8rem; color: #a78bfa; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+    .module-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 8px;
+    }
+    .mod-card {
+      background: rgba(0,0,0,.2); border: 1px solid var(--line);
+      border-radius: 10px; padding: 10px 14px; font-size: .85rem;
+    }
+    .mod-card strong { color: #06b6d4; display: block; margin-bottom: 4px; }
+    .mod-card span { color: var(--muted); font-size: .78rem; }
+    .mod-card a { color: #06b6d4; text-decoration: none; }
+    .mod-card a:hover { text-decoration: underline; }
+    .chapter-list { list-style: none; padding: 0; }
+    .chapter-list li {
+      padding: 8px 14px; border: 1px solid var(--line); border-radius: 8px;
+      margin-bottom: 6px; display: flex; justify-content: space-between;
+      align-items: center; background: rgba(0,0,0,.15); font-size: .85rem;
+    }
+    .chapter-list .tag {
+      font-size: 10px; padding: 2px 8px; border-radius: 99px;
+      font-weight: 600; color: #fff;
+    }
+    .tag-deployed { background: #10b981; }
+    .tag-planned { background: #6b7280; }
+    .machine-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 6px;
+    }
+    .machine-card {
+      background: rgba(99,102,241,.06); border: 1px solid rgba(99,102,241,.2);
+      border-radius: 8px; padding: 8px 12px; text-align: center; font-size: .8rem;
+    }
+    .machine-card strong { display: block; color: #8b5cf6; font-size: 1.1rem; }
     .top-repos { margin: 1.5rem 0; }
     .top-repos h3 { font-size: .9rem; margin-bottom: .8rem; color: #a78bfa; }
     .top-repos table { width: 100%; border-collapse: collapse; font-size: .85rem; }
@@ -41,19 +76,32 @@
       background: rgba(239,68,68,.08); border: 1px solid #ef4444;
       padding: 1rem; border-radius: 12px; text-align: center;
     }
+    .nav-links { text-align: center; margin: 1rem 0; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .nav-links a {
+      padding: 6px 14px; border: 1px solid var(--line); border-radius: 8px;
+      color: var(--text); font-size: .8rem; text-decoration: none;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,.06); }
     @media (max-width: 600px) { .charts { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
   <h1>Infinity Crown Dashboard</h1>
 
-  <div style="text-align:center; margin-bottom:1rem;">
-    <a href="../">&larr; Back to Crown Index</a>
+  <div class="nav-links">
+    <a href="../">&larr; Crown Index</a>
+    <a href="../version_viewer.html">Version Viewer</a>
+    <a href="https://pewpi-infinity.github.io/infinity-wearable-manifesto/">C13B0 Engine</a>
+    <a href="https://pewpi-infinity.github.io/infinity-manifesto/">Manifesto</a>
+    <a href="https://pewpi-infinity.github.io/infinity-mega-labs/">Mega Labs</a>
   </div>
 
   <div id="status" class="status">Loading data...</div>
   <div id="stats" class="dash-stats"></div>
   <div id="charts" class="charts"></div>
+  <div id="manifesto-section" class="section"></div>
+  <div id="sims-section" class="section"></div>
+  <div id="machines-section" class="section"></div>
   <div id="top-repos" class="top-repos"></div>
 
   <script>
@@ -71,24 +119,27 @@
         const dict = dictRes.status === "fulfilled" ? dictRes.value : {};
 
         // Status
-        const ts = data.timestamp ? new Date(data.timestamp).toLocaleString() : "Unknown";
-        document.getElementById("status").innerHTML = "System Online &mdash; Last update: " + ts;
-
-        // Stats (use overview sub-object which matches actual schema)
         const ov = data.overview || {};
+        const ts = ov.last_sync || data.timestamp || "Unknown";
+        document.getElementById("status").innerHTML = "System Online &mdash; Last sync: " + ts;
+
+        // Stats
         const totalRepos = ov.total_repos || data.total_repos || 0;
         const totalWords = ov.total_words || dict.total_unique_words || 0;
         const emptyRepos = ov.empty_repos || 0;
         const richRepos = ov.rich_repos || 0;
-        const categorized = Object.values(data.categories || {}).reduce((a, b) => a + b, 0);
+        const chapters = ov.manifesto_chapters || 0;
+        const sims = ov.simulation_modules || 0;
 
         document.getElementById("stats").innerHTML = [
           dashStat(totalRepos, "Total Repos"),
-          dashStat(categorized, "Categorized"),
-          dashStat(Object.keys(data.categories || {}).length, "Categories"),
-          dashStat(totalWords, "Unique Words"),
           dashStat(richRepos, "Content-Rich"),
-          dashStat(emptyRepos, "Empty")
+          dashStat(chapters, "Chapters"),
+          dashStat(sims, "Simulations"),
+          dashStat(ov.node_types || 4, "Node Types"),
+          dashStat(emptyRepos, "Empty"),
+          dashStat(Object.keys(data.categories || {}).length, "Categories"),
+          dashStat(ov.pages_enabled || 0, "Pages On")
         ].join("");
 
         // Charts
@@ -100,7 +151,6 @@
           <div class="chart-box"><h3>Content Density</h3><canvas id="densChart"></canvas></div>
         `;
 
-        // Destroy previous instances to prevent leaks
         if (categoryChart) categoryChart.destroy();
         if (densityChart) densityChart.destroy();
 
@@ -133,6 +183,54 @@
             }
           }
         });
+
+        // Manifesto Chapters
+        const mChapters = (data.manifesto || {}).chapters || [];
+        if (mChapters.length) {
+          const user = "pewpi-infinity";
+          document.getElementById("manifesto-section").innerHTML = `
+            <h3>Ion Manifesto Chapters</h3>
+            <ul class="chapter-list">
+              ${mChapters.map(ch => `
+                <li>
+                  <a href="https://${user}.github.io/${ch.repo}/" style="color:var(--text);text-decoration:none">${ch.name}</a>
+                  <span class="tag tag-${ch.status}">${ch.status}</span>
+                </li>
+              `).join("")}
+            </ul>
+          `;
+        }
+
+        // Simulation Modules
+        const simMods = (data.simulations || {}).modules || [];
+        if (simMods.length) {
+          const simRepo = (data.simulations || {}).repo || "infinity-wearable-manifesto";
+          document.getElementById("sims-section").innerHTML = `
+            <h3>C13B0 Simulation Modules (${simMods.length})</h3>
+            <div class="module-grid">
+              ${simMods.map(s => `
+                <div class="mod-card">
+                  <strong>${s.id !== "core" ? "Module " + s.id : "Core"}: ${s.name}</strong>
+                  <span><a href="https://github.com/pewpi-infinity/${simRepo}/blob/main/simulations/${s.file}">${s.file}</a></span>
+                </div>
+              `).join("")}
+            </div>
+          `;
+        }
+
+        // Machine Types
+        const machines = data.machine_types || {};
+        if (Object.keys(machines).length) {
+          const sorted = Object.entries(machines).sort((a, b) => b[1] - a[1]);
+          document.getElementById("machines-section").innerHTML = `
+            <h3>Machine Type Distribution (${sorted.reduce((a, b) => a + b[1], 0)} repos)</h3>
+            <div class="machine-grid">
+              ${sorted.map(([name, count]) => `
+                <div class="machine-card"><strong>${count}</strong>${name}</div>
+              `).join("")}
+            </div>
+          `;
+        }
 
         // Top repos table
         const topRepos = data.top_content_repos || (dict.rich_repos || []).slice(0, 15);
