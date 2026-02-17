@@ -1,0 +1,75 @@
+{
+  "infinity_research_network": {
+    "mongoose.os": {
+      "role": "Research Database",
+      "connects_to": [
+        "smug_look",
+        "infinity-crown-index",
+        "infinity-spark-engine"
+      ],
+      "topics": [
+        "aluminum-oxide",
+        "piezoelectric",
+        "bio-energy",
+        "atomic-architecture"
+      ]
+    },
+    "smug_look": {
+      "role": "C13B0 System Hub",
+      "connects_to": [
+        "mongoose.os",
+        "infinity-crown-index",
+        "repo-dashboard-hub"
+      ],
+      "topics": [
+        "c13b0",
+        "wave-archive",
+        "quantum-transport",
+        "token-system"
+      ]
+    },
+    "infinity-crown-index": {
+      "role": "Master Index",
+      "connects_to": [
+        "smug_look",
+        "mongoose.os",
+        "infinity-crown-hub"
+      ],
+      "topics": [
+        "ecosystem-map",
+        "dictionary",
+        "analytics",
+        "builder"
+      ]
+    },
+    "infinity-crown-hub": {
+      "role": "Progress Dashboard",
+      "connects_to": [
+        "infinity-crown-index",
+        "smug_look"
+      ],
+      "topics": [
+        "build-progress",
+        "deployment-status"
+      ]
+    },
+    "repo-dashboard-hub": {
+      "role": "Repository Dashboard",
+      "connects_to": [
+        "infinity-crown-index",
+        "smug_look"
+      ],
+      "topics": [
+        "repo-analytics",
+        "quantum-radio",
+        "search"
+      ]
+    }
+  },
+  "c13b0_atomic_architecture": {
+    "wave_archive": "Linking Bio-Energy Transfer to Photonic Memory",
+    "oxide_brain": "Aluminum Oxide neural network programming",
+    "bismuth_bounce": "Cross-repo data/memory passing via signal chain",
+    "inverse_scatter": "Ambient noise to usable intel decoder"
+  }
+}
