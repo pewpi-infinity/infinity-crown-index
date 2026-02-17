@@ -69,6 +69,11 @@
   };
 
   // ══ Build the toolbar ══
+  // Skip on pages that have their own toolbar/UI
+  const SKIP_PAGES = ["infinity-crown-index","infinity-master-hub","repo-dashboard-hub"];
+  const currentRepo = location.pathname.split("/").filter(Boolean)[0] || "";
+  if (SKIP_PAGES.includes(currentRepo)) return;
+
   function buildToolbar() {
     const bar = document.createElement('div');
     bar.id = 'infinity-forge-bar';
