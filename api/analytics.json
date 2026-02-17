@@ -1,62 +1,11 @@
 {
   "overview": {
-    "total_repos": 958,
-    "pages_enabled": 865,
-    "empty_repos": 252,
+    "total_repos": 980,
+    "pages_enabled": 888,
+    "empty_repos": 0,
     "rich_repos": 90,
-    "manifesto_chapters": 7,
-    "simulation_modules": 10,
-    "node_types": 4,
     "total_words": 0,
-    "last_sync": "20260217_052000"
+    "last_sync": "20260217_121709"
   },
-  "categories": {
-    "engineer": 146,
-    "ceo": 23,
-    "import": 3,
-    "investigate": 193,
-    "routes": 19,
-    "data": 574
-  },
-  "manifesto": {
-    "chapters": [
-      {"name": "Electrostatics", "repo": "infinity-manifesto", "status": "deployed"},
-      {"name": "Fermi Layer", "repo": "infinity-energy", "status": "deployed"},
-      {"name": "Electrochemistry", "repo": "infinity-currency", "status": "planned"},
-      {"name": "Ion Transport", "repo": "infinity-dynamics", "status": "planned"},
-      {"name": "Ion Gradients", "repo": "infinity-memory", "status": "planned"},
-      {"name": "Maxwell Unification", "repo": "infinity-quantum-lighting", "status": "planned"},
-      {"name": "Metamaterials", "repo": "vision-index-20260212_190124", "status": "deployed"}
-    ]
-  },
-  "simulations": {
-    "repo": "infinity-wearable-manifesto",
-    "modules": [
-      {"id": "A", "name": "Maxwell Fields", "file": "maxwell_field_sim.py"},
-      {"id": "B", "name": "Thermal Safety", "file": "thermal_safety_sim.py"},
-      {"id": "C", "name": "Memory Map", "file": "memory_map_sim.py"},
-      {"id": "D", "name": "Power Density", "file": "power_density_sim.py"},
-      {"id": "E", "name": "Metamaterial Rectenna", "file": "metamaterial_rectenna_sim.py"},
-      {"id": "F", "name": "Spark Gap Bio", "file": "spark_gap_bio_sim.py"},
-      {"id": "core", "name": "Ion Flux", "file": "ion_flux_sim.py"},
-      {"id": "core", "name": "Fermi Energy", "file": "fermi_energy_sim.py"},
-      {"id": "core", "name": "Lattice Energy", "file": "lattice_energy_sim.py"},
-      {"id": "core", "name": "Thermoelectric", "file": "thermoelectric_model.py"}
-    ]
-  },
-  "machine_types": {
-    "brain": 110,
-    "b55": 102,
-    "spark-node": 73,
-    "sim": 65,
-    "vision": 48,
-    "rotation-sim": 21,
-    "rotation-research": 13,
-    "b55-evo": 12,
-    "infinity-infra": 90,
-    "c13b0": 4,
-    "spark-nexus": 2,
-    "imsmsi": 2,
-    "misc": 16
-  }
+  "categories": {}
 }
