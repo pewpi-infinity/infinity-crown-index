@@ -1,8 +1,4147 @@
 {
-  "timestamp": "2026-02-15T20:00:15.119818+00:00",
-  "total_repos": 0,
-  "total_unique_words": 0,
-  "top_words": {},
-  "empty_repos": [],
-  "rich_repos": []
+  "infinity": {
+    "count": 771,
+    "repos": [
+      "cart_c13b0_full_infinity_trump_coin__20251221_071546",
+      "cart_c13b0_infinity_science_matrix__20251221_071546",
+      "cart_infinity_engine__20251221_071546",
+      "cart_infinity_forever__20251221_071546",
+      "cart_infinity_restart_all__20251221_071546",
+      "ezekiel_infinity_scroll_miner_v3_1__20251221_071546",
+      "ezekiel_infinity_scroll_miner_v3__20251221_071546",
+      "ezekiel_infinity_scroll_miner_v4__20251221_071546",
+      "ezekiel_infinity_scroll_miner__20251221_071546",
+      "Infinity-"
+    ],
+    "category": "name"
+  },
+  "brain": {
+    "count": 224,
+    "repos": [
+      "infinity-brain-001",
+      "infinity-brain-002",
+      "infinity-brain-003",
+      "infinity-brain-004",
+      "infinity-brain-005",
+      "infinity-brain-006",
+      "infinity-brain-007",
+      "infinity-brain-008",
+      "infinity-brain-009",
+      "infinity-brain-010"
+    ],
+    "category": "name"
+  },
+  "node": {
+    "count": 187,
+    "repos": [
+      "c13b0-node-20251227-095416",
+      "c13b0-node-20251227-101721",
+      "infinity-brain-001",
+      "infinity-brain-002",
+      "infinity-brain-003",
+      "infinity-spark-node",
+      "infinity-spark-node-20260201_024747",
+      "infinity-spark-node-20260201_024844",
+      "infinity-spark-node-20260201_024941",
+      "infinity-spark-node-20260201_025039"
+    ],
+    "category": "name"
+  },
+  "spark": {
+    "count": 127,
+    "repos": [
+      "infinity-spark",
+      "infinity-spark-archive",
+      "infinity-spark-arena",
+      "infinity-spark-array",
+      "infinity-spark-atlas",
+      "infinity-spark-axis",
+      "infinity-spark-beacon",
+      "infinity-spark-bridge",
+      "infinity-spark-builder",
+      "infinity-spark-compiler"
+    ],
+    "category": "name"
+  },
+  "b55": {
+    "count": 114,
+    "repos": [
+      "b55-20260114_235619",
+      "b55-20260114_235639",
+      "b55-20260115_042720",
+      "b55-20260115_042731",
+      "b55-20260115_042739",
+      "b55-20260115_042744",
+      "b55-20260115_045911",
+      "b55-20260115_045916",
+      "b55-20260115_045920",
+      "b55-20260115_045924"
+    ],
+    "category": "name"
+  },
+  "distributed": {
+    "count": 100,
+    "repos": [
+      "infinity-brain-001",
+      "infinity-brain-002",
+      "infinity-brain-003",
+      "infinity-brain-004",
+      "infinity-brain-005"
+    ],
+    "category": "description"
+  },
+  "sim": {
+    "count": 86,
+    "repos": [
+      "infinity-rotation-sim-20260115_225428",
+      "infinity-rotation-sim-20260116_005729",
+      "infinity-rotation-sim-20260116_105311",
+      "infinity-rotation-sim-20260116_235841",
+      "infinity-rotation-sim-20260118_193117",
+      "infinity-rotation-sim-20260119_044453",
+      "infinity-rotation-sim-20260119_083944",
+      "infinity-rotation-sim-20260119_085743",
+      "infinity-rotation-sim-20260121_185907",
+      "infinity-rotation-sim-20260121_190021"
+    ],
+    "category": "name"
+  },
+  "c13b0": {
+    "count": 85,
+    "repos": [
+      "build_c13b0_squared_disk__20251221_071546",
+      "c13b0-auth-scan",
+      "c13b0-cube-003",
+      "c13b0-genesis",
+      "c13b0-node-20251227-095416",
+      "c13b0-node-20251227-101721",
+      "c13b0-site-20251227-204454",
+      "c13b0_.c13b0_tmp_c13b0_item_001_index_index",
+      "c13b0_.c13b0_tmp_c13b0_item_001_index_index",
+      "c13b0_.c13b0_tmp_c13b0_item_001_index_index"
+    ],
+    "category": "name"
+  },
+  "crown": {
+    "count": 84,
+    "repos": [
+      "infinity-architecture",
+      "infinity-assimilation",
+      "infinity-audit",
+      "infinity-banking",
+      "infinity-belt",
+      "infinity-crown-hub",
+      "infinity-crown-index"
+    ],
+    "category": "description"
+  },
+  "system": {
+    "count": 83,
+    "repos": [
+      "infinity-architecture",
+      "infinity-assimilation",
+      "infinity-audit",
+      "infinity-banking",
+      "infinity-belt"
+    ],
+    "category": "description"
+  },
+  "part": {
+    "count": 82,
+    "repos": [
+      "infinity-architecture",
+      "infinity-assimilation",
+      "infinity-audit",
+      "infinity-banking",
+      "infinity-belt"
+    ],
+    "category": "description"
+  },
+  "cart": {
+    "count": 81,
+    "repos": [
+      "c13b0_c13b0_cart_item_001_20251223_085814_index",
+      "c13b0_cart_001_pewpi_login_20251221_082500",
+      "c13b0_cart_001_pewpi_login_20251221_082812",
+      "c13b0_cart_002_self_tokenizing_core_20251221_082845",
+      "c13b0_cart_003_intent_to_piece_20251221_083020",
+      "c13b0_cart_003_intent_to_piece_20251221_083218",
+      "c13b0_cart_005_voice_to_intent_20251221_083551",
+      "c13b0_cart_005_voice_to_intent_20251221_084529",
+      "c13b0_cart_007_permission_gate_20251221_085224",
+      "c13b0_cart_008_ecosystem_overlay_20251221_090211"
+    ],
+    "category": "name"
+  },
+  "quantum": {
+    "count": 78,
+    "repos": [
+      "cart_c13b0_quantum_ledger__20251221_071546",
+      "cart_c13b0_quantum_visualizer__20251221_071546",
+      "diodes_quantum",
+      "diodes_quantum_helium",
+      "diodes_quantum_transport",
+      "diodes_quantum_vectors",
+      "electron_tunneling_quantum",
+      "electron_tunneling_quantum_helium",
+      "electron_tunneling_quantum_transport",
+      "electron_tunneling_quantum_vectors"
+    ],
+    "category": "name"
+  },
+  "helium": {
+    "count": 73,
+    "repos": [
+      "diodes_helium",
+      "diodes_helium_diodes",
+      "diodes_quantum_helium",
+      "diodes_superfluid_helium",
+      "electron_tunneling_helium",
+      "electron_tunneling_helium_diodes",
+      "electron_tunneling_quantum_helium",
+      "electron_tunneling_superfluid_helium",
+      "helium",
+      "helium_diodes"
+    ],
+    "category": "name"
+  },
+  "index": {
+    "count": 66,
+    "repos": [
+      "-Comet-Delta-Noble-",
+      "c13b0_.c13b0_tmp_c13b0_item_001_index_index",
+      "c13b0_.c13b0_tmp_c13b0_item_001_index_index",
+      "c13b0_c13b0_cart_item_001_20251223_085814_index",
+      "c13b0_cart_009_master_index_aggregator_20251221_090650",
+      "c13b0_cart_009_master_index_aggregator_20251221_090750",
+      "c13b0_cart_009_master_index_aggregator_20251221_091115",
+      "c13b0_item_001_index",
+      "cart_c13b0_index_paypal_mario_sweep__20251221_071546",
+      "cart_c13b0_index_synth__20251221_071546"
+    ],
+    "category": "description"
+  },
+  "diodes": {
+    "count": 54,
+    "repos": [
+      "diodes_electron_tunneling",
+      "diodes_helium",
+      "diodes_helium_diodes",
+      "diodes_helium_diodes",
+      "diodes_quantum",
+      "diodes_quantum_helium",
+      "diodes_quantum_transport",
+      "diodes_quantum_vectors",
+      "diodes_silver_diodes",
+      "diodes_silver_diodes"
+    ],
+    "category": "name"
+  },
+  "vision": {
+    "count": 49,
+    "repos": [
+      "infinity-spark-vision",
+      "vision-index-20260115_052433",
+      "vision-index-20260115_052500",
+      "vision-index-20260115_052542",
+      "vision-index-20260115_052547",
+      "vision-index-20260115_052551",
+      "vision-index-20260115_052559",
+      "vision-index-20260115_052604",
+      "vision-index-20260115_052609",
+      "vision-index-20260115_052617"
+    ],
+    "category": "name"
+  },
+  "research": {
+    "count": 34,
+    "repos": [
+      "cart906_push_research_batches__20251221_071546",
+      "cart_c13b0_full_research_writer__20251221_071546",
+      "infinity-research-engine",
+      "infinity-rotation-research-20260119_072126",
+      "infinity-rotation-research-20260119_083719",
+      "infinity-rotation-research-20260119_083935",
+      "infinity-rotation-research-20260121_185839",
+      "infinity-rotation-research-20260122_001908",
+      "infinity-rotation-research-20260122_234400",
+      "infinity-rotation-research-20260129_023909"
+    ],
+    "category": "name"
+  },
+  "rotation": {
+    "count": 34,
+    "repos": [
+      "infinity-rotation-research-20260119_072126",
+      "infinity-rotation-research-20260119_083719",
+      "infinity-rotation-research-20260119_083935",
+      "infinity-rotation-research-20260121_185839",
+      "infinity-rotation-research-20260122_001908",
+      "infinity-rotation-research-20260122_234400",
+      "infinity-rotation-research-20260129_023909",
+      "infinity-rotation-research-20260129_190952",
+      "infinity-rotation-research-20260203_231607",
+      "infinity-rotation-research-20260203_231648"
+    ],
+    "category": "name"
+  },
+  "token": {
+    "count": 21,
+    "repos": [
+      "-Comet-Delta-Noble-",
+      "-Jade-Beacon-Oracle-",
+      "-Viper-Glyph-Prism-",
+      "c13b0_cart_013_token_owned_spa_20251221_093114",
+      "c13b0_cart_013_token_owned_spa_20251221_093734",
+      "cart_c13b0_recover_and_token_sweep__20251221_071546",
+      "cart_c13b0_token_augmenter__20251221_071546",
+      "cart_c13b0_token_canonicalize__20251221_071546",
+      "cart_c13b0_token_evolve__20251221_071546",
+      "cart_c13b0_token_pricer__20251221_071546"
+    ],
+    "category": "description"
+  },
+  "vectors": {
+    "count": 21,
+    "repos": [
+      "diodes_quantum_vectors",
+      "electron_tunneling_quantum_vectors",
+      "helium_diodes_quantum_vectors",
+      "helium_quantum_vectors",
+      "Infinity-Vectors",
+      "Infinity-Vectors-",
+      "quantum_helium_quantum_vectors",
+      "quantum_quantum_vectors",
+      "quantum_transport_quantum_vectors",
+      "quantum_vectors"
+    ],
+    "category": "name"
+  },
+  "transport": {
+    "count": 20,
+    "repos": [
+      "diodes_quantum_transport",
+      "electron_tunneling_quantum_transport",
+      "helium_diodes_quantum_transport",
+      "helium_quantum_transport",
+      "infinity-transport",
+      "quantum_helium_quantum_transport",
+      "quantum_quantum_transport",
+      "quantum_transport_diodes",
+      "quantum_transport_electron_tunneling",
+      "quantum_transport_helium"
+    ],
+    "category": "name"
+  },
+  "superfluid": {
+    "count": 19,
+    "repos": [
+      "diodes_superfluid_helium",
+      "electron_tunneling_superfluid_helium",
+      "helium_diodes_superfluid_helium",
+      "helium_superfluid_helium",
+      "quantum_helium_superfluid_helium",
+      "quantum_superfluid_helium",
+      "quantum_transport_superfluid_helium",
+      "quantum_vectors_superfluid_helium",
+      "silver_diodes_superfluid_helium",
+      "superfluid_helium"
+    ],
+    "category": "name"
+  },
+  "miner": {
+    "count": 19,
+    "repos": [
+      "ezekiel_infinity_scroll_miner_v3_1__20251221_071546",
+      "ezekiel_infinity_scroll_miner_v3__20251221_071546",
+      "ezekiel_infinity_scroll_miner_v4__20251221_071546",
+      "ezekiel_infinity_scroll_miner__20251221_071546",
+      "ezekiel_slow_scroll_miner__20251221_071546",
+      "infinity_blank_grade_research_miner",
+      "infinity_btc_miner_final__20251221_071546",
+      "infinity_image_token_miner",
+      "infinity_mongoose_bitcoin_research_miner",
+      "infinity_mongoose_real_miner"
+    ],
+    "category": "name"
+  },
+  "electron": {
+    "count": 18,
+    "repos": [
+      "diodes_electron_tunneling",
+      "electron_tunneling_diodes",
+      "electron_tunneling_helium",
+      "electron_tunneling_helium_diodes",
+      "electron_tunneling_quantum",
+      "electron_tunneling_quantum_helium",
+      "electron_tunneling_quantum_transport",
+      "electron_tunneling_quantum_vectors",
+      "electron_tunneling_silver_diodes",
+      "electron_tunneling_superfluid_helium"
+    ],
+    "category": "name"
+  },
+  "tunneling": {
+    "count": 18,
+    "repos": [
+      "diodes_electron_tunneling",
+      "electron_tunneling_diodes",
+      "electron_tunneling_helium",
+      "electron_tunneling_helium_diodes",
+      "electron_tunneling_quantum",
+      "electron_tunneling_quantum_helium",
+      "electron_tunneling_quantum_transport",
+      "electron_tunneling_quantum_vectors",
+      "electron_tunneling_silver_diodes",
+      "electron_tunneling_superfluid_helium"
+    ],
+    "category": "name"
+  },
+  "silver": {
+    "count": 18,
+    "repos": [
+      "diodes_silver_diodes",
+      "electron_tunneling_silver_diodes",
+      "helium_diodes_silver_diodes",
+      "helium_silver_diodes",
+      "quantum_helium_silver_diodes",
+      "quantum_silver_diodes",
+      "quantum_transport_silver_diodes",
+      "quantum_vectors_silver_diodes",
+      "silver_diodes_diodes",
+      "silver_diodes_electron_tunneling"
+    ],
+    "category": "name"
+  },
+  "hydrogen": {
+    "count": 16,
+    "repos": [
+      "infinity_research_hydrogen_assimilation",
+      "infinity_research_hydrogen_ceo",
+      "infinity_research_hydrogen_engineering",
+      "infinity_research_hydrogen_extract",
+      "infinity_research_hydrogen_input",
+      "infinity_research_hydrogen_investigative",
+      "infinity_research_hydrogen_lattice",
+      "infinity_research_hydrogen_routes"
+    ],
+    "category": "name"
+  },
+  "evo": {
+    "count": 12,
+    "repos": [
+      "b55-evo-1-1769024262",
+      "b55-evo-1-1769041156",
+      "b55-evo-1-1769041161",
+      "b55-evo-1-1769713799",
+      "b55-evo-1-1769713842",
+      "b55-evo-1-1769713860",
+      "b55-evo-v1-1769024850",
+      "b55-evo-v1-1769041165",
+      "b55-evo-v1-1769713803",
+      "b55-evo-v1-1769713847"
+    ],
+    "category": "name"
+  },
+  "viper": {
+    "count": 11,
+    "repos": [
+      "-Viper-Beacon-Ripple-",
+      "-Viper-Beacon-Umbra-",
+      "-Viper-Flux-Titan-",
+      "-Viper-Glyph-Oracle-",
+      "-Viper-Glyph-Prism-",
+      "-Viper-Horizon-Noble-",
+      "viper",
+      "viper-forge-spectra.os",
+      "VIPER-OCTAVE-BLOCK",
+      "VIPER_BLOCK_OCTAVE_20251220T073452Z"
+    ],
+    "category": "name"
+  },
+  "intent": {
+    "count": 11,
+    "repos": [
+      "c13b0_cart_003_intent_to_piece_20251221_083020",
+      "c13b0_cart_003_intent_to_piece_20251221_083218",
+      "c13b0_cart_005_voice_to_intent_20251221_083551",
+      "c13b0_cart_005_voice_to_intent_20251221_084529",
+      "infinity_research_hydrogen_assimilation"
+    ],
+    "category": "name"
+  },
+  "glyph": {
+    "count": 10,
+    "repos": [
+      "-Atlas-Glyph-Oracle-",
+      "-Atlas-Glyph-Quartz-",
+      "-Ember-Glyph-Ripple-",
+      "-Ion-Glyph-Mint-",
+      "-Ion-Glyph-Quartz-",
+      "-Ion-Glyph-Titan-",
+      "-Kestrel-Glyph-Solace-",
+      "-Lotus-Glyph-Noble-",
+      "-Viper-Glyph-Oracle-",
+      "-Viper-Glyph-Prism-"
+    ],
+    "category": "name"
+  },
+  "push": {
+    "count": 10,
+    "repos": [
+      "c13b0_absolute_push__20251221_071546",
+      "c13b0_minimal_push__20251221_071546",
+      "c13b0_one_shot_push_fix__20251221_071546",
+      "c13b0_push_all_carts_to_own_repos__20251221_071546",
+      "cart906_push_research_batches__20251221_071546",
+      "cart_c13b0_2_exec_full_run_and_push__20251221_071546",
+      "cart_c13b0_immediate_push__20251221_071546",
+      "cart_push_all_repos__20251221_071546",
+      "cart_quick_push__20251221_071546",
+      "cart_safe_push__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "sweep": {
+    "count": 10,
+    "repos": [
+      "c13b0_cart_mongoose_recover_sweep_fix",
+      "cart_c13b0_full_sweep__20251221_071546",
+      "cart_c13b0_global_sweep_oldest_first__20251221_071546",
+      "cart_c13b0_index_paypal_mario_sweep__20251221_071546",
+      "cart_c13b0_mongoose_sweep__20251221_071546",
+      "cart_c13b0_recover_and_token_sweep__20251221_071546",
+      "cart_c13b0_stage3_global_sweep__20251221_071546",
+      "cart_c14_1_global_index_token_pages_sweep__20251221_071546",
+      "cart_c14_global_index_token_pages_sweep__20251221_071546",
+      "cart_c14_global_index_token_sweep__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "noble": {
+    "count": 8,
+    "repos": [
+      "-Comet-Cipher-Noble-",
+      "-Comet-Delta-Noble-",
+      "-Ember-Aurora-Noble-",
+      "-Ember-Cipher-Noble-",
+      "-Falcon-Ivory-Noble-",
+      "-Kestrel-Aurora-Noble-",
+      "-Lotus-Glyph-Noble-",
+      "-Viper-Horizon-Noble-"
+    ],
+    "category": "name"
+  },
+  "ember": {
+    "count": 8,
+    "repos": [
+      "-Ember-Aurora-Mint-",
+      "-Ember-Aurora-Noble-",
+      "-Ember-Aurora-Solace-",
+      "-Ember-Cipher-Noble-",
+      "-Ember-Echo-Oracle-",
+      "-Ember-Glyph-Ripple-",
+      "-Ember-Horizon-Prism-",
+      "-Ember-Juniper-Ripple-"
+    ],
+    "category": "name"
+  },
+  "repo": {
+    "count": 8,
+    "repos": [
+      "c13b0_cart_self_owned_repo_20251221_071403",
+      "c13b0_cart_self_owned_repo__20251221_071546",
+      "c13b0_one_cart_one_repo__20251221_071546",
+      "cart900_unified_repo_builder__20251221_071546",
+      "cart_c13b0_2_existing_repo_builder__20251221_071546",
+      "cart_c13b0_global_repo_sweeper_v2__20251221_071546",
+      "cart_c13b0_global_repo_sweeper__20251221_071546",
+      "repo-dashboard-hub"
+    ],
+    "category": "name"
+  },
+  "oracle": {
+    "count": 7,
+    "repos": [
+      "-Atlas-Glyph-Oracle-",
+      "-Comet-Delta-Oracle-",
+      "-Ember-Echo-Oracle-",
+      "-Jade-Aurora-Oracle-",
+      "-Jade-Beacon-Oracle-",
+      "-Jade-Delta-Oracle-",
+      "-Viper-Glyph-Oracle-"
+    ],
+    "category": "name"
+  },
+  "prism": {
+    "count": 7,
+    "repos": [
+      "-Comet-Echo-Prism-",
+      "-Ember-Horizon-Prism-",
+      "-Halo-Aurora-Prism-",
+      "-Halo-Cipher-Prism-",
+      "-Halo-Ivory-Prism-",
+      "-Kestrel-Flux-Prism-",
+      "-Viper-Glyph-Prism-"
+    ],
+    "category": "name"
+  },
+  "aurora": {
+    "count": 7,
+    "repos": [
+      "-Ember-Aurora-Mint-",
+      "-Ember-Aurora-Noble-",
+      "-Ember-Aurora-Solace-",
+      "-Falcon-Aurora-Mint-",
+      "-Halo-Aurora-Prism-",
+      "-Jade-Aurora-Oracle-",
+      "-Kestrel-Aurora-Noble-"
+    ],
+    "category": "name"
+  },
+  "ledger": {
+    "count": 7,
+    "repos": [
+      "c13b0_cart_016_payment_split_ledger_20251221_100020",
+      "c13b0_cart_016_payment_split_ledger_20251221_100334",
+      "c13b0_cart_017_paypal_webhook_ledger_20251221_101249",
+      "cart_c13b0_ledger_index__20251221_071546",
+      "cart_c13b0_quantum_ledger__20251221_071546",
+      "infinity-spark-ledger",
+      "infinity_ownership_ledger"
+    ],
+    "category": "name"
+  },
+  "mongoose": {
+    "count": 7,
+    "repos": [
+      "c13b0_cart_mongoose_factory",
+      "c13b0_cart_mongoose_recover_sweep_fix",
+      "cart_c13b0_mongoose_sweep__20251221_071546",
+      "infinity-tools",
+      "infinity_mongoose_bitcoin_research_miner",
+      "infinity_mongoose_real_miner",
+      "mongoose.os"
+    ],
+    "category": "name"
+  },
+  "global": {
+    "count": 7,
+    "repos": [
+      "cart_c13b0_global_repo_sweeper_v2__20251221_071546",
+      "cart_c13b0_global_repo_sweeper__20251221_071546",
+      "cart_c13b0_global_sweep_oldest_first__20251221_071546",
+      "cart_c13b0_stage3_global_sweep__20251221_071546",
+      "cart_c14_1_global_index_token_pages_sweep__20251221_071546",
+      "cart_c14_global_index_token_pages_sweep__20251221_071546",
+      "cart_c14_global_index_token_sweep__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "mint": {
+    "count": 6,
+    "repos": [
+      "-Ember-Aurora-Mint-",
+      "-Falcon-Aurora-Mint-",
+      "-Ion-Glyph-Mint-",
+      "infinity-spark-mint",
+      "infinity-token-mint-7888eac0d2aa9301885b736d354c71a634816c428fe279d66bd7e4aee427a47e",
+      "infinity-token-mint-e5053ca39f8189ced310f7a11ff836deac63f26060916f3e171b27778d069e5b"
+    ],
+    "category": "name"
+  },
+  "data": {
+    "count": 6,
+    "repos": [
+      "-Jade-Beacon-Oracle-",
+      "-Mario-InfinityTrumpCoin-",
+      "infinity-data-collection",
+      "infinity-data-disseminate"
+    ],
+    "category": "description"
+  },
+  "vector": {
+    "count": 6,
+    "repos": [
+      "ASTEROID-ARCADE",
+      "GPT-Vector-Design",
+      "infinity_vector_bitcoin_octave",
+      "Vector",
+      "Vector-API"
+    ],
+    "category": "description"
+  },
+  "iteration": {
+    "count": 6,
+    "repos": [
+      "b55-evo-1-1769024262",
+      "b55-evo-1-1769041156",
+      "b55-evo-1-1769041161",
+      "b55-evo-1-1769713799",
+      "b55-evo-1-1769713842"
+    ],
+    "category": "description"
+  },
+  "octave": {
+    "count": 6,
+    "repos": [
+      "bitcoin_octave_resonance",
+      "cart_c13b0_octave_signal_matrix__20251221_071546",
+      "infinity_vector_bitcoin_octave",
+      "VIPER-OCTAVE-BLOCK",
+      "VIPER_BLOCK_OCTAVE_20251220T073452Z",
+      "VIPER_BLOCK_OCTAVE_20251220T073747Z"
+    ],
+    "category": "name"
+  },
+  "core": {
+    "count": 6,
+    "repos": [
+      "c13b0_cart_002_self_tokenizing_core_20251221_082845",
+      "emoji_grammar_core",
+      "infinity-carts-core",
+      "infinity-spark-core",
+      "infinity_research_printer_core",
+      "legend-core"
+    ],
+    "category": "name"
+  },
+  "spa": {
+    "count": 6,
+    "repos": [
+      "c13b0_cart_013_token_owned_spa_20251221_093114",
+      "c13b0_cart_013_token_owned_spa_20251221_093734",
+      "Infinity-Vectors",
+      "infinity_spa",
+      "Vector"
+    ],
+    "category": "name"
+  },
+  "memory": {
+    "count": 5,
+    "repos": [
+      "---",
+      "-Halo-Juniper-Solace-",
+      "infinity-memory",
+      "infinity-memory-spine"
+    ],
+    "category": "description"
+  },
+  "assimilation": {
+    "count": 5,
+    "repos": [
+      "-Comet-Delta-Noble-",
+      "infinity-assimilation",
+      "infinity_research_hydrogen_assimilation"
+    ],
+    "category": "description"
+  },
+  "solace": {
+    "count": 5,
+    "repos": [
+      "-Ember-Aurora-Solace-",
+      "-Halo-Horizon-Solace-",
+      "-Halo-Juniper-Solace-",
+      "-Kestrel-Flux-Solace-",
+      "-Kestrel-Glyph-Solace-"
+    ],
+    "category": "name"
+  },
+  "ripple": {
+    "count": 5,
+    "repos": [
+      "-Ember-Glyph-Ripple-",
+      "-Ember-Juniper-Ripple-",
+      "-Falcon-Ivory-Ripple-",
+      "-Jade-Delta-Ripple-",
+      "-Viper-Beacon-Ripple-"
+    ],
+    "category": "name"
+  },
+  "halo": {
+    "count": 5,
+    "repos": [
+      "-Halo-Aurora-Prism-",
+      "-Halo-Cipher-Prism-",
+      "-Halo-Horizon-Solace-",
+      "-Halo-Ivory-Prism-",
+      "-Halo-Juniper-Solace-"
+    ],
+    "category": "name"
+  },
+  "jade": {
+    "count": 5,
+    "repos": [
+      "-Jade-Aurora-Oracle-",
+      "-Jade-Beacon-Oracle-",
+      "-Jade-Beacon-Titan-",
+      "-Jade-Delta-Oracle-",
+      "-Jade-Delta-Ripple-"
+    ],
+    "category": "name"
+  },
+  "beacon": {
+    "count": 5,
+    "repos": [
+      "-Jade-Beacon-Oracle-",
+      "-Jade-Beacon-Titan-",
+      "-Viper-Beacon-Ripple-",
+      "-Viper-Beacon-Umbra-",
+      "infinity-spark-beacon"
+    ],
+    "category": "name"
+  },
+  "kestrel": {
+    "count": 5,
+    "repos": [
+      "-Kestrel-Aurora-Noble-",
+      "-Kestrel-Flux-Prism-",
+      "-Kestrel-Flux-Solace-",
+      "-Kestrel-Glyph-Solace-",
+      "-Kestrel-Juniper-Quartz-"
+    ],
+    "category": "name"
+  },
+  "mario": {
+    "count": 5,
+    "repos": [
+      "-Mario-InfinityTrumpCoin-",
+      "cart_c13b0_index_paypal_mario_sweep__20251221_071546",
+      "cart_c13b0_mario_stable__20251221_071546",
+      "MARIO-TOKENS"
+    ],
+    "category": "name"
+  },
+  "item": {
+    "count": 5,
+    "repos": [
+      "c13b0_.c13b0_tmp_c13b0_item_001_index_index",
+      "c13b0_c13b0_cart_item_001_20251223_085814_index",
+      "c13b0_cart_item_001_20251223_085814",
+      "c13b0_item_001_index",
+      "c13b0_site_item_001"
+    ],
+    "category": "name"
+  },
+  "paypal": {
+    "count": 5,
+    "repos": [
+      "c13b0_cart_015_paypal_buy_now_20251221_094949",
+      "c13b0_cart_017_paypal_webhook_ledger_20251221_101249",
+      "c13b0_cart_finish_paypal_no_webhook",
+      "cart_c13b0_index_paypal_mario_sweep__20251221_071546",
+      "cart_c13b0_paypal_login_lineage__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "fix": {
+    "count": 5,
+    "repos": [
+      "c13b0_cart_mongoose_recover_sweep_fix",
+      "c13b0_github_auth_fix__20251221_071546",
+      "c13b0_one_shot_push_fix__20251221_071546",
+      "cart_fix_index_md__20251221_071546",
+      "cart_git_identity_fix__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "emoji": {
+    "count": 5,
+    "repos": [
+      "cart_c13b0_2_exec_rotating_key_and_emoji__20251221_071546",
+      "emoji_chain_validator",
+      "emoji_grammar_core",
+      "pewpi-emoji-login",
+      "research_emoji_classifier"
+    ],
+    "category": "name"
+  },
+  "pages": {
+    "count": 5,
+    "repos": [
+      "cart_c13b0_enable_pages__20251221_071546",
+      "cart_c14_1_global_index_token_pages_sweep__20251221_071546",
+      "cart_c14_global_index_token_pages_sweep__20251221_071546",
+      "cart_c14_pages_liveliness_scan__20251221_071546",
+      "infinity-brain-pages"
+    ],
+    "category": "name"
+  },
+  "engine": {
+    "count": 5,
+    "repos": [
+      "cart_infinity_engine__20251221_071546",
+      "infinity-pricing-engine-1219ae8ba22d0d8fd02e826b2689f4e73b6008c42b09e2bb6b452bf64f176ac7",
+      "infinity-pricing-engine-c4c5acf2b332a9ae1b255479a7efad1e90a73da7132a03e9d57ec7e6f1c0baa6",
+      "infinity-research-engine",
+      "infinity-spark-engine"
+    ],
+    "category": "name"
+  },
+  "ezekiel": {
+    "count": 5,
+    "repos": [
+      "ezekiel_infinity_scroll_miner_v3_1__20251221_071546",
+      "ezekiel_infinity_scroll_miner_v3__20251221_071546",
+      "ezekiel_infinity_scroll_miner_v4__20251221_071546",
+      "ezekiel_infinity_scroll_miner__20251221_071546",
+      "ezekiel_slow_scroll_miner__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "scroll": {
+    "count": 5,
+    "repos": [
+      "ezekiel_infinity_scroll_miner_v3_1__20251221_071546",
+      "ezekiel_infinity_scroll_miner_v3__20251221_071546",
+      "ezekiel_infinity_scroll_miner_v4__20251221_071546",
+      "ezekiel_infinity_scroll_miner__20251221_071546",
+      "ezekiel_slow_scroll_miner__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "comet": {
+    "count": 4,
+    "repos": [
+      "-Comet-Cipher-Noble-",
+      "-Comet-Delta-Noble-",
+      "-Comet-Delta-Oracle-",
+      "-Comet-Echo-Prism-"
+    ],
+    "category": "name"
+  },
+  "delta": {
+    "count": 4,
+    "repos": [
+      "-Comet-Delta-Noble-",
+      "-Comet-Delta-Oracle-",
+      "-Jade-Delta-Oracle-",
+      "-Jade-Delta-Ripple-"
+    ],
+    "category": "name"
+  },
+  "juniper": {
+    "count": 4,
+    "repos": [
+      "-Ember-Juniper-Ripple-",
+      "-Falcon-Juniper-Umbra-",
+      "-Halo-Juniper-Solace-",
+      "-Kestrel-Juniper-Quartz-"
+    ],
+    "category": "name"
+  },
+  "falcon": {
+    "count": 4,
+    "repos": [
+      "-Falcon-Aurora-Mint-",
+      "-Falcon-Ivory-Noble-",
+      "-Falcon-Ivory-Ripple-",
+      "-Falcon-Juniper-Umbra-"
+    ],
+    "category": "name"
+  },
+  "login": {
+    "count": 4,
+    "repos": [
+      "c13b0_cart_001_pewpi_login_20251221_082500",
+      "c13b0_cart_001_pewpi_login_20251221_082812",
+      "cart_c13b0_paypal_login_lineage__20251221_071546",
+      "pewpi-emoji-login"
+    ],
+    "category": "name"
+  },
+  "voice": {
+    "count": 4,
+    "repos": [
+      "c13b0_cart_005_voice_to_intent_20251221_083551",
+      "c13b0_cart_005_voice_to_intent_20251221_084529",
+      "infinity-voice"
+    ],
+    "category": "name"
+  },
+  "master": {
+    "count": 4,
+    "repos": [
+      "c13b0_cart_009_master_index_aggregator_20251221_090650",
+      "c13b0_cart_009_master_index_aggregator_20251221_090750",
+      "c13b0_cart_009_master_index_aggregator_20251221_091115",
+      "infinity-master-hub"
+    ],
+    "category": "name"
+  },
+  "owned": {
+    "count": 4,
+    "repos": [
+      "c13b0_cart_013_token_owned_spa_20251221_093114",
+      "c13b0_cart_013_token_owned_spa_20251221_093734",
+      "c13b0_cart_self_owned_repo_20251221_071403",
+      "c13b0_cart_self_owned_repo__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "full": {
+    "count": 4,
+    "repos": [
+      "cart_c13b0_2_exec_full_run_and_push__20251221_071546",
+      "cart_c13b0_full_infinity_trump_coin__20251221_071546",
+      "cart_c13b0_full_research_writer__20251221_071546",
+      "cart_c13b0_full_sweep__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "sweeper": {
+    "count": 4,
+    "repos": [
+      "cart_c13b0_global_repo_sweeper_v2__20251221_071546",
+      "cart_c13b0_global_repo_sweeper__20251221_071546",
+      "infinity-sweeper"
+    ],
+    "category": "name"
+  },
+  "signal": {
+    "count": 4,
+    "repos": [
+      "cart_c13b0_octave_signal_matrix__20251221_071546",
+      "gold-mine-vein-signal-20251221_210400",
+      "infinity-spark-signal",
+      "infinity-tools"
+    ],
+    "category": "name"
+  },
+  "real": {
+    "count": 4,
+    "repos": [
+      "cart_c13b0_real_work__20251221_071546",
+      "infinity_mongoose_real_miner",
+      "real_btc_miner__20251221_071546",
+      "real_infinity_miner__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "c14": {
+    "count": 4,
+    "repos": [
+      "cart_c14_1_global_index_token_pages_sweep__20251221_071546",
+      "cart_c14_global_index_token_pages_sweep__20251221_071546",
+      "cart_c14_global_index_token_sweep__20251221_071546",
+      "cart_c14_pages_liveliness_scan__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "design": {
+    "count": 4,
+    "repos": [
+      "Design-Depo",
+      "GPT-Vector-Design",
+      "infinity-web-design"
+    ],
+    "category": "name"
+  },
+  "commerce": {
+    "count": 4,
+    "repos": [
+      "infinity-commerce",
+      "infinity-facet-commerce-331a85cf91e8c57e11afd21a30a71de2ed6569cabc692ef4aa2195bb1b02ff07",
+      "infinity-facet-commerce-bb332e384c3232356f481c7a91b9cbd504926eb1b9f89c89567d66e991b6327d"
+    ],
+    "category": "name"
+  },
+  "hub": {
+    "count": 4,
+    "repos": [
+      "infinity-crown-hub",
+      "infinity-master-hub",
+      "infinity-spark-hub",
+      "repo-dashboard-hub"
+    ],
+    "category": "name"
+  },
+  "osprey": {
+    "count": 4,
+    "repos": [
+      "osprey-4.0",
+      "Osprey-5.0",
+      "Osprey-5.1",
+      "Osprey-Terminal"
+    ],
+    "category": "name"
+  },
+  "atlas": {
+    "count": 3,
+    "repos": [
+      "-Atlas-Glyph-Oracle-",
+      "-Atlas-Glyph-Quartz-",
+      "infinity-spark-atlas"
+    ],
+    "category": "name"
+  },
+  "quartz": {
+    "count": 3,
+    "repos": [
+      "-Atlas-Glyph-Quartz-",
+      "-Ion-Glyph-Quartz-",
+      "-Kestrel-Juniper-Quartz-"
+    ],
+    "category": "name"
+  },
+  "cipher": {
+    "count": 3,
+    "repos": [
+      "-Comet-Cipher-Noble-",
+      "-Ember-Cipher-Noble-",
+      "-Halo-Cipher-Prism-"
+    ],
+    "category": "name"
+  },
+  "horizon": {
+    "count": 3,
+    "repos": [
+      "-Ember-Horizon-Prism-",
+      "-Halo-Horizon-Solace-",
+      "-Viper-Horizon-Noble-"
+    ],
+    "category": "name"
+  },
+  "ivory": {
+    "count": 3,
+    "repos": [
+      "-Falcon-Ivory-Noble-",
+      "-Falcon-Ivory-Ripple-",
+      "-Halo-Ivory-Prism-"
+    ],
+    "category": "name"
+  },
+  "engineering": {
+    "count": 3,
+    "repos": [
+      "-Halo-Aurora-Prism-",
+      "infinity_research_hydrogen_engineering"
+    ],
+    "category": "description"
+  },
+  "ion": {
+    "count": 3,
+    "repos": [
+      "-Ion-Glyph-Mint-",
+      "-Ion-Glyph-Quartz-",
+      "-Ion-Glyph-Titan-"
+    ],
+    "category": "name"
+  },
+  "titan": {
+    "count": 3,
+    "repos": [
+      "-Ion-Glyph-Titan-",
+      "-Jade-Beacon-Titan-",
+      "-Viper-Flux-Titan-"
+    ],
+    "category": "name"
+  },
+  "extract": {
+    "count": 3,
+    "repos": [
+      "-Jade-Beacon-Oracle-",
+      "infinity_research_hydrogen_extract"
+    ],
+    "category": "description"
+  },
+  "flux": {
+    "count": 3,
+    "repos": [
+      "-Kestrel-Flux-Prism-",
+      "-Kestrel-Flux-Solace-",
+      "-Viper-Flux-Titan-"
+    ],
+    "category": "name"
+  },
+  "bitcoin": {
+    "count": 3,
+    "repos": [
+      "bitcoin_octave_resonance",
+      "infinity_mongoose_bitcoin_research_miner",
+      "infinity_vector_bitcoin_octave"
+    ],
+    "category": "name"
+  },
+  "pewpi": {
+    "count": 3,
+    "repos": [
+      "c13b0_cart_001_pewpi_login_20251221_082500",
+      "c13b0_cart_001_pewpi_login_20251221_082812",
+      "pewpi-emoji-login"
+    ],
+    "category": "name"
+  },
+  "self": {
+    "count": 3,
+    "repos": [
+      "c13b0_cart_002_self_tokenizing_core_20251221_082845",
+      "c13b0_cart_self_owned_repo_20251221_071403",
+      "c13b0_cart_self_owned_repo__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "aggregator": {
+    "count": 3,
+    "repos": [
+      "c13b0_cart_009_master_index_aggregator_20251221_090650",
+      "c13b0_cart_009_master_index_aggregator_20251221_090750",
+      "c13b0_cart_009_master_index_aggregator_20251221_091115"
+    ],
+    "category": "name"
+  },
+  "repos": {
+    "count": 3,
+    "repos": [
+      "c13b0_push_all_carts_to_own_repos__20251221_071546",
+      "cart_discover_repos__20251221_071546",
+      "cart_push_all_repos__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "builder": {
+    "count": 3,
+    "repos": [
+      "cart900_unified_repo_builder__20251221_071546",
+      "cart_c13b0_2_existing_repo_builder__20251221_071546",
+      "infinity-spark-builder"
+    ],
+    "category": "name"
+  },
+  "writer": {
+    "count": 3,
+    "repos": [
+      "cart_c13b0_full_research_writer__20251221_071546",
+      "infinity-spark-writer",
+      "infinity_research_token_writer"
+    ],
+    "category": "name"
+  },
+  "matrix": {
+    "count": 3,
+    "repos": [
+      "cart_c13b0_infinity_science_matrix__20251221_071546",
+      "cart_c13b0_octave_signal_matrix__20251221_071546",
+      "infinity-spark-matrix"
+    ],
+    "category": "name"
+  },
+  "chain": {
+    "count": 3,
+    "repos": [
+      "emoji_chain_validator",
+      "infinity-chain"
+    ],
+    "category": "name"
+  },
+  "rogers": {
+    "count": 3,
+    "repos": [
+      "infinity-portal",
+      "infinity-rogers-host-0016cea98cea2e6c14226aaae572ab47a818a1346adb5291c7810bb55ad4d680",
+      "infinity-rogers-host-811a7653af1eddc42b8dce236a78bbe18e25778a7e57c071a6200ef0d3c36aec"
+    ],
+    "category": "description"
+  },
+  "printer": {
+    "count": 3,
+    "repos": [
+      "infinity-printer",
+      "infinity_research_printer_core"
+    ],
+    "category": "name"
+  },
+  "reuse": {
+    "count": 3,
+    "repos": [
+      "infinity-reuse-995d58f3c9e74a0cefc5ed8bd875acd76a47b01fdd77eb2d461fd2629ad2812c",
+      "infinity-reuse-ca6c28e5d7c487fd44a22d409df7d239323fc803b70cca2eb46fe7b4dbb47d35",
+      "infinity-reuse-e7049f6b626cda8aef25e551551caada4b00ce48defe9bb5cdadf073b5edb526"
+    ],
+    "category": "name"
+  },
+  "sound": {
+    "count": 3,
+    "repos": [
+      "infinity-sound",
+      "infinity-sound-page"
+    ],
+    "category": "name"
+  },
+  "lattice": {
+    "count": 3,
+    "repos": [
+      "infinity-spark-lattice",
+      "infinity_research_hydrogen_lattice"
+    ],
+    "category": "name"
+  },
+  "nexus": {
+    "count": 3,
+    "repos": [
+      "infinity-spark-nexus",
+      "infinity-spark-nexus-20260201_024330",
+      "infinity-spark-nexus-20260201_024451"
+    ],
+    "category": "name"
+  },
+  "stream": {
+    "count": 3,
+    "repos": [
+      "infinity-spark-stream",
+      "infinity_research_hydrogen_lattice",
+      "infinity_research_vam_1878_morgans"
+    ],
+    "category": "name"
+  },
+  "block": {
+    "count": 3,
+    "repos": [
+      "VIPER-OCTAVE-BLOCK",
+      "VIPER_BLOCK_OCTAVE_20251220T073452Z",
+      "VIPER_BLOCK_OCTAVE_20251220T073747Z"
+    ],
+    "category": "name"
+  },
+  "magnetic": {
+    "count": 2,
+    "repos": [
+      "---",
+      "-Halo-Juniper-Solace-"
+    ],
+    "category": "description"
+  },
+  "purpose": {
+    "count": 2,
+    "repos": [
+      "---",
+      "ClaudeBot"
+    ],
+    "category": "description"
+  },
+  "negative": {
+    "count": 2,
+    "repos": [
+      "-Comet-Delta-Noble-",
+      "infinity-brain-102"
+    ],
+    "category": "description"
+  },
+  "echo": {
+    "count": 2,
+    "repos": [
+      "-Comet-Echo-Prism-",
+      "-Ember-Echo-Oracle-"
+    ],
+    "category": "name"
+  },
+  "umbra": {
+    "count": 2,
+    "repos": [
+      "-Falcon-Juniper-Umbra-",
+      "-Viper-Beacon-Umbra-"
+    ],
+    "category": "name"
+  },
+  "tools": {
+    "count": 2,
+    "repos": [
+      "-Halo-Aurora-Prism-",
+      "infinity-tools"
+    ],
+    "category": "description"
+  },
+  "derived": {
+    "count": 2,
+    "repos": [
+      "-Jade-Beacon-Oracle-",
+      "-Viper-Glyph-Prism-"
+    ],
+    "category": "description"
+  },
+  "ticket": {
+    "count": 2,
+    "repos": [
+      "-Mario-InfinityTrumpCoin-",
+      "infinity_image_token_miner"
+    ],
+    "category": "description"
+  },
+  "asteroid": {
+    "count": 2,
+    "repos": [
+      "ASTEROID-ARCADE"
+    ],
+    "category": "name"
+  },
+  "arcade": {
+    "count": 2,
+    "repos": [
+      "ASTEROID-ARCADE"
+    ],
+    "category": "name"
+  },
+  "asteroids": {
+    "count": 2,
+    "repos": [
+      "asteroids"
+    ],
+    "category": "name"
+  },
+  "build": {
+    "count": 2,
+    "repos": [
+      "build_c13b0_squared_disk__20251221_071546",
+      "cart_c13b0_2_stable_wire_and_build__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "auth": {
+    "count": 2,
+    "repos": [
+      "c13b0-auth-scan",
+      "c13b0_github_auth_fix__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "scan": {
+    "count": 2,
+    "repos": [
+      "c13b0-auth-scan",
+      "cart_c14_pages_liveliness_scan__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "genesis": {
+    "count": 2,
+    "repos": [
+      "c13b0-genesis",
+      "c13b0_genesis_bootstrap__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "site": {
+    "count": 2,
+    "repos": [
+      "c13b0-site-20251227-204454",
+      "c13b0_site_item_001"
+    ],
+    "category": "name"
+  },
+  "auto": {
+    "count": 2,
+    "repos": [
+      "c13b0_auto_20251219_175421",
+      "c13b0_auto_20251219_175712"
+    ],
+    "category": "name"
+  },
+  "piece": {
+    "count": 2,
+    "repos": [
+      "c13b0_cart_003_intent_to_piece_20251221_083020",
+      "c13b0_cart_003_intent_to_piece_20251221_083218"
+    ],
+    "category": "name"
+  },
+  "world": {
+    "count": 2,
+    "repos": [
+      "c13b0_cart_010_world_map_20251221_091127",
+      "c13b0_cart_010_world_map_20251221_091450"
+    ],
+    "category": "name"
+  },
+  "map": {
+    "count": 2,
+    "repos": [
+      "c13b0_cart_010_world_map_20251221_091127",
+      "c13b0_cart_010_world_map_20251221_091450"
+    ],
+    "category": "name"
+  },
+  "page": {
+    "count": 2,
+    "repos": [
+      "c13b0_cart_011_live_page_assembler_20251221_091848",
+      "infinity-sound-page"
+    ],
+    "category": "name"
+  },
+  "payment": {
+    "count": 2,
+    "repos": [
+      "c13b0_cart_016_payment_split_ledger_20251221_100020",
+      "c13b0_cart_016_payment_split_ledger_20251221_100334"
+    ],
+    "category": "name"
+  },
+  "split": {
+    "count": 2,
+    "repos": [
+      "c13b0_cart_016_payment_split_ledger_20251221_100020",
+      "c13b0_cart_016_payment_split_ledger_20251221_100334"
+    ],
+    "category": "name"
+  },
+  "webhook": {
+    "count": 2,
+    "repos": [
+      "c13b0_cart_017_paypal_webhook_ledger_20251221_101249",
+      "c13b0_cart_finish_paypal_no_webhook"
+    ],
+    "category": "name"
+  },
+  "factory": {
+    "count": 2,
+    "repos": [
+      "c13b0_cart_mongoose_factory",
+      "infinity-spark-iot-factory"
+    ],
+    "category": "name"
+  },
+  "recover": {
+    "count": 2,
+    "repos": [
+      "c13b0_cart_mongoose_recover_sweep_fix",
+      "cart_c13b0_recover_and_token_sweep__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "github": {
+    "count": 2,
+    "repos": [
+      "c13b0_github_auth_fix__20251221_071546",
+      "ClaudeBot"
+    ],
+    "category": "name"
+  },
+  "carts": {
+    "count": 2,
+    "repos": [
+      "c13b0_push_all_carts_to_own_repos__20251221_071546",
+      "infinity-carts-core"
+    ],
+    "category": "name"
+  },
+  "dashboard": {
+    "count": 2,
+    "repos": [
+      "cart_01_dashboard__20251221_071546",
+      "repo-dashboard-hub"
+    ],
+    "category": "name"
+  },
+  "exec": {
+    "count": 2,
+    "repos": [
+      "cart_c13b0_2_exec_full_run_and_push__20251221_071546",
+      "cart_c13b0_2_exec_rotating_key_and_emoji__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "stable": {
+    "count": 2,
+    "repos": [
+      "cart_c13b0_2_stable_wire_and_build__20251221_071546",
+      "cart_c13b0_mario_stable__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "knowledge": {
+    "count": 2,
+    "repos": [
+      "cart_inject_knowledge__20251221_071546",
+      "infinity-brain-101"
+    ],
+    "category": "name"
+  },
+  "bike": {
+    "count": 2,
+    "repos": [
+      "excite-bike",
+      "mongoose.os"
+    ],
+    "category": "name"
+  },
+  "imsmsi": {
+    "count": 2,
+    "repos": [
+      "imsmsi-20260116_011425",
+      "imsmsi-20260116_013943"
+    ],
+    "category": "name"
+  },
+  "architecture": {
+    "count": 2,
+    "repos": [
+      "infinity-architecture"
+    ],
+    "category": "name"
+  },
+  "audit": {
+    "count": 2,
+    "repos": [
+      "infinity-audit"
+    ],
+    "category": "name"
+  },
+  "banking": {
+    "count": 2,
+    "repos": [
+      "infinity-banking"
+    ],
+    "category": "name"
+  },
+  "belt": {
+    "count": 2,
+    "repos": [
+      "infinity-belt"
+    ],
+    "category": "name"
+  },
+  "listen": {
+    "count": 2,
+    "repos": [
+      "infinity-brain-105",
+      "infinity-brain-106"
+    ],
+    "category": "description"
+  },
+  "someone": {
+    "count": 2,
+    "repos": [
+      "infinity-brain-105",
+      "infinity-brain-106"
+    ],
+    "category": "description"
+  },
+  "else": {
+    "count": 2,
+    "repos": [
+      "infinity-brain-105",
+      "infinity-brain-106"
+    ],
+    "category": "description"
+  },
+  "too": {
+    "count": 2,
+    "repos": [
+      "infinity-brain-106"
+    ],
+    "category": "description"
+  },
+  "busy": {
+    "count": 2,
+    "repos": [
+      "infinity-brain-106"
+    ],
+    "category": "description"
+  },
+  "new": {
+    "count": 2,
+    "repos": [
+      "infinity-brain-109",
+      "Vector-API"
+    ],
+    "category": "description"
+  },
+  "builders": {
+    "count": 2,
+    "repos": [
+      "infinity-builders"
+    ],
+    "category": "name"
+  },
+  "commands": {
+    "count": 2,
+    "repos": [
+      "infinity-commands"
+    ],
+    "category": "name"
+  },
+  "components": {
+    "count": 2,
+    "repos": [
+      "infinity-components"
+    ],
+    "category": "name"
+  },
+  "currency": {
+    "count": 2,
+    "repos": [
+      "infinity-currency"
+    ],
+    "category": "name"
+  },
+  "cylinder": {
+    "count": 2,
+    "repos": [
+      "infinity-cylinder"
+    ],
+    "category": "name"
+  },
+  "collection": {
+    "count": 2,
+    "repos": [
+      "infinity-data-collection"
+    ],
+    "category": "name"
+  },
+  "disseminate": {
+    "count": 2,
+    "repos": [
+      "infinity-data-disseminate"
+    ],
+    "category": "name"
+  },
+  "developers": {
+    "count": 2,
+    "repos": [
+      "infinity-developers"
+    ],
+    "category": "name"
+  },
+  "dictionary": {
+    "count": 2,
+    "repos": [
+      "infinity-dictionary"
+    ],
+    "category": "name"
+  },
+  "directions": {
+    "count": 2,
+    "repos": [
+      "infinity-directions"
+    ],
+    "category": "name"
+  },
+  "displays": {
+    "count": 2,
+    "repos": [
+      "infinity-displays"
+    ],
+    "category": "name"
+  },
+  "dreamscapes": {
+    "count": 2,
+    "repos": [
+      "infinity-dreamscapes"
+    ],
+    "category": "name"
+  },
+  "dynamics": {
+    "count": 2,
+    "repos": [
+      "infinity-dynamics"
+    ],
+    "category": "name"
+  },
+  "ebay": {
+    "count": 2,
+    "repos": [
+      "infinity-ebay"
+    ],
+    "category": "name"
+  },
+  "energy": {
+    "count": 2,
+    "repos": [
+      "infinity-energy"
+    ],
+    "category": "name"
+  },
+  "events": {
+    "count": 2,
+    "repos": [
+      "infinity-events"
+    ],
+    "category": "name"
+  },
+  "export": {
+    "count": 2,
+    "repos": [
+      "infinity-export"
+    ],
+    "category": "name"
+  },
+  "facebook": {
+    "count": 2,
+    "repos": [
+      "infinity-facebook"
+    ],
+    "category": "name"
+  },
+  "facet": {
+    "count": 2,
+    "repos": [
+      "infinity-facet-commerce-331a85cf91e8c57e11afd21a30a71de2ed6569cabc692ef4aa2195bb1b02ff07",
+      "infinity-facet-commerce-bb332e384c3232356f481c7a91b9cbd504926eb1b9f89c89567d66e991b6327d"
+    ],
+    "category": "name"
+  },
+  "fonts": {
+    "count": 2,
+    "repos": [
+      "infinity-fonts"
+    ],
+    "category": "name"
+  },
+  "frame": {
+    "count": 2,
+    "repos": [
+      "infinity-frame"
+    ],
+    "category": "name"
+  },
+  "hash": {
+    "count": 2,
+    "repos": [
+      "infinity-hash-generator"
+    ],
+    "category": "name"
+  },
+  "generator": {
+    "count": 2,
+    "repos": [
+      "infinity-hash-generator"
+    ],
+    "category": "name"
+  },
+  "history": {
+    "count": 2,
+    "repos": [
+      "infinity-history"
+    ],
+    "category": "name"
+  },
+  "housing": {
+    "count": 2,
+    "repos": [
+      "infinity-housing"
+    ],
+    "category": "name"
+  },
+  "human": {
+    "count": 2,
+    "repos": [
+      "infinity-human-notebook-20260201_014236",
+      "infinity-human-notebook-20260201_014317"
+    ],
+    "category": "name"
+  },
+  "notebook": {
+    "count": 2,
+    "repos": [
+      "infinity-human-notebook-20260201_014236",
+      "infinity-human-notebook-20260201_014317"
+    ],
+    "category": "name"
+  },
+  "img": {
+    "count": 2,
+    "repos": [
+      "infinity-img-video"
+    ],
+    "category": "name"
+  },
+  "video": {
+    "count": 2,
+    "repos": [
+      "infinity-img-video"
+    ],
+    "category": "name"
+  },
+  "import": {
+    "count": 2,
+    "repos": [
+      "infinity-import"
+    ],
+    "category": "name"
+  },
+  "designer": {
+    "count": 2,
+    "repos": [
+      "infinity-index-designer-180bb0e4168b94585463aac47fc1623754abe1aa408f13f52bb3b338f211085d",
+      "infinity-index-designer-8a02a19e4106b37a1f2cb640b67229861d9f6689b5100f3418d219761dbcf487"
+    ],
+    "category": "name"
+  },
+  "instagram": {
+    "count": 2,
+    "repos": [
+      "infinity-instagram"
+    ],
+    "category": "name"
+  },
+  "labeling": {
+    "count": 2,
+    "repos": [
+      "infinity-labeling"
+    ],
+    "category": "name"
+  },
+  "language": {
+    "count": 2,
+    "repos": [
+      "infinity-language-interpreter"
+    ],
+    "category": "name"
+  },
+  "interpreter": {
+    "count": 2,
+    "repos": [
+      "infinity-language-interpreter"
+    ],
+    "category": "name"
+  },
+  "layers": {
+    "count": 2,
+    "repos": [
+      "infinity-layers"
+    ],
+    "category": "name"
+  },
+  "layout": {
+    "count": 2,
+    "repos": [
+      "infinity-layout"
+    ],
+    "category": "name"
+  },
+  "legends": {
+    "count": 2,
+    "repos": [
+      "infinity-legends"
+    ],
+    "category": "name"
+  },
+  "listener": {
+    "count": 2,
+    "repos": [
+      "infinity-listener"
+    ],
+    "category": "name"
+  },
+  "literature": {
+    "count": 2,
+    "repos": [
+      "infinity-literature"
+    ],
+    "category": "name"
+  },
+  "lock": {
+    "count": 2,
+    "repos": [
+      "infinity-lock"
+    ],
+    "category": "name"
+  },
+  "logic": {
+    "count": 2,
+    "repos": [
+      "infinity-logic"
+    ],
+    "category": "name"
+  },
+  "maps": {
+    "count": 2,
+    "repos": [
+      "infinity-maps"
+    ],
+    "category": "name"
+  },
+  "math": {
+    "count": 2,
+    "repos": [
+      "infinity-math"
+    ],
+    "category": "name"
+  },
+  "merchants": {
+    "count": 2,
+    "repos": [
+      "infinity-merchants"
+    ],
+    "category": "name"
+  },
+  "modulators": {
+    "count": 2,
+    "repos": [
+      "infinity-modulators"
+    ],
+    "category": "name"
+  },
+  "money": {
+    "count": 2,
+    "repos": [
+      "infinity-money"
+    ],
+    "category": "name"
+  },
+  "networking": {
+    "count": 2,
+    "repos": [
+      "infinity-networking"
+    ],
+    "category": "name"
+  },
+  "plans": {
+    "count": 2,
+    "repos": [
+      "infinity-plans"
+    ],
+    "category": "name"
+  },
+  "portal": {
+    "count": 2,
+    "repos": [
+      "infinity-portal",
+      "infinity-spark-portal"
+    ],
+    "category": "name"
+  },
+  "power": {
+    "count": 2,
+    "repos": [
+      "infinity-power"
+    ],
+    "category": "name"
+  },
+  "pricing": {
+    "count": 2,
+    "repos": [
+      "infinity-pricing-engine-1219ae8ba22d0d8fd02e826b2689f4e73b6008c42b09e2bb6b452bf64f176ac7",
+      "infinity-pricing-engine-c4c5acf2b332a9ae1b255479a7efad1e90a73da7132a03e9d57ec7e6f1c0baa6"
+    ],
+    "category": "name"
+  },
+  "project": {
+    "count": 2,
+    "repos": [
+      "infinity-project-managers"
+    ],
+    "category": "name"
+  },
+  "managers": {
+    "count": 2,
+    "repos": [
+      "infinity-project-managers"
+    ],
+    "category": "name"
+  },
+  "protect": {
+    "count": 2,
+    "repos": [
+      "infinity-protect"
+    ],
+    "category": "name"
+  },
+  "lighting": {
+    "count": 2,
+    "repos": [
+      "infinity-quantum-lighting"
+    ],
+    "category": "name"
+  },
+  "reader": {
+    "count": 2,
+    "repos": [
+      "infinity-reader"
+    ],
+    "category": "name"
+  },
+  "reasoning": {
+    "count": 2,
+    "repos": [
+      "infinity-reasoning"
+    ],
+    "category": "name"
+  },
+  "regulations": {
+    "count": 2,
+    "repos": [
+      "infinity-regulations"
+    ],
+    "category": "name"
+  },
+  "religion": {
+    "count": 2,
+    "repos": [
+      "infinity-religion"
+    ],
+    "category": "name"
+  },
+  "robots": {
+    "count": 2,
+    "repos": [
+      "infinity-robots"
+    ],
+    "category": "name"
+  },
+  "host": {
+    "count": 2,
+    "repos": [
+      "infinity-rogers-host-0016cea98cea2e6c14226aaae572ab47a818a1346adb5291c7810bb55ad4d680",
+      "infinity-rogers-host-811a7653af1eddc42b8dce236a78bbe18e25778a7e57c071a6200ef0d3c36aec"
+    ],
+    "category": "name"
+  },
+  "royalties": {
+    "count": 2,
+    "repos": [
+      "infinity-royalties"
+    ],
+    "category": "name"
+  },
+  "schedules": {
+    "count": 2,
+    "repos": [
+      "infinity-schedules"
+    ],
+    "category": "name"
+  },
+  "scripts": {
+    "count": 2,
+    "repos": [
+      "infinity-scripts",
+      "infinity-tools"
+    ],
+    "category": "name"
+  },
+  "semantics": {
+    "count": 2,
+    "repos": [
+      "infinity-semantics"
+    ],
+    "category": "name"
+  },
+  "society": {
+    "count": 2,
+    "repos": [
+      "infinity-society"
+    ],
+    "category": "name"
+  },
+  "socket": {
+    "count": 2,
+    "repos": [
+      "infinity-socket"
+    ],
+    "category": "name"
+  },
+  "forge": {
+    "count": 2,
+    "repos": [
+      "infinity-spark-forge",
+      "viper-forge-spectra.os"
+    ],
+    "category": "name"
+  },
+  "terminal": {
+    "count": 2,
+    "repos": [
+      "infinity-spark-terminal",
+      "Osprey-Terminal"
+    ],
+    "category": "name"
+  },
+  "theater": {
+    "count": 2,
+    "repos": [
+      "infinity-spark-theater",
+      "omni-theater-present"
+    ],
+    "category": "name"
+  },
+  "synch": {
+    "count": 2,
+    "repos": [
+      "infinity-synch"
+    ],
+    "category": "name"
+  },
+  "tangibles": {
+    "count": 2,
+    "repos": [
+      "infinity-tangibles"
+    ],
+    "category": "name"
+  },
+  "threader": {
+    "count": 2,
+    "repos": [
+      "infinity-threader"
+    ],
+    "category": "name"
+  },
+  "tiktok": {
+    "count": 2,
+    "repos": [
+      "infinity-tiktok"
+    ],
+    "category": "name"
+  },
+  "tire": {
+    "count": 2,
+    "repos": [
+      "infinity-tire"
+    ],
+    "category": "name"
+  },
+  "topics": {
+    "count": 2,
+    "repos": [
+      "infinity-topics"
+    ],
+    "category": "name"
+  },
+  "trackers": {
+    "count": 2,
+    "repos": [
+      "infinity-trackers"
+    ],
+    "category": "name"
+  },
+  "travel": {
+    "count": 2,
+    "repos": [
+      "infinity-travel"
+    ],
+    "category": "name"
+  },
+  "twitter": {
+    "count": 2,
+    "repos": [
+      "Infinity-Twitter"
+    ],
+    "category": "name"
+  },
+  "unifying": {
+    "count": 2,
+    "repos": [
+      "infinity-unifying"
+    ],
+    "category": "name"
+  },
+  "viewer": {
+    "count": 2,
+    "repos": [
+      "infinity-viewer"
+    ],
+    "category": "name"
+  },
+  "watcher": {
+    "count": 2,
+    "repos": [
+      "infinity-watcher"
+    ],
+    "category": "name"
+  },
+  "web": {
+    "count": 2,
+    "repos": [
+      "infinity-web-design"
+    ],
+    "category": "name"
+  },
+  "youtube": {
+    "count": 2,
+    "repos": [
+      "infinity-youtube"
+    ],
+    "category": "name"
+  },
+  "btc": {
+    "count": 2,
+    "repos": [
+      "infinity_btc_miner_final__20251221_071546",
+      "real_btc_miner__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "image": {
+    "count": 2,
+    "repos": [
+      "infinity_image_token_miner"
+    ],
+    "category": "name"
+  },
+  "ceo": {
+    "count": 2,
+    "repos": [
+      "infinity_research_hydrogen_ceo"
+    ],
+    "category": "name"
+  },
+  "input": {
+    "count": 2,
+    "repos": [
+      "infinity_research_hydrogen_input"
+    ],
+    "category": "name"
+  },
+  "investigative": {
+    "count": 2,
+    "repos": [
+      "infinity_research_hydrogen_investigative"
+    ],
+    "category": "name"
+  },
+  "routes": {
+    "count": 2,
+    "repos": [
+      "infinity_research_hydrogen_routes"
+    ],
+    "category": "name"
+  },
+  "vam": {
+    "count": 2,
+    "repos": [
+      "infinity_research_vam_1878_morgans"
+    ],
+    "category": "name"
+  },
+  "morgans": {
+    "count": 2,
+    "repos": [
+      "infinity_research_vam_1878_morgans"
+    ],
+    "category": "name"
+  },
+  "tokens": {
+    "count": 2,
+    "repos": [
+      "MARIO-TOKENS"
+    ],
+    "category": "name"
+  },
+  "neuromorphic": {
+    "count": 2,
+    "repos": [
+      "Vector",
+      "Vector-API"
+    ],
+    "category": "description"
+  },
+  "pulls": {
+    "count": 1,
+    "repos": [
+      "---"
+    ],
+    "category": "description"
+  },
+  "use": {
+    "count": 1,
+    "repos": [
+      "---"
+    ],
+    "category": "description"
+  },
+  "acknowledger": {
+    "count": 1,
+    "repos": [
+      "-Comet-Delta-Noble-"
+    ],
+    "category": "description"
+  },
+  "metamaterials": {
+    "count": 1,
+    "repos": [
+      "-Comet-Delta-Noble-"
+    ],
+    "category": "description"
+  },
+  "optics": {
+    "count": 1,
+    "repos": [
+      "-Comet-Delta-Noble-"
+    ],
+    "category": "description"
+  },
+  "time": {
+    "count": 1,
+    "repos": [
+      "-Halo-Aurora-Prism-"
+    ],
+    "category": "description"
+  },
+  "crystal": {
+    "count": 1,
+    "repos": [
+      "-Halo-Aurora-Prism-"
+    ],
+    "category": "description"
+  },
+  "experimental": {
+    "count": 1,
+    "repos": [
+      "-Halo-Aurora-Prism-"
+    ],
+    "category": "description"
+  },
+  "realizations": {
+    "count": 1,
+    "repos": [
+      "-Halo-Aurora-Prism-"
+    ],
+    "category": "description"
+  },
+  "spintronics": {
+    "count": 1,
+    "repos": [
+      "-Halo-Juniper-Solace-"
+    ],
+    "category": "description"
+  },
+  "color": {
+    "count": 1,
+    "repos": [
+      "-Jade-Beacon-Oracle-"
+    ],
+    "category": "description"
+  },
+  "route": {
+    "count": 1,
+    "repos": [
+      "-Jade-Beacon-Oracle-"
+    ],
+    "category": "description"
+  },
+  "put": {
+    "count": 1,
+    "repos": [
+      "-Jade-Beacon-Oracle-"
+    ],
+    "category": "description"
+  },
+  "blue": {
+    "count": 1,
+    "repos": [
+      "-Jade-Beacon-Oracle-"
+    ],
+    "category": "description"
+  },
+  "lotus": {
+    "count": 1,
+    "repos": [
+      "-Lotus-Glyph-Noble-"
+    ],
+    "category": "name"
+  },
+  "infinitytrumpcoin": {
+    "count": 1,
+    "repos": [
+      "-Mario-InfinityTrumpCoin-"
+    ],
+    "category": "name"
+  },
+  "prefix": {
+    "count": 1,
+    "repos": [
+      "-PREFIX---STAMP-"
+    ],
+    "category": "name"
+  },
+  "stamp": {
+    "count": 1,
+    "repos": [
+      "-PREFIX---STAMP-"
+    ],
+    "category": "name"
+  },
+  "highly": {
+    "count": 1,
+    "repos": [
+      "ASTEROID-ARCADE"
+    ],
+    "category": "description"
+  },
+  "playable": {
+    "count": 1,
+    "repos": [
+      "ASTEROID-ARCADE"
+    ],
+    "category": "description"
+  },
+  "open": {
+    "count": 1,
+    "repos": [
+      "ASTEROID-ARCADE"
+    ],
+    "category": "description"
+  },
+  "source": {
+    "count": 1,
+    "repos": [
+      "ASTEROID-ARCADE"
+    ],
+    "category": "description"
+  },
+  "retro": {
+    "count": 1,
+    "repos": [
+      "ASTEROID-ARCADE"
+    ],
+    "category": "description"
+  },
+  "game": {
+    "count": 1,
+    "repos": [
+      "ASTEROID-ARCADE"
+    ],
+    "category": "description"
+  },
+  "written": {
+    "count": 1,
+    "repos": [
+      "ASTEROID-ARCADE"
+    ],
+    "category": "description"
+  },
+  "requires": {
+    "count": 1,
+    "repos": [
+      "ASTEROID-ARCADE"
+    ],
+    "category": "description"
+  },
+  "framework": {
+    "count": 1,
+    "repos": [
+      "ASTEROID-ARCADE"
+    ],
+    "category": "description"
+  },
+  "clone": {
+    "count": 1,
+    "repos": [
+      "asteroids"
+    ],
+    "category": "description"
+  },
+  "javascript": {
+    "count": 1,
+    "repos": [
+      "asteroids"
+    ],
+    "category": "description"
+  },
+  "canvas": {
+    "count": 1,
+    "repos": [
+      "asteroids"
+    ],
+    "category": "description"
+  },
+  "banksy": {
+    "count": 1,
+    "repos": [
+      "banksy"
+    ],
+    "category": "name"
+  },
+  "biotuner": {
+    "count": 1,
+    "repos": [
+      "Biotuner"
+    ],
+    "category": "name"
+  },
+  "resonance": {
+    "count": 1,
+    "repos": [
+      "bitcoin_octave_resonance"
+    ],
+    "category": "name"
+  },
+  "squared": {
+    "count": 1,
+    "repos": [
+      "build_c13b0_squared_disk__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "disk": {
+    "count": 1,
+    "repos": [
+      "build_c13b0_squared_disk__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "cube": {
+    "count": 1,
+    "repos": [
+      "c13b0-cube-003"
+    ],
+    "category": "name"
+  },
+  "tmp": {
+    "count": 1,
+    "repos": [
+      "c13b0_.c13b0_tmp_c13b0_item_001_index_index"
+    ],
+    "category": "name"
+  },
+  "absolute": {
+    "count": 1,
+    "repos": [
+      "c13b0_absolute_push__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "tokenizing": {
+    "count": 1,
+    "repos": [
+      "c13b0_cart_002_self_tokenizing_core_20251221_082845"
+    ],
+    "category": "name"
+  },
+  "permission": {
+    "count": 1,
+    "repos": [
+      "c13b0_cart_007_permission_gate_20251221_085224"
+    ],
+    "category": "name"
+  },
+  "gate": {
+    "count": 1,
+    "repos": [
+      "c13b0_cart_007_permission_gate_20251221_085224"
+    ],
+    "category": "name"
+  },
+  "ecosystem": {
+    "count": 1,
+    "repos": [
+      "c13b0_cart_008_ecosystem_overlay_20251221_090211"
+    ],
+    "category": "name"
+  },
+  "overlay": {
+    "count": 1,
+    "repos": [
+      "c13b0_cart_008_ecosystem_overlay_20251221_090211"
+    ],
+    "category": "name"
+  },
+  "live": {
+    "count": 1,
+    "repos": [
+      "c13b0_cart_011_live_page_assembler_20251221_091848"
+    ],
+    "category": "name"
+  },
+  "assembler": {
+    "count": 1,
+    "repos": [
+      "c13b0_cart_011_live_page_assembler_20251221_091848"
+    ],
+    "category": "name"
+  },
+  "buy": {
+    "count": 1,
+    "repos": [
+      "c13b0_cart_015_paypal_buy_now_20251221_094949"
+    ],
+    "category": "name"
+  },
+  "now": {
+    "count": 1,
+    "repos": [
+      "c13b0_cart_015_paypal_buy_now_20251221_094949"
+    ],
+    "category": "name"
+  },
+  "finish": {
+    "count": 1,
+    "repos": [
+      "c13b0_cart_finish_paypal_no_webhook"
+    ],
+    "category": "name"
+  },
+  "bootstrap": {
+    "count": 1,
+    "repos": [
+      "c13b0_genesis_bootstrap__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "minimal": {
+    "count": 1,
+    "repos": [
+      "c13b0_minimal_push__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "shot": {
+    "count": 1,
+    "repos": [
+      "c13b0_one_shot_push_fix__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "proceed": {
+    "count": 1,
+    "repos": [
+      "c13b0_proceed_300repos_20251219_180329"
+    ],
+    "category": "name"
+  },
+  "300repos": {
+    "count": 1,
+    "repos": [
+      "c13b0_proceed_300repos_20251219_180329"
+    ],
+    "category": "name"
+  },
+  "own": {
+    "count": 1,
+    "repos": [
+      "c13b0_push_all_carts_to_own_repos__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "cart003": {
+    "count": 1,
+    "repos": [
+      "cart003_autorun__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "autorun": {
+    "count": 1,
+    "repos": [
+      "cart003_autorun__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "cart900": {
+    "count": 1,
+    "repos": [
+      "cart900_unified_repo_builder__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "unified": {
+    "count": 1,
+    "repos": [
+      "cart900_unified_repo_builder__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "cart906": {
+    "count": 1,
+    "repos": [
+      "cart906_push_research_batches__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "batches": {
+    "count": 1,
+    "repos": [
+      "cart906_push_research_batches__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "cleanstream": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_2_cleanstream__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "run": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_2_exec_full_run_and_push__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "rotating": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_2_exec_rotating_key_and_emoji__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "key": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_2_exec_rotating_key_and_emoji__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "existing": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_2_existing_repo_builder__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "mechanic": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_2_mechanic_foundry__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "foundry": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_2_mechanic_foundry__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "wire": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_2_stable_wire_and_build__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "enable": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_enable_pages__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "trump": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_full_infinity_trump_coin__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "coin": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_full_infinity_trump_coin__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "oldest": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_global_sweep_oldest_first__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "first": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_global_sweep_oldest_first__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "immediate": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_immediate_push__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "synth": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_index_synth__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "science": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_infinity_science_matrix__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "stall": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_no_stall__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "lineage": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_paypal_login_lineage__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "visualizer": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_quantum_visualizer__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "work": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_real_work__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "stage3": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_stage3_global_sweep__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "augmenter": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_token_augmenter__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "canonicalize": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_token_canonicalize__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "evolve": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_token_evolve__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "pricer": {
+    "count": 1,
+    "repos": [
+      "cart_c13b0_token_pricer__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "liveliness": {
+    "count": 1,
+    "repos": [
+      "cart_c14_pages_liveliness_scan__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "commit": {
+    "count": 1,
+    "repos": [
+      "cart_commit_all__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "discover": {
+    "count": 1,
+    "repos": [
+      "cart_discover_repos__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "git": {
+    "count": 1,
+    "repos": [
+      "cart_git_identity_fix__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "identity": {
+    "count": 1,
+    "repos": [
+      "cart_git_identity_fix__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "forever": {
+    "count": 1,
+    "repos": [
+      "cart_infinity_forever__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "restart": {
+    "count": 1,
+    "repos": [
+      "cart_infinity_restart_all__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "inject": {
+    "count": 1,
+    "repos": [
+      "cart_inject_knowledge__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "launcher": {
+    "count": 1,
+    "repos": [
+      "cart_launcher_menu__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "menu": {
+    "count": 1,
+    "repos": [
+      "cart_launcher_menu__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "quick": {
+    "count": 1,
+    "repos": [
+      "cart_quick_push__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "rad": {
+    "count": 1,
+    "repos": [
+      "cart_rad__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "safe": {
+    "count": 1,
+    "repos": [
+      "cart_safe_push__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "claudebot": {
+    "count": 1,
+    "repos": [
+      "ClaudeBot"
+    ],
+    "category": "name"
+  },
+  "cloud": {
+    "count": 1,
+    "repos": [
+      "ClaudeBot"
+    ],
+    "category": "description"
+  },
+  "general": {
+    "count": 1,
+    "repos": [
+      "ClaudeBot"
+    ],
+    "category": "description"
+  },
+  "irc": {
+    "count": 1,
+    "repos": [
+      "ClaudeBot"
+    ],
+    "category": "description"
+  },
+  "bot": {
+    "count": 1,
+    "repos": [
+      "ClaudeBot"
+    ],
+    "category": "description"
+  },
+  "powered": {
+    "count": 1,
+    "repos": [
+      "ClaudeBot"
+    ],
+    "category": "description"
+  },
+  "hubot": {
+    "count": 1,
+    "repos": [
+      "ClaudeBot"
+    ],
+    "category": "description"
+  },
+  "cross": {
+    "count": 1,
+    "repos": [
+      "cross_token_graph"
+    ],
+    "category": "name"
+  },
+  "graph": {
+    "count": 1,
+    "repos": [
+      "cross_token_graph"
+    ],
+    "category": "name"
+  },
+  "depo": {
+    "count": 1,
+    "repos": [
+      "Design-Depo"
+    ],
+    "category": "name"
+  },
+  "validator": {
+    "count": 1,
+    "repos": [
+      "emoji_chain_validator"
+    ],
+    "category": "name"
+  },
+  "grammar": {
+    "count": 1,
+    "repos": [
+      "emoji_grammar_core"
+    ],
+    "category": "name"
+  },
+  "excite": {
+    "count": 1,
+    "repos": [
+      "excite-bike"
+    ],
+    "category": "name"
+  },
+  "slow": {
+    "count": 1,
+    "repos": [
+      "ezekiel_slow_scroll_miner__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "freedom": {
+    "count": 1,
+    "repos": [
+      "Freedom"
+    ],
+    "category": "name"
+  },
+  "files": {
+    "count": 1,
+    "repos": [
+      "Freedom"
+    ],
+    "category": "description"
+  },
+  "gold": {
+    "count": 1,
+    "repos": [
+      "gold-mine-vein-signal-20251221_210400"
+    ],
+    "category": "name"
+  },
+  "mine": {
+    "count": 1,
+    "repos": [
+      "gold-mine-vein-signal-20251221_210400"
+    ],
+    "category": "name"
+  },
+  "vein": {
+    "count": 1,
+    "repos": [
+      "gold-mine-vein-signal-20251221_210400"
+    ],
+    "category": "name"
+  },
+  "gpt": {
+    "count": 1,
+    "repos": [
+      "GPT-Vector-Design"
+    ],
+    "category": "name"
+  },
+  "gutenberg": {
+    "count": 1,
+    "repos": [
+      "Gutenberg"
+    ],
+    "category": "name"
+  },
+  "learning": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-101"
+    ],
+    "category": "description"
+  },
+  "growth": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-101"
+    ],
+    "category": "description"
+  },
+  "bad": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-102"
+    ],
+    "category": "description"
+  },
+  "finger": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-102"
+    ],
+    "category": "description"
+  },
+  "touch": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-102"
+    ],
+    "category": "description"
+  },
+  "contact": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-102"
+    ],
+    "category": "description"
+  },
+  "reading": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-103"
+    ],
+    "category": "description"
+  },
+  "minds": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-103"
+    ],
+    "category": "description"
+  },
+  "enhanced": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-103"
+    ],
+    "category": "description"
+  },
+  "perception": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-103"
+    ],
+    "category": "description"
+  },
+  "understood": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-104"
+    ],
+    "category": "description"
+  },
+  "clarity": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-104"
+    ],
+    "category": "description"
+  },
+  "openness": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-105"
+    ],
+    "category": "description"
+  },
+  "talking": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-106"
+    ],
+    "category": "description"
+  },
+  "simply": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-106"
+    ],
+    "category": "description"
+  },
+  "means": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-106"
+    ],
+    "category": "description"
+  },
+  "break": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-107"
+    ],
+    "category": "description"
+  },
+  "rest": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-107"
+    ],
+    "category": "description"
+  },
+  "service": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-108"
+    ],
+    "category": "description"
+  },
+  "collect": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-108"
+    ],
+    "category": "description"
+  },
+  "enforcement": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-108"
+    ],
+    "category": "description"
+  },
+  "tax": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-108"
+    ],
+    "category": "description"
+  },
+  "home": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-109"
+    ],
+    "category": "description"
+  },
+  "fresh": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-109"
+    ],
+    "category": "description"
+  },
+  "start": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-109"
+    ],
+    "category": "description"
+  },
+  "location": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-109"
+    ],
+    "category": "description"
+  },
+  "don": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-110"
+    ],
+    "category": "description"
+  },
+  "really": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-110"
+    ],
+    "category": "description"
+  },
+  "because": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-110"
+    ],
+    "category": "description"
+  },
+  "vanity": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-110"
+    ],
+    "category": "description"
+  },
+  "sort": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-110"
+    ],
+    "category": "description"
+  },
+  "illegal": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-110"
+    ],
+    "category": "description"
+  },
+  "except": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-110"
+    ],
+    "category": "description"
+  },
+  "family": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-110"
+    ],
+    "category": "description"
+  },
+  "revelations": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-111"
+    ],
+    "category": "description"
+  },
+  "give": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-111"
+    ],
+    "category": "description"
+  },
+  "divine": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-111"
+    ],
+    "category": "description"
+  },
+  "insights": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-111"
+    ],
+    "category": "description"
+  },
+  "shared": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-111"
+    ],
+    "category": "description"
+  },
+  "searc": {
+    "count": 1,
+    "repos": [
+      "infinity-brain-searc"
+    ],
+    "category": "name"
+  },
+  "331a85cf91e8c57e11afd21a30a71de2ed6569cabc692ef4aa2195bb1b02ff07": {
+    "count": 1,
+    "repos": [
+      "infinity-facet-commerce-331a85cf91e8c57e11afd21a30a71de2ed6569cabc692ef4aa2195bb1b02ff07"
+    ],
+    "category": "name"
+  },
+  "bb332e384c3232356f481c7a91b9cbd504926eb1b9f89c89567d66e991b6327d": {
+    "count": 1,
+    "repos": [
+      "infinity-facet-commerce-bb332e384c3232356f481c7a91b9cbd504926eb1b9f89c89567d66e991b6327d"
+    ],
+    "category": "name"
+  },
+  "imports": {
+    "count": 1,
+    "repos": [
+      "infinity-imports"
+    ],
+    "category": "name"
+  },
+  "180bb0e4168b94585463aac47fc1623754abe1aa408f13f52bb3b338f211085d": {
+    "count": 1,
+    "repos": [
+      "infinity-index-designer-180bb0e4168b94585463aac47fc1623754abe1aa408f13f52bb3b338f211085d"
+    ],
+    "category": "name"
+  },
+  "8a02a19e4106b37a1f2cb640b67229861d9f6689b5100f3418d219761dbcf487": {
+    "count": 1,
+    "repos": [
+      "infinity-index-designer-8a02a19e4106b37a1f2cb640b67229861d9f6689b5100f3418d219761dbcf487"
+    ],
+    "category": "name"
+  },
+  "mega": {
+    "count": 1,
+    "repos": [
+      "infinity-mega-labs"
+    ],
+    "category": "name"
+  },
+  "labs": {
+    "count": 1,
+    "repos": [
+      "infinity-mega-labs"
+    ],
+    "category": "name"
+  },
+  "spine": {
+    "count": 1,
+    "repos": [
+      "infinity-memory-spine"
+    ],
+    "category": "name"
+  },
+  "onepush": {
+    "count": 1,
+    "repos": [
+      "infinity-onepush"
+    ],
+    "category": "name"
+  },
+  "poic": {
+    "count": 1,
+    "repos": [
+      "infinity-poic-registry"
+    ],
+    "category": "name"
+  },
+  "registry": {
+    "count": 1,
+    "repos": [
+      "infinity-poic-registry"
+    ],
+    "category": "name"
+  },
+  "chat": {
+    "count": 1,
+    "repos": [
+      "infinity-portal"
+    ],
+    "category": "description"
+  },
+  "1219ae8ba22d0d8fd02e826b2689f4e73b6008c42b09e2bb6b452bf64f176ac7": {
+    "count": 1,
+    "repos": [
+      "infinity-pricing-engine-1219ae8ba22d0d8fd02e826b2689f4e73b6008c42b09e2bb6b452bf64f176ac7"
+    ],
+    "category": "name"
+  },
+  "c4c5acf2b332a9ae1b255479a7efad1e90a73da7132a03e9d57ec7e6f1c0baa6": {
+    "count": 1,
+    "repos": [
+      "infinity-pricing-engine-c4c5acf2b332a9ae1b255479a7efad1e90a73da7132a03e9d57ec7e6f1c0baa6"
+    ],
+    "category": "name"
+  },
+  "995d58f3c9e74a0cefc5ed8bd875acd76a47b01fdd77eb2d461fd2629ad2812c": {
+    "count": 1,
+    "repos": [
+      "infinity-reuse-995d58f3c9e74a0cefc5ed8bd875acd76a47b01fdd77eb2d461fd2629ad2812c"
+    ],
+    "category": "name"
+  },
+  "ca6c28e5d7c487fd44a22d409df7d239323fc803b70cca2eb46fe7b4dbb47d35": {
+    "count": 1,
+    "repos": [
+      "infinity-reuse-ca6c28e5d7c487fd44a22d409df7d239323fc803b70cca2eb46fe7b4dbb47d35"
+    ],
+    "category": "name"
+  },
+  "e7049f6b626cda8aef25e551551caada4b00ce48defe9bb5cdadf073b5edb526": {
+    "count": 1,
+    "repos": [
+      "infinity-reuse-e7049f6b626cda8aef25e551551caada4b00ce48defe9bb5cdadf073b5edb526"
+    ],
+    "category": "name"
+  },
+  "0016cea98cea2e6c14226aaae572ab47a818a1346adb5291c7810bb55ad4d680": {
+    "count": 1,
+    "repos": [
+      "infinity-rogers-host-0016cea98cea2e6c14226aaae572ab47a818a1346adb5291c7810bb55ad4d680"
+    ],
+    "category": "name"
+  },
+  "811a7653af1eddc42b8dce236a78bbe18e25778a7e57c071a6200ef0d3c36aec": {
+    "count": 1,
+    "repos": [
+      "infinity-rogers-host-811a7653af1eddc42b8dce236a78bbe18e25778a7e57c071a6200ef0d3c36aec"
+    ],
+    "category": "name"
+  },
+  "archive": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-archive"
+    ],
+    "category": "name"
+  },
+  "arena": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-arena"
+    ],
+    "category": "name"
+  },
+  "array": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-array"
+    ],
+    "category": "name"
+  },
+  "axis": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-axis"
+    ],
+    "category": "name"
+  },
+  "bridge": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-bridge"
+    ],
+    "category": "name"
+  },
+  "compiler": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-compiler"
+    ],
+    "category": "name"
+  },
+  "console": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-console"
+    ],
+    "category": "name"
+  },
+  "control": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-control"
+    ],
+    "category": "name"
+  },
+  "dock": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-dock"
+    ],
+    "category": "name"
+  },
+  "gateway": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-gateway"
+    ],
+    "category": "name"
+  },
+  "grid": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-grid"
+    ],
+    "category": "name"
+  },
+  "iot": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-iot-factory"
+    ],
+    "category": "name"
+  },
+  "lab": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-lab"
+    ],
+    "category": "name"
+  },
+  "launchpad": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-launchpad"
+    ],
+    "category": "name"
+  },
+  "main": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-main"
+    ],
+    "category": "name"
+  },
+  "market": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-market"
+    ],
+    "category": "name"
+  },
+  "network": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-network"
+    ],
+    "category": "name"
+  },
+  "operator": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-operator"
+    ],
+    "category": "name"
+  },
+  "orbit": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-orbit"
+    ],
+    "category": "name"
+  },
+  "pulse": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-pulse"
+    ],
+    "category": "name"
+  },
+  "reactor": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-reactor"
+    ],
+    "category": "name"
+  },
+  "relay": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-relay"
+    ],
+    "category": "name"
+  },
+  "scanner": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-scanner"
+    ],
+    "category": "name"
+  },
+  "search": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-search"
+    ],
+    "category": "name"
+  },
+  "sector": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-sector"
+    ],
+    "category": "name"
+  },
+  "studio": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-studio"
+    ],
+    "category": "name"
+  },
+  "tickets": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-tickets"
+    ],
+    "category": "name"
+  },
+  "tour": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-tour"
+    ],
+    "category": "name"
+  },
+  "vault": {
+    "count": 1,
+    "repos": [
+      "infinity-spark-vault"
+    ],
+    "category": "name"
+  },
+  "7888eac0d2aa9301885b736d354c71a634816c428fe279d66bd7e4aee427a47e": {
+    "count": 1,
+    "repos": [
+      "infinity-token-mint-7888eac0d2aa9301885b736d354c71a634816c428fe279d66bd7e4aee427a47e"
+    ],
+    "category": "name"
+  },
+  "e5053ca39f8189ced310f7a11ff836deac63f26060916f3e171b27778d069e5b": {
+    "count": 1,
+    "repos": [
+      "infinity-token-mint-e5053ca39f8189ced310f7a11ff836deac63f26060916f3e171b27778d069e5b"
+    ],
+    "category": "name"
+  },
+  "sovereign": {
+    "count": 1,
+    "repos": [
+      "infinity-tools"
+    ],
+    "category": "description"
+  },
+  "toolset": {
+    "count": 1,
+    "repos": [
+      "infinity-tools"
+    ],
+    "category": "description"
+  },
+  "upload": {
+    "count": 1,
+    "repos": [
+      "infinity-tools"
+    ],
+    "category": "description"
+  },
+  "file": {
+    "count": 1,
+    "repos": [
+      "infinity-tools"
+    ],
+    "category": "description"
+  },
+  "management": {
+    "count": 1,
+    "repos": [
+      "infinity-tools"
+    ],
+    "category": "description"
+  },
+  "bismuth": {
+    "count": 1,
+    "repos": [
+      "infinity-tools"
+    ],
+    "category": "description"
+  },
+  "bounce": {
+    "count": 1,
+    "repos": [
+      "infinity-tools"
+    ],
+    "category": "description"
+  },
+  "treasury": {
+    "count": 1,
+    "repos": [
+      "infinity-treasury"
+    ],
+    "category": "name"
+  },
+  "boot": {
+    "count": 1,
+    "repos": [
+      "Infinity-Vectors"
+    ],
+    "category": "description"
+  },
+  "blank": {
+    "count": 1,
+    "repos": [
+      "infinity_blank_grade_research_miner"
+    ],
+    "category": "name"
+  },
+  "grade": {
+    "count": 1,
+    "repos": [
+      "infinity_blank_grade_research_miner"
+    ],
+    "category": "name"
+  },
+  "final": {
+    "count": 1,
+    "repos": [
+      "infinity_btc_miner_final__20251221_071546"
+    ],
+    "category": "name"
+  },
+  "rejection": {
+    "count": 1,
+    "repos": [
+      "infinity_image_token_miner"
+    ],
+    "category": "description"
+  },
+  "append": {
+    "count": 1,
+    "repos": [
+      "infinity_image_token_miner"
+    ],
+    "category": "description"
+  },
+  "only": {
+    "count": 1,
+    "repos": [
+      "infinity_image_token_miner"
+    ],
+    "category": "description"
+  },
+  "ownership": {
+    "count": 1,
+    "repos": [
+      "infinity_ownership_ledger"
+    ],
+    "category": "name"
+  },
+  "joe": {
+    "count": 1,
+    "repos": [
+      "Joe"
+    ],
+    "category": "name"
+  },
+  "kinetic": {
+    "count": 1,
+    "repos": [
+      "kinetic-fortress-20260119_190021"
+    ],
+    "category": "name"
+  },
+  "fortress": {
+    "count": 1,
+    "repos": [
+      "kinetic-fortress-20260119_190021"
+    ],
+    "category": "name"
+  },
+  "legend": {
+    "count": 1,
+    "repos": [
+      "legend-core"
+    ],
+    "category": "name"
+  },
+  "auditor": {
+    "count": 1,
+    "repos": [
+      "MARIO-TOKENS"
+    ],
+    "category": "description"
+  },
+  "batch": {
+    "count": 1,
+    "repos": [
+      "MARIO-TOKENS"
+    ],
+    "category": "description"
+  },
+  "finisher": {
+    "count": 1,
+    "repos": [
+      "MARIO-TOKENS"
+    ],
+    "category": "description"
+  },
+  "trick": {
+    "count": 1,
+    "repos": [
+      "mongoose.os"
+    ],
+    "category": "description"
+  },
+  "freestyle": {
+    "count": 1,
+    "repos": [
+      "mongoose.os"
+    ],
+    "category": "description"
+  },
+  "bmx": {
+    "count": 1,
+    "repos": [
+      "mongoose.os"
+    ],
+    "category": "description"
+  },
+  "scripting": {
+    "count": 1,
+    "repos": [
+      "mongoose.os"
+    ],
+    "category": "description"
+  },
+  "omni": {
+    "count": 1,
+    "repos": [
+      "omni-theater-present"
+    ],
+    "category": "name"
+  },
+  "present": {
+    "count": 1,
+    "repos": [
+      "omni-theater-present"
+    ],
+    "category": "name"
+  },
+  "pixie": {
+    "count": 1,
+    "repos": [
+      "pixie-ai-backend"
+    ],
+    "category": "name"
+  },
+  "backend": {
+    "count": 1,
+    "repos": [
+      "pixie-ai-backend"
+    ],
+    "category": "name"
+  },
+  "machine": {
+    "count": 1,
+    "repos": [
+      "quantum-machine-catalog"
+    ],
+    "category": "name"
+  },
+  "catalog": {
+    "count": 1,
+    "repos": [
+      "quantum-machine-catalog"
+    ],
+    "category": "name"
+  },
+  "density": {
+    "count": 1,
+    "repos": [
+      "research_density_meter"
+    ],
+    "category": "name"
+  },
+  "meter": {
+    "count": 1,
+    "repos": [
+      "research_density_meter"
+    ],
+    "category": "name"
+  },
+  "classifier": {
+    "count": 1,
+    "repos": [
+      "research_emoji_classifier"
+    ],
+    "category": "name"
+  },
+  "rooster": {
+    "count": 1,
+    "repos": [
+      "rooster.os"
+    ],
+    "category": "name"
+  },
+  "semiconductor": {
+    "count": 1,
+    "repos": [
+      "semiconductor_diodes"
+    ],
+    "category": "name"
+  },
+  "smug": {
+    "count": 1,
+    "repos": [
+      "smug_look"
+    ],
+    "category": "name"
+  },
+  "look": {
+    "count": 1,
+    "repos": [
+      "smug_look"
+    ],
+    "category": "name"
+  },
+  "truvio": {
+    "count": 1,
+    "repos": [
+      "truvio-studios"
+    ],
+    "category": "name"
+  },
+  "studios": {
+    "count": 1,
+    "repos": [
+      "truvio-studios"
+    ],
+    "category": "name"
+  },
+  "utopia": {
+    "count": 1,
+    "repos": [
+      "Utopia"
+    ],
+    "category": "name"
+  },
+  "placement": {
+    "count": 1,
+    "repos": [
+      "Vector"
+    ],
+    "category": "description"
+  },
+  "apps": {
+    "count": 1,
+    "repos": [
+      "Vector"
+    ],
+    "category": "description"
+  },
+  "programming": {
+    "count": 1,
+    "repos": [
+      "Vector"
+    ],
+    "category": "description"
+  },
+  "api": {
+    "count": 1,
+    "repos": [
+      "Vector-API"
+    ],
+    "category": "name"
+  },
+  "vectoring": {
+    "count": 1,
+    "repos": [
+      "Vector-API"
+    ],
+    "category": "description"
+  },
+  "spectra": {
+    "count": 1,
+    "repos": [
+      "viper-forge-spectra.os"
+    ],
+    "category": "name"
+  },
+  "20251220t073452z": {
+    "count": 1,
+    "repos": [
+      "VIPER_BLOCK_OCTAVE_20251220T073452Z"
+    ],
+    "category": "name"
+  },
+  "20251220t073747z": {
+    "count": 1,
+    "repos": [
+      "VIPER_BLOCK_OCTAVE_20251220T073747Z"
+    ],
+    "category": "name"
+  }
 }
