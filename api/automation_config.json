@@ -1,0 +1,62 @@
+{
+  "version": "1.0",
+  "system": "infinity-forge-automation",
+  "timestamp": "20260217_043931",
+  "components": {
+    "forge_toolbar": {
+      "source": "https://pewpi-infinity.github.io/infinity-crown-index/js/infinity-emoji-logic.js",
+      "version": "1.0",
+      "deployed_to": "all repos with index.html"
+    },
+    "router": {
+      "source": "https://pewpi-infinity.github.io/infinity-crown-index/js/infinity-router.js",
+      "version": "1.0",
+      "deployed_to": "hub repos"
+    },
+    "machine_routing": {
+      "source": "https://pewpi-infinity.github.io/infinity-crown-index/api/machine_routing.json",
+      "description": "prev/next links between machine repos"
+    },
+    "machine_index": {
+      "source": "https://pewpi-infinity.github.io/infinity-tools/api/machines.json",
+      "description": "searchable machine directory"
+    },
+    "forge_manifest": {
+      "source": "https://pewpi-infinity.github.io/infinity-crown-index/api/forge_manifest.json",
+      "description": "deployment manifest"
+    },
+    "dictionary": {
+      "source": "https://pewpi-infinity.github.io/infinity-crown-index/api/dictionary.json",
+      "description": "510 terms from 959+ repos"
+    },
+    "research_network": {
+      "source": "https://pewpi-infinity.github.io/infinity-crown-index/api/research_network.json",
+      "description": "cross-links between research repos"
+    },
+    "hash_registry": {
+      "source": "https://pewpi-infinity.github.io/infinity-crown-index/api/hash_registry.json",
+      "description": "4-Hash token structure"
+    }
+  },
+  "hub_structure": {
+    "crown_index": "Central dashboard",
+    "master_hub": "Global navigation",
+    "spark_market": "Marketplace",
+    "tools": "Upload, scripts, signal",
+    "mongoose_os": "Research database",
+    "smug_look": "C13B0 system",
+    "mario_tokens": "Gamified tokens",
+    "djvertigo_token": "DJVertigo dashboard"
+  },
+  "scripts": {
+    "REPO_FORGE.py": "Creates machine repos with HTML + chat",
+    "FORGE_DEPLOY.py": "Deploys emoji-logic + toolbar + hash tokens",
+    "FORGE_DJVERTIGO.py": "Built DJVertigo-token + linked 30 repos",
+    "FORGE_AUTOLINK.py": "Mass-links all 980 repos with forge toolbar",
+    "DEPLOY_ROUTER.py": "Deploys unified router for navigation",
+    "DEPLOY_ROUTER_P3.py": "Deploys automation config",
+    "BUILD_MACHINES.py": "Creates machine pages + tools repo + dictionary",
+    "ECOSYSTEM_LINKER.py": "Links categories + spark repos + fixes blank pages",
+    "DEPLOY_MACHINE_INDEXES.py": "Deployed index pages to 446/447 repos"
+  }
+}
