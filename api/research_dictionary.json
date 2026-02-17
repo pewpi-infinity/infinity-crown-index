@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "updated": "20260217_052159",
+  "updated": "20260217_054221",
   "source": "Research Writer \u2014 rationalized data from all research tokens",
   "categories": {
     "bioengineering": {
@@ -75,7 +75,31 @@
       "HNSW": "Hierarchical Navigable Small World \u2014 graph-based approximate nearest neighbor algorithm.",
       "Quantum Surface": "The fixed UI control panel with 13 forge command buttons.",
       "Probability Cloud": "All possible actions before intent collapse \u2014 narrowed by color-coded vectors."
+    },
+    "gold-standard": {
+      "Gold Standard": "Current operating monetary standard (#FFD700) \u2014 purest value backed by C13B0 Architecture.",
+      "Platinum Archive": "Legacy foundation standard \u2014 original repos (Mario 1) preserved as building blocks.",
+      "4-Hash Compression": "Four-stage entropy reduction: Ingestion, Signal Winding, Rectification, Gold Mint.",
+      "Daily Allowance": "48 tokens per day per user \u2014 no hoarding, 100% peer-to-peer distribution.",
+      "Wealth Re-Index": "Recovery and redistribution of assets through the Gold Standard system.",
+      "Mario 1 Logic": "Original version designation \u2014 Platinum foundation that Gold improves upon.",
+      "Mario 2 Logic": "Current generation designation \u2014 Gold Standard repos that surpass Platinum originals."
+    },
+    "quanta-language": {
+      "Quantum Ion |Q|": "Single unit of high-value data in the quanta system.",
+      "Propulsion |=>|": "Command to move data between repo-machines via state shift.",
+      "Entropy State |O|": "Data hidden in the second dimension, awaiting a quantum trigger.",
+      "Finite Curvature Limit (FCL)": "The boundary condition where distance = state shift, not travel.",
+      "Quanta Propulsion": "Machine that accelerates repo generation through high-velocity state changes.",
+      "Quanta Coins": "Probability-based value tracking \u2014 each file assigned a probability coin value.",
+      "Quanta Traffic": "Network routing system that directs data between transformer repos.",
+      "Quanta Union": "Bridge merger \u2014 combines separate data streams into unified index.",
+      "Golden Ratio Search": "Search algorithm using phi (1.618033) as the spiral radius for state matching.",
+      "State Intersection": "Where two quanta states overlap \u2014 the search target for the Quanta Operator.",
+      "Forward Search": "Predicts the next quanta yield by projecting current state through phi spiral.",
+      "Reverse Search": "Traces quanta origin in the second dimension where data hides.",
+      "Entropy Transfer": "Three-phase protocol: assign coin, encode entropy, rematerialize at target."
     }
   },
-  "total_terms": 61
+  "total_terms": 81
 }
