@@ -1,0 +1,66 @@
+{
+  "version": "2.0",
+  "updated": "20260217_051518",
+  "source": "Research Writer \u2014 rationalized data from all research tokens",
+  "categories": {
+    "bioengineering": {
+      "USAG-1": "Uterine sensitization-associated gene-1. Protein that inhibits tooth growth by blocking BMP and Wnt signaling. Target of Japanese tooth regeneration drug.",
+      "BMP": "Bone Morphogenetic Protein. Family of growth factors (BMP-2, BMP-4, BMP-7) that induce bone and dental hard tissue formation.",
+      "Wnt Signaling": "Cell signaling pathway crucial for development of supernumerary teeth and cell fate decisions. Works with BMP.",
+      "LRP5": "Low-density lipoprotein receptor-related protein 5. Wnt pathway coreceptor essential for osteoblast specialization.",
+      "Hydroxyapatite": "Calcium phosphate mineral forming the crystalline structure of teeth and bones. Formula: Ca10(PO4)6(OH)2.",
+      "Ameloblast": "Enamel-forming cell. Uses calcium channels (TRPM7, SOCE) to build tooth enamel.",
+      "Osteoblast": "Bone-forming cell. Differentiates from stem cells via BMP-2 and Runx2 signaling.",
+      "Osteoclast": "Bone-resorbing cell. Gallium inhibits its acid secretion to prevent bone loss.",
+      "Periodontal Ligament": "Connective tissue suspending teeth in sockets. Contains mechanoreceptors for proprioception.",
+      "Trigeminal Nerve": "Largest sensory nerve in head. Carries tooth proprioception data to brain.",
+      "Proprioception": "Body's sense of position and movement. Teeth use this via periodontal mechanoreceptors.",
+      "Toregem Biopharma": "Japanese startup developing USAG-1 antibody for tooth regeneration. Clinical trials 2024-2026."
+    },
+    "nanomedicine": {
+      "Gold Nanoparticle (AuNP)": "Nanoscale gold particles used to promote osteoblast differentiation and deliver biomolecules.",
+      "MAPK Pathway": "Mitogen-Activated Protein Kinase cascade. Signal amplification pathway triggered by mechanical stress on cell membranes.",
+      "Runx2": "Master transcription factor for osteoblast differentiation. Upregulated by gold nanoparticle mechanical stress.",
+      "Gallium (Ga)": "Semi-metal used in bone-loss treatment. High affinity for active bone formation. Phase-changes near room temperature.",
+      "Gallium Maltolate": "Gallium compound shown to disrupt SARS-CoV-2 replication.",
+      "Liquid Metal (GLM)": "Gallium-based liquid metals used in bioelectrodes, electronic blood vessels, and cryopreservation.",
+      "TRPM7": "Transient receptor potential melastatin 7. Calcium channel regulating ameloblast calcium absorption.",
+      "SOCE": "Store-Operated Calcium Entry. Pathway regulating intracellular calcium for enamel formation.",
+      "Aplastic Anemia": "Condition where bone marrow stops producing blood cells. Risk from excessive gold salt therapy.",
+      "Metallic Glass": "Platinum-based amorphous metal structure tested for biocompatible orthopedic implants.",
+      "Bioelectrode": "Gallium-based electrode integrated with vascular stents for real-time blood pressure monitoring."
+    },
+    "sovereign-tech": {
+      "Quantum Intent Collapser": "System that transforms passive interactions (likes/clicks) into active asset generation commands.",
+      "Vector Trigger": "Click that maps multidimensional coordinates of user interest rather than binary like/dislike.",
+      "Sovereign Builder": "User who creates infrastructure from interactions rather than donating data to platforms.",
+      "Alchemist's Chain": "Value multiplication pipeline: Token \u2192 Research \u2192 Tool \u2192 Asset.",
+      "Time-to-Value": "Metric measuring speed from idea to published asset. Infinity system reduces this to minutes.",
+      "Digital Property": "Published website/repo that holds compounding value as an asset.",
+      "Distributed Intelligence": "Network of repo-machines that grows with every user interaction."
+    },
+    "c13b0-architecture": {
+      "Sequinoid Packet": "Dissipative Soliton \u2014 self-sustaining wave pattern maintaining structure while exchanging energy.",
+      "The Cure": "Bio-Energy Signal Output protocol. Research tokens = captured signals, published repos = rectified output.",
+      "Dissipative Soliton": "Localized structure in a dissipative system maintained by continuous energy flow.",
+      "Freq_hz": "Frequency signature metadata. Standard: 432 Hz.",
+      "Signal Winding": "Transformation phase in C13B0 pattern: Input \u2192 Signal Winding \u2192 Output.",
+      "Rectification": "Output phase. Converting processed signals into published, structured assets.",
+      "Forge Toolbar": "Shared UI component deployed across all repos for ecosystem navigation.",
+      "Crown Index": "Central dashboard aggregating all repos, categories, and status.",
+      "Machine Routing": "Prev/next navigation system connecting 80+ machine repos in sequence.",
+      "Research Token": "Structured research document with YAML metadata, stored in mongoose.os vault."
+    },
+    "forge-system": {
+      "REPO_FORGE": "Script that creates machine repos with full HTML, chat widgets, and navigation.",
+      "FORGE_DEPLOY": "Script that deploys emoji-logic toolbar and 4-Hash token structure.",
+      "FORGE_AUTOLINK": "Script that mass-links all repos with forge toolbar. Handles 409 SHA conflicts.",
+      "FORGE_DJVERTIGO": "Script that built DJVertigo-token repo and linked 30 additional repos.",
+      "DEPLOY_ROUTER": "Script that created infinity-router.js for unified navigation across hubs.",
+      "ECOSYSTEM_LINKER": "Script that links category repos, spark repos, and fixes blank pages.",
+      "BUILD_MACHINES": "Script that creates machine pages, tools repo, and 510-term dictionary.",
+      "RESEARCH_WRITER": "Script that mass-produces research tokens, dictionary entries, and chapter pages."
+    }
+  },
+  "total_terms": 48
+}
