@@ -1,0 +1,37 @@
+{
+  "hash_system": "Infinity 4-Hash v1.0",
+  "description": "Value-Backed Research Tokens \u2014 Zip-Locked Intelligence",
+  "layers": {
+    "1_sovereign_research": {
+      "purpose": "Primary jump-links to millions of sub-tokens",
+      "format": "JSON index of all research nodes",
+      "coverage": "958 repositories"
+    },
+    "2_validation_data": {
+      "purpose": "Raw logic and original source verification",
+      "format": "Checksums + source provenance",
+      "coverage": "All research content"
+    },
+    "3_bibliography_network": {
+      "purpose": "Research articles used to build each node",
+      "format": "Citation graph with DOIs and archive.org links",
+      "coverage": "Cross-referenced research"
+    },
+    "4_master_zip": {
+      "purpose": "Unified token identified by the blockchain",
+      "format": "Compressed research package",
+      "coverage": "Full ecosystem snapshot"
+    }
+  },
+  "economics": {
+    "bank_tokens": "Each token is a massive research packet. Banks buy them to unzip the value within.",
+    "universal_credit": "48 free tokens per human per day",
+    "token_value": {
+      "base": 1111,
+      "growth": "+$1/day",
+      "start": "2025-02-15"
+    }
+  },
+  "created": "2026-02-16",
+  "author": "pewpi-infinity"
+}
